@@ -1,0 +1,135 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --pss-surface: #f8fafc;
+  --pss-panel: #ffffff;
+  --pss-border: #dbe1ea;
+  --pss-edge: #0ea5e9;
+  --pss-edge-hover: #0284c7;
+}
+
+body {
+  @apply bg-gray-50;
+}
+
+* {
+  -webkit-tap-highlight-color: transparent;
+}
+
+.react-flow__minimap {
+  @apply rounded border border-gray-300;
+}
+
+.react-flow__panel {
+  @apply bg-white rounded-lg shadow-md;
+}
+
+.react-flow__node {
+  transition: box-shadow 0.2s ease, transform 0.2s ease, opacity 0.2s ease;
+}
+
+.react-flow__edge-path {
+  transition: stroke 0.2s ease, stroke-width 0.2s ease, opacity 0.2s ease, filter 0.2s ease;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.react-flow {
+  background:
+    radial-gradient(circle at 20% 10%, rgba(14, 165, 233, 0.05), transparent 30%),
+    linear-gradient(180deg, #f8fafc 0%, #f1f5f9 100%);
+}
+
+.react-flow__edge:hover .react-flow__edge-path {
+  stroke: var(--pss-edge-hover);
+  filter: drop-shadow(0 0 4px rgba(2, 132, 199, 0.25));
+}
+
+.react-flow__edge.selected .react-flow__edge-path {
+  stroke: #0369a1;
+}
+
+.react-flow__edge-textbg {
+  fill: rgba(255, 255, 255, 0.92);
+  stroke: var(--pss-border);
+  stroke-width: 1px;
+}
+
+.react-flow__handle {
+  width: 14px;
+  height: 14px;
+  border: 2px solid #ffffff;
+  box-shadow: 0 2px 8px rgba(15, 23, 42, 0.15);
+}
+
+.react-flow__handle:hover {
+  transform: scale(1.15);
+}
+
+.device-node {
+  backdrop-filter: saturate(115%) blur(1px);
+}
+
+/* Canvas styles */
+.pss-canvas {
+  @apply w-full h-full bg-white;
+}
+
+/* Equipment library */
+.equipment-library {
+  @apply bg-white rounded-lg shadow-sm border border-gray-200;
+}
+
+/* Properties panel */
+.properties-panel {
+  @apply bg-white rounded-lg shadow-sm border border-gray-200 overflow-y-auto;
+}
+
+/* Validation panel */
+.validation-panel {
+  @apply bg-white rounded-lg shadow-sm border border-gray-200;
+}
+
+.equipment-library .group {
+  transition: transform 0.15s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+}
+
+.equipment-library .group:hover {
+  transform: translateY(-1px);
+}
+
+/* Error states */
+.error-state {
+  @apply border-l-4 border-red-500 bg-red-50 p-3;
+}
+
+.warning-state {
+  @apply border-l-4 border-yellow-500 bg-yellow-50 p-3;
+}
+
+.success-state {
+  @apply border-l-4 border-green-500 bg-green-50 p-3;
+}
+
+@keyframes fade-slide-in {
+  from {
+    opacity: 0;
+    transform: translateY(-8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes pulse-soft {
+  0%,
+  100% {
+    opacity: 0.5;
+  }
+  50% {
+    opacity: 1;
+  }
+}

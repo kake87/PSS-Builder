@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PSS Builder - Security Systems Architecture Constructor</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+                'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+                sans-serif;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+        
+        .container {
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            max-width: 800px;
+            width: 100%;
+            padding: 60px 40px;
+            text-align: center;
+        }
+        
+        h1 {
+            color: #333;
+            margin-bottom: 10px;
+            font-size: 2.5em;
+        }
+        
+        .subtitle {
+            color: #666;
+            font-size: 1.1em;
+            margin-bottom: 30px;
+        }
+        
+        .logo {
+            font-size: 4em;
+            margin-bottom: 20px;
+        }
+        
+        .features {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin: 40px 0;
+            text-align: left;
+        }
+        
+        .feature {
+            padding: 20px;
+            background: #f8f9fa;
+            border-radius: 8px;
+            border-left: 4px solid #667eea;
+        }
+        
+        .feature h3 {
+            color: #667eea;
+            margin-bottom: 10px;
+            font-size: 1.1em;
+        }
+        
+        .feature p {
+            color: #666;
+            font-size: 0.95em;
+            line-height: 1.6;
+        }
+        
+        .buttons {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            margin-top: 40px;
+            flex-wrap: wrap;
+        }
+        
+        button {
+            padding: 12px 30px;
+            font-size: 1em;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 600;
+        }
+        
+        .btn-primary {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(102, 126, 234, 0.3);
+        }
+        
+        .btn-secondary {
+            background: white;
+            color: #667eea;
+            border: 2px solid #667eea;
+        }
+        
+        .btn-secondary:hover {
+            background: #667eea;
+            color: white;
+        }
+        
+        .links {
+            margin-top: 30px;
+            color: #666;
+            font-size: 0.95em;
+        }
+        
+        .links a {
+            color: #667eea;
+            text-decoration: none;
+            margin: 0 15px;
+            font-weight: 600;
+        }
+        
+        .links a:hover {
+            text-decoration: underline;
+        }
+        
+        @media (max-width: 600px) {
+            .container {
+                padding: 40px 20px;
+            }
+            
+            h1 {
+                font-size: 1.8em;
+            }
+            
+            .features {
+                grid-template-columns: 1fr;
+            }
+            
+            .buttons {
+                flex-direction: column;
+            }
+            
+            button {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="logo">🏗️</div>
+        <h1>PSS Builder</h1>
+        <p class="subtitle">Конструктор архитектур систем безопасности</p>
+        
+        <div class="features">
+            <div class="feature">
+                <h3>🎯 Быстрая сборка</h3>
+                <p>Собирайте архитектуру систем из готовых компонентов в несколько кликов</p>
+            </div>
+            <div class="feature">
+                <h3>✅ Проверка корректности</h3>
+                <p>Система автоматически проверяет совместимость оборудования и ограничения</p>
+            </div>
+            <div class="feature">
+                <h3>📦 Каталог оборудования</h3>
+                <p>Доступ к каталогу реальных моделей камер, коммутаторов и серверов</p>
+            </div>
+            <div class="feature">
+                <h3>🎨 Готовые шаблоны</h3>
+                <p>Используйте готовые решения для офисов, складов и производств</p>
+            </div>
+        </div>
+        
+        <div class="buttons">
+            <button class="btn-primary" onclick="goToAPI()">API Documentation</button>
+            <button class="btn-secondary" onclick="viewExample()">View Example</button>
+        </div>
+        
+        <div class="links">
+            <a href="/docs">Swagger UI</a>
+            <a href="/redoc">ReDoc</a>
+            <a href="/health">Health Check</a>
+        </div>
+    </div>
+    
+    <script>
+        function goToAPI() {
+            window.location.href = '/docs';
+        }
+        
+        function viewExample() {
+            window.location.href = 'example.py';
+        }
+        
+        // Check API health
+        fetch('/health')
+            .then(response => response.json())
+            .then(data => {
+                console.log('API Status:', data);
+                document.title = `PSS Builder - ${data.status}`;
+            })
+            .catch(error => console.error('API Error:', error));
+    </script>
+</body>
+</html>
