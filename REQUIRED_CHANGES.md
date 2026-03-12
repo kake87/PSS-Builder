@@ -572,4 +572,19 @@ Progress update (March 11, 2026):
   - `/api/equipment-catalog/compatibility-rules`
   - `/api/equipment-catalog/normalized`
 - [x] Added frontend client types/methods for normalized catalog endpoints
-- [ ] Persist normalized catalog in dedicated DB tables (currently generated from in-memory catalog)
+- [x] Switched Equipment Library loading to normalized catalog models (with legacy fallback)
+- [x] Added lifecycle filters in Equipment Library (`verified`, `draft`, `deprecated`, `all`)
+- [x] Persisted Equipment Library filters in localStorage
+- [x] Added equipment completeness badge based on `required_fields` from normalized `equipment_types`
+- [x] Persisted normalized catalog snapshot on backend disk (`backend/data/normalized_catalog.json`)
+- [x] Added backend CRUD for catalog entities:
+  - `POST/DELETE /api/equipment-catalog/types`
+  - `POST/DELETE /api/equipment-catalog/models`
+  - `POST /api/equipment-catalog/models/bulk`
+  - `POST/DELETE /api/equipment-catalog/compatibility-rules`
+- [x] `devices-from-template` now resolves models from normalized catalog snapshot
+- [x] Added import by URL endpoint and UI flow:
+  - `POST /api/equipment-catalog/models/import-url`
+  - `POST /api/equipment-catalog/models/import-url/bulk`
+  - Equipment Library URL import control (paste link -> import -> catalog refresh)
+- [ ] Persist normalized catalog in dedicated DB tables (currently JSON file snapshot)

@@ -38,8 +38,12 @@ def main():
     
     backend_install_cmd = [
         str(python_exe),
-        "-m", "pip", "install", "-q",
-        "fastapi", "uvicorn", "pydantic", "sqlalchemy"
+        "-m",
+        "pip",
+        "install",
+        "-q",
+        "-r",
+        "requirements.txt",
     ]
     
     print("📦 Installing backend dependencies...")

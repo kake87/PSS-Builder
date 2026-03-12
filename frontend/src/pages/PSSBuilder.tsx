@@ -2,6 +2,7 @@ import React, { useCallback, useEffect, useMemo, useState } from 'react'
 import { useMutation, useQuery } from '@tanstack/react-query'
 import { Node, Edge } from 'reactflow'
 import { Plus, X } from 'lucide-react'
+import { AxiosError } from 'axios'
 import { projectsApi, devicesApi } from '@/shared/api/client'
 import { useProjectStore, ValidationIssue, NodeGroup } from '@/shared/store/projectStore'
 import { Canvas } from '@/widgets/Canvas'
@@ -160,6 +161,60 @@ function getValidationMessages(value: unknown): string[] {
     }
   }
   return [String(value)]
+}
+
+function getApiErrorMessage(error: unknown): string {
+  if (error instanceof AxiosError) {
+    const responseData = error.response?.data
+    const detail = responseData?.detail
+    const responseText =
+      typeof responseData === 'string'
+        ? responseData
+        : typeof detail === 'string'
+        ? detail
+        : ''
+    const normalizedText = responseText.toLowerCase()
+    const backendUnavailableViaProxy =
+      normalizedText.includes('econnrefused') ||
+      normalizedText.includes('connect error') ||
+      normalizedText.includes('proxy error') ||
+      normalizedText.includes('failed to fetch') ||
+      normalizedText.includes('target machine actively refused') ||
+      normalizedText.includes('upstream')
+
+    if (typeof detail === 'string' && detail.trim()) {
+      if (backendUnavailableViaProxy) {
+        return 'Backend API is unavailable. Start backend on http://127.0.0.1:8000 and retry.'
+      }
+      return detail
+    }
+
+    if (Array.isArray(detail)) {
+      const formatted = detail
+        .map((item: any) => item?.msg || item?.message || String(item))
+        .filter(Boolean)
+        .join('; ')
+      if (formatted) return formatted
+    }
+
+    if (!error.response) {
+      return 'Backend API is unavailable. Start backend on http://127.0.0.1:8000 and retry.'
+    }
+
+    if (backendUnavailableViaProxy) {
+      return 'Backend API is unavailable. Start backend on http://127.0.0.1:8000 and retry.'
+    }
+
+    if (error.response.status >= 500) {
+      return 'Server error while creating project. Check backend logs and retry.'
+    }
+  }
+
+  if (error instanceof Error && error.message) {
+    return error.message
+  }
+
+  return 'Failed to create project.'
 }
 
 function buildLocalValidation(nodes: Node[], edges: Edge[]): ValidationIssue[] {
@@ -356,6 +411,7 @@ function CreateProjectModal({
 export function PSSBuilder() {
   const [projects, setProjects] = useState<any[]>([])
   const [isCreateModalOpen, setIsCreateModalOpen] = useState(false)
+  const [createProjectError, setCreateProjectError] = useState<string | null>(null)
   const [equipmentCatalog, setEquipmentCatalog] = useState<Record<string, any>>({})
   const [isHelpOpen, setIsHelpOpen] = useState(false)
   const projectStore = useProjectStore()
@@ -388,10 +444,33 @@ export function PSSBuilder() {
   useQuery({
     queryKey: ['equipment-catalog'],
     queryFn: async () => {
-      const res = await devicesApi.getEquipmentCatalog()
-      const catalogData = res.data || {}
-      setEquipmentCatalog(catalogData)
-      return catalogData
+      try {
+        const normalized = await devicesApi.getNormalizedEquipmentCatalog()
+        const models = normalized.data?.equipment_models || []
+        const catalogData = models.reduce((acc, model) => {
+          acc[model.key] = {
+            name: model.name,
+            manufacturer: model.manufacturer,
+            model: model.model,
+            device_type: model.type_key,
+            lifecycle_status: model.lifecycle_status,
+            power_consumption_watts: model.power_consumption_watts,
+            resolution: model.resolution,
+            storage_capacity_gb: model.storage_capacity_gb,
+            bandwidth_requires_mbps: model.bandwidth_requires_mbps,
+            ports: model.ports || [],
+          }
+          return acc
+        }, {} as Record<string, any>)
+        setEquipmentCatalog(catalogData)
+        return catalogData
+      } catch (error) {
+        console.warn('Normalized catalog failed, fallback to legacy:', error)
+        const res = await devicesApi.getEquipmentCatalog()
+        const catalogData = res.data || {}
+        setEquipmentCatalog(catalogData)
+        return catalogData
+      }
     },
   })
 
@@ -434,6 +513,7 @@ export function PSSBuilder() {
   const createProjectMutation = useMutation({
     mutationFn: (data: { name: string; description: string }) => projectsApi.createProject(data),
     onSuccess: (res) => {
+      setCreateProjectError(null)
       projectStore.reset()
       projectStore.setGraph([], [], {
         markDirty: false,
@@ -453,6 +533,12 @@ export function PSSBuilder() {
         return [nextProject, ...rest]
       })
       setIsCreateModalOpen(false)
+    },
+    onError: (error) => {
+      const message = getApiErrorMessage(error)
+      setCreateProjectError(message)
+      console.error('Project creation failed:', error)
+      emitToast(message, 'error')
     },
   })
 
@@ -511,6 +597,7 @@ export function PSSBuilder() {
   })
 
   const handleCreateProject = (name: string, description: string) => {
+    setCreateProjectError(null)
     createProjectMutation.mutate({ name, description })
   }
 
@@ -733,10 +820,13 @@ export function PSSBuilder() {
 
         <CreateProjectModal
           isOpen={isCreateModalOpen}
-          onClose={() => setIsCreateModalOpen(false)}
+          onClose={() => {
+            setCreateProjectError(null)
+            setIsCreateModalOpen(false)
+          }}
           onCreate={handleCreateProject}
           isSubmitting={createProjectMutation.isPending}
-          errorMessage={createProjectMutation.error?.message ?? null}
+          errorMessage={createProjectError}
         />
       </>
     )
@@ -862,10 +952,13 @@ export function PSSBuilder() {
 
         <CreateProjectModal
           isOpen={isCreateModalOpen}
-          onClose={() => setIsCreateModalOpen(false)}
+          onClose={() => {
+            setCreateProjectError(null)
+            setIsCreateModalOpen(false)
+          }}
           onCreate={handleCreateProject}
           isSubmitting={createProjectMutation.isPending}
-          errorMessage={createProjectMutation.error?.message ?? null}
+          errorMessage={createProjectError}
         />
       </>
     </EditorErrorBoundary>

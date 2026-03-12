@@ -1,0 +1,1034 @@
+{
+  "schema_version": "1.0",
+  "generated_at": "2026-03-12T11:52:56.968775+00:00",
+  "equipment_types": [
+    {
+      "id": "type-access-controller",
+      "key": "access_controller",
+      "name": "Access Controller",
+      "required_fields": [
+        "name",
+        "device_type",
+        "model",
+        "manufacturer",
+        "ports"
+      ],
+      "lifecycle_status": "verified",
+      "description": "Access control device."
+    },
+    {
+      "id": "type-camera",
+      "key": "camera",
+      "name": "Camera",
+      "required_fields": [
+        "name",
+        "device_type",
+        "model",
+        "manufacturer",
+        "resolution",
+        "ports"
+      ],
+      "lifecycle_status": "verified",
+      "description": "Video capture endpoint device."
+    },
+    {
+      "id": "type-nvr",
+      "key": "nvr",
+      "name": "NVR",
+      "required_fields": [
+        "name",
+        "device_type",
+        "model",
+        "manufacturer",
+        "storage_capacity_gb",
+        "ports"
+      ],
+      "lifecycle_status": "verified",
+      "description": "Network video recorder."
+    },
+    {
+      "id": "type-server",
+      "key": "server",
+      "name": "Server",
+      "required_fields": [
+        "name",
+        "device_type",
+        "model",
+        "manufacturer",
+        "storage_capacity_gb",
+        "ports"
+      ],
+      "lifecycle_status": "verified",
+      "description": "Compute/storage server."
+    },
+    {
+      "id": "type-switch",
+      "key": "switch",
+      "name": "Switch",
+      "required_fields": [
+        "name",
+        "device_type",
+        "model",
+        "manufacturer",
+        "ports",
+        "power_consumption_watts"
+      ],
+      "lifecycle_status": "verified",
+      "description": "Network switching device."
+    },
+    {
+      "id": "type-ups",
+      "key": "ups",
+      "name": "UPS",
+      "required_fields": [
+        "name",
+        "device_type",
+        "model",
+        "manufacturer",
+        "power_consumption_watts",
+        "ports"
+      ],
+      "lifecycle_status": "verified",
+      "description": "Uninterruptible power supply."
+    }
+  ],
+  "equipment_models": [
+    {
+      "id": "d8119da5-36fb-4f05-8338-133852ce9041",
+      "key": "hikvision-4k",
+      "type_key": "camera",
+      "name": "Hikvision DS-2CD2143G2-I",
+      "manufacturer": "Hikvision",
+      "model": "DS-2CD2143G2-I",
+      "lifecycle_status": "verified",
+      "schema_version": "1.0",
+      "power_consumption_watts": 10.0,
+      "resolution": "4K (8MP)",
+      "storage_capacity_gb": null,
+      "bandwidth_requires_mbps": 8,
+      "ports": [
+        {
+          "name": "ETH1",
+          "port_type": "ethernet",
+          "speed_mbps": 1000,
+          "power_watts": null
+        },
+        {
+          "name": "POE",
+          "port_type": "power",
+          "speed_mbps": null,
+          "power_watts": 12.0
+        }
+      ]
+    },
+    {
+      "id": "16b96d95-fa73-41b1-b397-271dfc9399a7",
+      "key": "dahua-2k",
+      "type_key": "camera",
+      "name": "Dahua IPC-HDBW2431E",
+      "manufacturer": "Dahua",
+      "model": "IPC-HDBW2431E",
+      "lifecycle_status": "verified",
+      "schema_version": "1.0",
+      "power_consumption_watts": 8.0,
+      "resolution": "2K (4MP)",
+      "storage_capacity_gb": null,
+      "bandwidth_requires_mbps": 5,
+      "ports": [
+        {
+          "name": "ETH1",
+          "port_type": "ethernet",
+          "speed_mbps": 1000,
+          "power_watts": null
+        },
+        {
+          "name": "POE",
+          "port_type": "power",
+          "speed_mbps": null,
+          "power_watts": 9.6
+        }
+      ]
+    },
+    {
+      "id": "2c383c53-fcf9-4b41-b1a7-abbeb38b2499",
+      "key": "uniview-1080p",
+      "type_key": "camera",
+      "name": "Uniview IPC322SR",
+      "manufacturer": "Uniview",
+      "model": "IPC322SR",
+      "lifecycle_status": "verified",
+      "schema_version": "1.0",
+      "power_consumption_watts": 5.0,
+      "resolution": "1080p (2MP)",
+      "storage_capacity_gb": null,
+      "bandwidth_requires_mbps": 3,
+      "ports": [
+        {
+          "name": "ETH1",
+          "port_type": "ethernet",
+          "speed_mbps": 1000,
+          "power_watts": null
+        },
+        {
+          "name": "POE",
+          "port_type": "power",
+          "speed_mbps": null,
+          "power_watts": 6.0
+        }
+      ]
+    },
+    {
+      "id": "0015fa2e-6033-4846-bd80-3852f7263b99",
+      "key": "cisco-48poe",
+      "type_key": "switch",
+      "name": "Cisco Catalyst 2960X-48TS-L",
+      "manufacturer": "Cisco",
+      "model": "C2960X-48TS-L",
+      "lifecycle_status": "verified",
+      "schema_version": "1.0",
+      "power_consumption_watts": 150.0,
+      "resolution": null,
+      "storage_capacity_gb": null,
+      "bandwidth_requires_mbps": null,
+      "ports": [
+        {
+          "name": "GigabitEthernet 1/0/1",
+          "port_type": "ethernet",
+          "speed_mbps": 1000,
+          "power_watts": null
+        },
+        {
+          "name": "GigabitEthernet 1/0/2",
+          "port_type": "ethernet",
+          "speed_mbps": 1000,
+          "power_watts": null
+        },
+        {
+          "name": "GigabitEthernet 1/0/3",
+          "port_type": "ethernet",
+          "speed_mbps": 1000,
+          "power_watts": null
+        },
+        {
+          "name": "GigabitEthernet 1/0/4",
+          "port_type": "ethernet",
+          "speed_mbps": 1000,
+          "power_watts": null
+        },
+        {
+          "name": "GigabitEthernet 1/0/5",
+          "port_type": "ethernet",
+          "speed_mbps": 1000,
+          "power_watts": null
+        },
+        {
+          "name": "GigabitEthernet 1/0/6",
+          "port_type": "ethernet",
+          "speed_mbps": 1000,
+          "power_watts": null
+        },
+        {
+          "name": "GigabitEthernet 1/0/7",
+          "port_type": "ethernet",
+          "speed_mbps": 1000,
+          "power_watts": null
+        },
+        {
+          "name": "GigabitEthernet 1/0/8",
+          "port_type": "ethernet",
+          "speed_mbps": 1000,
+          "power_watts": null
+        },
+        {
+          "name": "GigabitEthernet 1/0/9",
+          "port_type": "ethernet",
+          "speed_mbps": 1000,
+          "power_watts": null
+        },
+        {
+          "name": "GigabitEthernet 1/0/10",
+          "port_type": "ethernet",
+          "speed_mbps": 1000,
+          "power_watts": null
+        },
+        {
+          "name": "GigabitEthernet 1/0/11",
+          "port_type": "ethernet",
+          "speed_mbps": 1000,
+          "power_watts": null
+        },
+        {
+          "name": "GigabitEthernet 1/0/12",
+          "port_type": "ethernet",
+          "speed_mbps": 1000,
+          "power_watts": null
+        },
+        {
+          "name": "GigabitEthernet 1/0/13",
+          "port_type": "ethernet",
+          "speed_mbps": 1000,
+          "power_watts": null
+        },
+        {
+          "name": "GigabitEthernet 1/0/14",
+          "port_type": "ethernet",
+          "speed_mbps": 1000,
+          "power_watts": null
+        },
+        {
+          "name": "GigabitEthernet 1/0/15",
+          "port_type": "ethernet",
+          "speed_mbps": 1000,
+          "power_watts": null
+        },
+        {
+          "name": "GigabitEthernet 1/0/16",
+          "port_type": "ethernet",
+          "speed_mbps": 1000,
+          "power_watts": null
+        },
+        {
+          "name": "GigabitEthernet 1/0/17",
+          "port_type": "ethernet",
+          "speed_mbps": 1000,
+          "power_watts": null
+        },
+        {
+          "name": "GigabitEthernet 1/0/18",
+          "port_type": "ethernet",
+          "speed_mbps": 1000,
+          "power_watts": null
+        },
+        {
+          "name": "GigabitEthernet 1/0/19",
+          "port_type": "ethernet",
+          "speed_mbps": 1000,
+          "power_watts": null
+        },
+        {
+          "name": "GigabitEthernet 1/0/20",
+          "port_type": "ethernet",
+          "speed_mbps": 1000,
+          "power_watts": null
+        },
+        {
+          "name": "GigabitEthernet 1/0/21",
+          "port_type": "ethernet",
+          "speed_mbps": 1000,
+          "power_watts": null
+        },
+        {
+          "name": "GigabitEthernet 1/0/22",
+          "port_type": "ethernet",
+          "speed_mbps": 1000,
+          "power_watts": null
+        },
+        {
+          "name": "GigabitEthernet 1/0/23",
+          "port_type": "ethernet",
+          "speed_mbps": 1000,
+          "power_watts": null
+        },
+        {
+          "name": "GigabitEthernet 1/0/24",
+          "port_type": "ethernet",
+          "speed_mbps": 1000,
+          "power_watts": null
+        },
+        {
+          "name": "GigabitEthernet 1/0/25",
+          "port_type": "ethernet",
+          "speed_mbps": 1000,
+          "power_watts": null
+        },
+        {
+          "name": "GigabitEthernet 1/0/26",
+          "port_type": "ethernet",
+          "speed_mbps": 1000,
+          "power_watts": null
+        },
+        {
+          "name": "GigabitEthernet 1/0/27",
+          "port_type": "ethernet",
+          "speed_mbps": 1000,
+          "power_watts": null
+        },
+        {
+          "name": "GigabitEthernet 1/0/28",
+          "port_type": "ethernet",
+          "speed_mbps": 1000,
+          "power_watts": null
+        },
+        {
+          "name": "GigabitEthernet 1/0/29",
+          "port_type": "ethernet",
+          "speed_mbps": 1000,
+          "power_watts": null
+        },
+        {
+          "name": "GigabitEthernet 1/0/30",
+          "port_type": "ethernet",
+          "speed_mbps": 1000,
+          "power_watts": null
+        },
+        {
+          "name": "GigabitEthernet 1/0/31",
+          "port_type": "ethernet",
+          "speed_mbps": 1000,
+          "power_watts": null
+        },
+        {
+          "name": "GigabitEthernet 1/0/32",
+          "port_type": "ethernet",
+          "speed_mbps": 1000,
+          "power_watts": null
+        },
+        {
+          "name": "GigabitEthernet 1/0/33",
+          "port_type": "ethernet",
+          "speed_mbps": 1000,
+          "power_watts": null
+        },
+        {
+          "name": "GigabitEthernet 1/0/34",
+          "port_type": "ethernet",
+          "speed_mbps": 1000,
+          "power_watts": null
+        },
+        {
+          "name": "GigabitEthernet 1/0/35",
+          "port_type": "ethernet",
+          "speed_mbps": 1000,
+          "power_watts": null
+        },
+        {
+          "name": "GigabitEthernet 1/0/36",
+          "port_type": "ethernet",
+          "speed_mbps": 1000,
+          "power_watts": null
+        },
+        {
+          "name": "GigabitEthernet 1/0/37",
+          "port_type": "ethernet",
+          "speed_mbps": 1000,
+          "power_watts": null
+        },
+        {
+          "name": "GigabitEthernet 1/0/38",
+          "port_type": "ethernet",
+          "speed_mbps": 1000,
+          "power_watts": null
+        },
+        {
+          "name": "GigabitEthernet 1/0/39",
+          "port_type": "ethernet",
+          "speed_mbps": 1000,
+          "power_watts": null
+        },
+        {
+          "name": "GigabitEthernet 1/0/40",
+          "port_type": "ethernet",
+          "speed_mbps": 1000,
+          "power_watts": null
+        },
+        {
+          "name": "GigabitEthernet 1/0/41",
+          "port_type": "ethernet",
+          "speed_mbps": 1000,
+          "power_watts": null
+        },
+        {
+          "name": "GigabitEthernet 1/0/42",
+          "port_type": "ethernet",
+          "speed_mbps": 1000,
+          "power_watts": null
+        },
+        {
+          "name": "GigabitEthernet 1/0/43",
+          "port_type": "ethernet",
+          "speed_mbps": 1000,
+          "power_watts": null
+        },
+        {
+          "name": "GigabitEthernet 1/0/44",
+          "port_type": "ethernet",
+          "speed_mbps": 1000,
+          "power_watts": null
+        },
+        {
+          "name": "GigabitEthernet 1/0/45",
+          "port_type": "ethernet",
+          "speed_mbps": 1000,
+          "power_watts": null
+        },
+        {
+          "name": "GigabitEthernet 1/0/46",
+          "port_type": "ethernet",
+          "speed_mbps": 1000,
+          "power_watts": null
+        },
+        {
+          "name": "GigabitEthernet 1/0/47",
+          "port_type": "ethernet",
+          "speed_mbps": 1000,
+          "power_watts": null
+        },
+        {
+          "name": "GigabitEthernet 1/0/48",
+          "port_type": "ethernet",
+          "speed_mbps": 1000,
+          "power_watts": null
+        },
+        {
+          "name": "PS1",
+          "port_type": "power",
+          "speed_mbps": null,
+          "power_watts": 500.0
+        },
+        {
+          "name": "PS2",
+          "port_type": "power",
+          "speed_mbps": null,
+          "power_watts": 500.0
+        }
+      ]
+    },
+    {
+      "id": "caa83c6e-34c6-4b57-beca-f822ffe3d743",
+      "key": "hikvision-24poe",
+      "type_key": "switch",
+      "name": "Hikvision DS-3E0524P-E",
+      "manufacturer": "Hikvision",
+      "model": "DS-3E0524P-E",
+      "lifecycle_status": "verified",
+      "schema_version": "1.0",
+      "power_consumption_watts": 90.0,
+      "resolution": null,
+      "storage_capacity_gb": null,
+      "bandwidth_requires_mbps": null,
+      "ports": [
+        {
+          "name": "GE 1",
+          "port_type": "ethernet",
+          "speed_mbps": 1000,
+          "power_watts": null
+        },
+        {
+          "name": "GE 2",
+          "port_type": "ethernet",
+          "speed_mbps": 1000,
+          "power_watts": null
+        },
+        {
+          "name": "GE 3",
+          "port_type": "ethernet",
+          "speed_mbps": 1000,
+          "power_watts": null
+        },
+        {
+          "name": "GE 4",
+          "port_type": "ethernet",
+          "speed_mbps": 1000,
+          "power_watts": null
+        },
+        {
+          "name": "GE 5",
+          "port_type": "ethernet",
+          "speed_mbps": 1000,
+          "power_watts": null
+        },
+        {
+          "name": "GE 6",
+          "port_type": "ethernet",
+          "speed_mbps": 1000,
+          "power_watts": null
+        },
+        {
+          "name": "GE 7",
+          "port_type": "ethernet",
+          "speed_mbps": 1000,
+          "power_watts": null
+        },
+        {
+          "name": "GE 8",
+          "port_type": "ethernet",
+          "speed_mbps": 1000,
+          "power_watts": null
+        },
+        {
+          "name": "GE 9",
+          "port_type": "ethernet",
+          "speed_mbps": 1000,
+          "power_watts": null
+        },
+        {
+          "name": "GE 10",
+          "port_type": "ethernet",
+          "speed_mbps": 1000,
+          "power_watts": null
+        },
+        {
+          "name": "GE 11",
+          "port_type": "ethernet",
+          "speed_mbps": 1000,
+          "power_watts": null
+        },
+        {
+          "name": "GE 12",
+          "port_type": "ethernet",
+          "speed_mbps": 1000,
+          "power_watts": null
+        },
+        {
+          "name": "GE 13",
+          "port_type": "ethernet",
+          "speed_mbps": 1000,
+          "power_watts": null
+        },
+        {
+          "name": "GE 14",
+          "port_type": "ethernet",
+          "speed_mbps": 1000,
+          "power_watts": null
+        },
+        {
+          "name": "GE 15",
+          "port_type": "ethernet",
+          "speed_mbps": 1000,
+          "power_watts": null
+        },
+        {
+          "name": "GE 16",
+          "port_type": "ethernet",
+          "speed_mbps": 1000,
+          "power_watts": null
+        },
+        {
+          "name": "GE 17",
+          "port_type": "ethernet",
+          "speed_mbps": 1000,
+          "power_watts": null
+        },
+        {
+          "name": "GE 18",
+          "port_type": "ethernet",
+          "speed_mbps": 1000,
+          "power_watts": null
+        },
+        {
+          "name": "GE 19",
+          "port_type": "ethernet",
+          "speed_mbps": 1000,
+          "power_watts": null
+        },
+        {
+          "name": "GE 20",
+          "port_type": "ethernet",
+          "speed_mbps": 1000,
+          "power_watts": null
+        },
+        {
+          "name": "GE 21",
+          "port_type": "ethernet",
+          "speed_mbps": 1000,
+          "power_watts": null
+        },
+        {
+          "name": "GE 22",
+          "port_type": "ethernet",
+          "speed_mbps": 1000,
+          "power_watts": null
+        },
+        {
+          "name": "GE 23",
+          "port_type": "ethernet",
+          "speed_mbps": 1000,
+          "power_watts": null
+        },
+        {
+          "name": "GE 24",
+          "port_type": "ethernet",
+          "speed_mbps": 1000,
+          "power_watts": null
+        },
+        {
+          "name": "PS",
+          "port_type": "power",
+          "speed_mbps": null,
+          "power_watts": 120.0
+        }
+      ]
+    },
+    {
+      "id": "5f3766d5-40d6-40a6-bb6b-442ed5bf0428",
+      "key": "netgear-16poe",
+      "type_key": "switch",
+      "name": "Netgear PoE+ Smart Managed Pro Switch",
+      "manufacturer": "Netgear",
+      "model": "GS716Pv3",
+      "lifecycle_status": "verified",
+      "schema_version": "1.0",
+      "power_consumption_watts": 65.0,
+      "resolution": null,
+      "storage_capacity_gb": null,
+      "bandwidth_requires_mbps": null,
+      "ports": [
+        {
+          "name": "Port 1",
+          "port_type": "ethernet",
+          "speed_mbps": 1000,
+          "power_watts": null
+        },
+        {
+          "name": "Port 2",
+          "port_type": "ethernet",
+          "speed_mbps": 1000,
+          "power_watts": null
+        },
+        {
+          "name": "Port 3",
+          "port_type": "ethernet",
+          "speed_mbps": 1000,
+          "power_watts": null
+        },
+        {
+          "name": "Port 4",
+          "port_type": "ethernet",
+          "speed_mbps": 1000,
+          "power_watts": null
+        },
+        {
+          "name": "Port 5",
+          "port_type": "ethernet",
+          "speed_mbps": 1000,
+          "power_watts": null
+        },
+        {
+          "name": "Port 6",
+          "port_type": "ethernet",
+          "speed_mbps": 1000,
+          "power_watts": null
+        },
+        {
+          "name": "Port 7",
+          "port_type": "ethernet",
+          "speed_mbps": 1000,
+          "power_watts": null
+        },
+        {
+          "name": "Port 8",
+          "port_type": "ethernet",
+          "speed_mbps": 1000,
+          "power_watts": null
+        },
+        {
+          "name": "Port 9",
+          "port_type": "ethernet",
+          "speed_mbps": 1000,
+          "power_watts": null
+        },
+        {
+          "name": "Port 10",
+          "port_type": "ethernet",
+          "speed_mbps": 1000,
+          "power_watts": null
+        },
+        {
+          "name": "Port 11",
+          "port_type": "ethernet",
+          "speed_mbps": 1000,
+          "power_watts": null
+        },
+        {
+          "name": "Port 12",
+          "port_type": "ethernet",
+          "speed_mbps": 1000,
+          "power_watts": null
+        },
+        {
+          "name": "Port 13",
+          "port_type": "ethernet",
+          "speed_mbps": 1000,
+          "power_watts": null
+        },
+        {
+          "name": "Port 14",
+          "port_type": "ethernet",
+          "speed_mbps": 1000,
+          "power_watts": null
+        },
+        {
+          "name": "Port 15",
+          "port_type": "ethernet",
+          "speed_mbps": 1000,
+          "power_watts": null
+        },
+        {
+          "name": "Port 16",
+          "port_type": "ethernet",
+          "speed_mbps": 1000,
+          "power_watts": null
+        },
+        {
+          "name": "Power",
+          "port_type": "power",
+          "speed_mbps": null,
+          "power_watts": 180.0
+        }
+      ]
+    },
+    {
+      "id": "40d2a487-6fca-4731-b75d-dedf7ad848aa",
+      "key": "nvr-hikvision-32ch",
+      "type_key": "nvr",
+      "name": "Hikvision DS-7632NI-K2",
+      "manufacturer": "Hikvision",
+      "model": "DS-7632NI-K2",
+      "lifecycle_status": "verified",
+      "schema_version": "1.0",
+      "power_consumption_watts": 300.0,
+      "resolution": null,
+      "storage_capacity_gb": 4000,
+      "bandwidth_requires_mbps": null,
+      "ports": [
+        {
+          "name": "ETH1",
+          "port_type": "ethernet",
+          "speed_mbps": 1000,
+          "power_watts": null
+        },
+        {
+          "name": "ETH2",
+          "port_type": "ethernet",
+          "speed_mbps": 1000,
+          "power_watts": null
+        },
+        {
+          "name": "USB 1",
+          "port_type": "serial",
+          "speed_mbps": null,
+          "power_watts": null
+        },
+        {
+          "name": "Power",
+          "port_type": "power",
+          "speed_mbps": null,
+          "power_watts": 500.0
+        }
+      ]
+    },
+    {
+      "id": "c0d8a8bf-f410-4882-bd02-adb372a9c429",
+      "key": "server-dell-r750",
+      "type_key": "server",
+      "name": "Dell PowerEdge R750",
+      "manufacturer": "Dell",
+      "model": "PowerEdge R750",
+      "lifecycle_status": "verified",
+      "schema_version": "1.0",
+      "power_consumption_watts": 500.0,
+      "resolution": null,
+      "storage_capacity_gb": 8000,
+      "bandwidth_requires_mbps": null,
+      "ports": [
+        {
+          "name": "ETH1",
+          "port_type": "ethernet",
+          "speed_mbps": 10000,
+          "power_watts": null
+        },
+        {
+          "name": "ETH2",
+          "port_type": "ethernet",
+          "speed_mbps": 10000,
+          "power_watts": null
+        },
+        {
+          "name": "IPMI",
+          "port_type": "ethernet",
+          "speed_mbps": 1000,
+          "power_watts": null
+        },
+        {
+          "name": "Power 1",
+          "port_type": "power",
+          "speed_mbps": null,
+          "power_watts": 1000.0
+        },
+        {
+          "name": "Power 2",
+          "port_type": "power",
+          "speed_mbps": null,
+          "power_watts": 1000.0
+        }
+      ]
+    },
+    {
+      "id": "b963b873-4340-481c-a250-e49ad8a20c0d",
+      "key": "access-hikvision",
+      "type_key": "access_controller",
+      "name": "Hikvision DS-K2604T",
+      "manufacturer": "Hikvision",
+      "model": "DS-K2604T",
+      "lifecycle_status": "verified",
+      "schema_version": "1.0",
+      "power_consumption_watts": 50.0,
+      "resolution": null,
+      "storage_capacity_gb": null,
+      "bandwidth_requires_mbps": null,
+      "ports": [
+        {
+          "name": "ETH1",
+          "port_type": "ethernet",
+          "speed_mbps": 100,
+          "power_watts": null
+        },
+        {
+          "name": "RS485",
+          "port_type": "serial",
+          "speed_mbps": null,
+          "power_watts": null
+        },
+        {
+          "name": "Power",
+          "port_type": "power",
+          "speed_mbps": null,
+          "power_watts": 60.0
+        }
+      ]
+    },
+    {
+      "id": "07de5080-0cf1-45a0-a056-5e7b61e0ab5a",
+      "key": "access-zkteco",
+      "type_key": "access_controller",
+      "name": "ZKTeco ProCapture EC220",
+      "manufacturer": "ZKTeco",
+      "model": "ProCapture EC220",
+      "lifecycle_status": "verified",
+      "schema_version": "1.0",
+      "power_consumption_watts": 40.0,
+      "resolution": null,
+      "storage_capacity_gb": null,
+      "bandwidth_requires_mbps": null,
+      "ports": [
+        {
+          "name": "ETH1",
+          "port_type": "ethernet",
+          "speed_mbps": 100,
+          "power_watts": null
+        },
+        {
+          "name": "RS485",
+          "port_type": "serial",
+          "speed_mbps": null,
+          "power_watts": null
+        },
+        {
+          "name": "Power",
+          "port_type": "power",
+          "speed_mbps": null,
+          "power_watts": 50.0
+        }
+      ]
+    },
+    {
+      "id": "f0e8a10d-45f9-47f0-b723-6698183392e0",
+      "key": "ups-apc-5kva",
+      "type_key": "ups",
+      "name": "APC Smart-UPS 5000VA",
+      "manufacturer": "APC",
+      "model": "SUA5000RMI5U",
+      "lifecycle_status": "verified",
+      "schema_version": "1.0",
+      "power_consumption_watts": 5000.0,
+      "resolution": null,
+      "storage_capacity_gb": null,
+      "bandwidth_requires_mbps": null,
+      "ports": [
+        {
+          "name": "RS232",
+          "port_type": "serial",
+          "speed_mbps": null,
+          "power_watts": null
+        },
+        {
+          "name": "Ethernet",
+          "port_type": "ethernet",
+          "speed_mbps": 10,
+          "power_watts": null
+        },
+        {
+          "name": "Input",
+          "port_type": "power",
+          "speed_mbps": null,
+          "power_watts": 5000.0
+        },
+        {
+          "name": "Output",
+          "port_type": "power",
+          "speed_mbps": null,
+          "power_watts": 5000.0
+        }
+      ]
+    },
+    {
+      "id": "9f3a9766-2608-40f0-aed7-8f547b5ff063",
+      "key": "ds-2cd2h23g2-izs",
+      "type_key": "camera",
+      "name": "DS-2CD2H23G2-IZS",
+      "manufacturer": "Hikvision",
+      "model": "DS-2CD2H23G2-IZS",
+      "lifecycle_status": "draft",
+      "schema_version": "1.0",
+      "power_consumption_watts": null,
+      "resolution": null,
+      "storage_capacity_gb": null,
+      "bandwidth_requires_mbps": null,
+      "ports": [
+        {
+          "name": "ETH1",
+          "port_type": "ethernet",
+          "speed_mbps": 1000,
+          "power_watts": null
+        }
+      ]
+    }
+  ],
+  "compatibility_rules": [
+    {
+      "id": "rule-eth-eth",
+      "rule_key": "ethernet_to_ethernet",
+      "from_port_type": "ethernet",
+      "to_port_type": "ethernet",
+      "allowed_cables": [
+        "CAT5e",
+        "CAT6",
+        "OPTICAL"
+      ],
+      "max_length_meters": 100,
+      "lifecycle_status": "verified"
+    },
+    {
+      "id": "rule-serial-serial",
+      "rule_key": "serial_to_serial",
+      "from_port_type": "serial",
+      "to_port_type": "serial",
+      "allowed_cables": [
+        "SERIAL"
+      ],
+      "max_length_meters": 15,
+      "lifecycle_status": "verified"
+    },
+    {
+      "id": "rule-power-power",
+      "rule_key": "power_to_power",
+      "from_port_type": "power",
+      "to_port_type": "power",
+      "allowed_cables": [
+        "POWER"
+      ],
+      "max_length_meters": 30,
+      "lifecycle_status": "verified"
+    }
+  ]
+}

@@ -1,35 +1,83 @@
 """
-API для работы с устройствами
+Devices and equipment catalog API.
 """
-from fastapi import APIRouter, HTTPException
-from app.models import Device
-from app.schemas import DeviceCreateSchema
-from app.storage import storage
-from app.equipment_catalog import EQUIPMENT_CATALOG
-from app.catalog_schema import (
-    EquipmentTypeDefinition,
-    EquipmentModelDefinition,
-    CompatibilityRuleDefinition,
-    NormalizedCatalogResponse,
-    build_normalized_catalog,
-)
 from copy import deepcopy
 from uuid import uuid4
+
+from fastapi import APIRouter, HTTPException
+from pydantic import ValidationError
+from pydantic import BaseModel, Field
+
+from app.catalog_schema import (
+    CompatibilityRuleDefinition,
+    EquipmentModelDefinition,
+    EquipmentTypeDefinition,
+    NormalizedCatalogResponse,
+)
+from app.catalog_importer import import_hikvision_model_from_url
+from app.equipment_catalog import EQUIPMENT_CATALOG
+from app.models import Device
+from app.models.device import PortType
+from app.schemas import DeviceCreateSchema
+from app.storage import storage
 
 router = APIRouter(prefix="/api", tags=["devices"])
 
 
+class ImportCatalogUrlRequest(BaseModel):
+    url: str = Field(..., min_length=10)
+    type_key: str = "camera"
+    lifecycle_status: str = "verified"
+
+
 def _catalog_snapshot() -> NormalizedCatalogResponse:
-    return build_normalized_catalog(EQUIPMENT_CATALOG)
+    return storage.get_normalized_catalog()
+
+
+def _build_device_from_model(model: EquipmentModelDefinition) -> Device:
+    try:
+        device = Device(
+            name=model.name,
+            device_type=model.type_key,
+            model=model.model,
+            manufacturer=model.manufacturer,
+            power_consumption_watts=model.power_consumption_watts,
+            resolution=model.resolution,
+            storage_capacity_gb=model.storage_capacity_gb,
+            bandwidth_requires_mbps=model.bandwidth_requires_mbps,
+        )
+    except ValidationError:
+        device = Device(
+            name=model.name,
+            device_type="gateway",
+            model=model.model,
+            manufacturer=model.manufacturer,
+            power_consumption_watts=model.power_consumption_watts,
+            resolution=model.resolution,
+            storage_capacity_gb=model.storage_capacity_gb,
+            bandwidth_requires_mbps=model.bandwidth_requires_mbps,
+            notes=f"Original type_key: {model.type_key}",
+        )
+    for port in model.ports:
+        try:
+            port_type = PortType(str(port.port_type))
+        except ValueError:
+            port_type = PortType.ETHERNET
+        device.add_port(
+            port.name,
+            port_type,
+            speed_mbps=port.speed_mbps,
+            power_watts=port.power_watts,
+        )
+    return device
 
 
 @router.get("/projects/{project_id}/devices", response_model=list)
 async def list_devices(project_id: str):
-    """Получить список устройств в проекте"""
     project = storage.get_project(project_id)
     if not project:
-        raise HTTPException(status_code=404, detail="Проект не найден")
-    
+        raise HTTPException(status_code=404, detail="Project not found")
+
     return [
         {
             "id": d.id,
@@ -46,11 +94,10 @@ async def list_devices(project_id: str):
 
 @router.post("/projects/{project_id}/devices", response_model=dict)
 async def add_device(project_id: str, schema: DeviceCreateSchema):
-    """Добавить устройство в проект"""
     project = storage.get_project(project_id)
     if not project:
-        raise HTTPException(status_code=404, detail="Проект не найден")
-    
+        raise HTTPException(status_code=404, detail="Project not found")
+
     device = Device(
         name=schema.name,
         device_type=schema.device_type,
@@ -59,10 +106,10 @@ async def add_device(project_id: str, schema: DeviceCreateSchema):
         location=schema.location,
         notes=schema.notes,
     )
-    
+
     project.add_device(device)
     storage.update_project(project_id, project)
-    
+
     return {
         "id": device.id,
         "name": device.name,
@@ -74,25 +121,28 @@ async def add_device(project_id: str, schema: DeviceCreateSchema):
 
 @router.get("/equipment-catalog", response_model=dict)
 async def get_equipment_catalog():
-    """Получить каталог доступного оборудования"""
     catalog = {}
-    for key, device in EQUIPMENT_CATALOG.items():
-        catalog[key] = {
-            "id": device.id,
-            "name": device.name,
-            "device_type": device.device_type,
-            "model": device.model,
-            "manufacturer": device.manufacturer,
-            "power_consumption_watts": device.power_consumption_watts,
-            "resolution": device.resolution,
-            "storage_capacity_gb": device.storage_capacity_gb,
+    snapshot = _catalog_snapshot()
+    for model in snapshot.equipment_models:
+        catalog[model.key] = {
+            "id": model.id,
+            "name": model.name,
+            "device_type": model.type_key,
+            "model": model.model,
+            "manufacturer": model.manufacturer,
+            "power_consumption_watts": model.power_consumption_watts,
+            "resolution": model.resolution,
+            "storage_capacity_gb": model.storage_capacity_gb,
+            "bandwidth_requires_mbps": model.bandwidth_requires_mbps,
+            "lifecycle_status": model.lifecycle_status,
             "ports": [
                 {
                     "name": p.name,
                     "port_type": p.port_type,
                     "speed_mbps": p.speed_mbps or 0,
+                    "power_watts": p.power_watts or 0,
                 }
-                for p in device.ports
+                for p in model.ports
             ],
         }
     return catalog
@@ -100,14 +150,41 @@ async def get_equipment_catalog():
 
 @router.get("/equipment-catalog/types", response_model=list[EquipmentTypeDefinition])
 async def get_equipment_types():
-    """Get normalized equipment type definitions."""
     return _catalog_snapshot().equipment_types
+
+
+@router.post("/equipment-catalog/types", response_model=EquipmentTypeDefinition)
+async def upsert_equipment_type(item: EquipmentTypeDefinition):
+    return storage.upsert_equipment_type(item)
+
+
+@router.delete("/equipment-catalog/types/{type_key}", response_model=dict)
+async def delete_equipment_type(type_key: str):
+    if not storage.delete_equipment_type(type_key):
+        raise HTTPException(status_code=404, detail="Equipment type not found")
+    return {"message": "Equipment type deleted"}
 
 
 @router.get("/equipment-catalog/models", response_model=list[EquipmentModelDefinition])
 async def get_equipment_models():
-    """Get normalized equipment model entries."""
     return _catalog_snapshot().equipment_models
+
+
+@router.post("/equipment-catalog/models", response_model=EquipmentModelDefinition)
+async def upsert_equipment_model(item: EquipmentModelDefinition):
+    return storage.upsert_equipment_model(item)
+
+
+@router.post("/equipment-catalog/models/bulk", response_model=list[EquipmentModelDefinition])
+async def upsert_equipment_models_bulk(items: list[EquipmentModelDefinition]):
+    return [storage.upsert_equipment_model(item) for item in items]
+
+
+@router.delete("/equipment-catalog/models/{model_key}", response_model=dict)
+async def delete_equipment_model(model_key: str):
+    if not storage.delete_equipment_model(model_key):
+        raise HTTPException(status_code=404, detail="Equipment model not found")
+    return {"message": "Equipment model deleted"}
 
 
 @router.get(
@@ -115,36 +192,94 @@ async def get_equipment_models():
     response_model=list[CompatibilityRuleDefinition],
 )
 async def get_catalog_compatibility_rules():
-    """Get compatibility rules attached to catalog port types."""
     return _catalog_snapshot().compatibility_rules
+
+
+@router.post(
+    "/equipment-catalog/compatibility-rules",
+    response_model=CompatibilityRuleDefinition,
+)
+async def upsert_catalog_compatibility_rule(item: CompatibilityRuleDefinition):
+    return storage.upsert_compatibility_rule(item)
+
+
+@router.delete("/equipment-catalog/compatibility-rules/{rule_key}", response_model=dict)
+async def delete_catalog_compatibility_rule(rule_key: str):
+    if not storage.delete_compatibility_rule(rule_key):
+        raise HTTPException(status_code=404, detail="Compatibility rule not found")
+    return {"message": "Compatibility rule deleted"}
 
 
 @router.get("/equipment-catalog/normalized", response_model=NormalizedCatalogResponse)
 async def get_normalized_equipment_catalog():
-    """Get full normalized catalog payload."""
     return _catalog_snapshot()
+
+
+@router.post("/equipment-catalog/normalized/refresh", response_model=NormalizedCatalogResponse)
+async def refresh_normalized_equipment_catalog():
+    return storage.refresh_normalized_catalog()
+
+
+@router.post("/equipment-catalog/models/import-url", response_model=EquipmentModelDefinition)
+async def import_equipment_model_from_url(payload: ImportCatalogUrlRequest):
+    try:
+        model = import_hikvision_model_from_url(
+            payload.url,
+            type_key=payload.type_key,
+            lifecycle_status=payload.lifecycle_status,
+        )
+    except Exception as error:
+        raise HTTPException(status_code=400, detail=f"Import failed: {error}") from error
+    return storage.upsert_equipment_model(model)
+
+
+@router.post("/equipment-catalog/models/import-url/bulk", response_model=list[EquipmentModelDefinition])
+async def import_equipment_models_from_urls(payload: list[ImportCatalogUrlRequest]):
+    results: list[EquipmentModelDefinition] = []
+    errors: list[str] = []
+
+    for entry in payload:
+        try:
+            model = import_hikvision_model_from_url(
+                entry.url,
+                type_key=entry.type_key,
+                lifecycle_status=entry.lifecycle_status,
+            )
+            results.append(storage.upsert_equipment_model(model))
+        except Exception as error:
+            errors.append(f"{entry.url}: {error}")
+
+    if not results and errors:
+        raise HTTPException(status_code=400, detail={"message": "Bulk import failed", "errors": errors})
+    return results
 
 
 @router.post("/projects/{project_id}/devices-from-template", response_model=dict)
 async def add_device_from_template(project_id: str, equipment_key: str):
-    """Добавить устройство из каталога в проект (копирование)"""
     project = storage.get_project(project_id)
     if not project:
-        raise HTTPException(status_code=404, detail="Проект не найден")
-    
-    if equipment_key not in EQUIPMENT_CATALOG:
-        raise HTTPException(status_code=404, detail="Оборудование не найдено в каталоге")
-    
-    # Копируем устройство из каталога
-    template_device = EQUIPMENT_CATALOG[equipment_key]
-    device = deepcopy(template_device)
-    device.id = str(uuid4())
-    for port in device.ports:
-        port.id = str(uuid4())
-    
+        raise HTTPException(status_code=404, detail="Project not found")
+
+    snapshot = _catalog_snapshot()
+    model = next((item for item in snapshot.equipment_models if item.key == equipment_key), None)
+
+    if model:
+        device = _build_device_from_model(model)
+        device.id = str(uuid4())
+        for port in device.ports:
+            port.id = str(uuid4())
+    else:
+        if equipment_key not in EQUIPMENT_CATALOG:
+            raise HTTPException(status_code=404, detail="Equipment not found in catalog")
+        template_device = EQUIPMENT_CATALOG[equipment_key]
+        device = deepcopy(template_device)
+        device.id = str(uuid4())
+        for port in device.ports:
+            port.id = str(uuid4())
+
     project.add_device(device)
     storage.update_project(project_id, project)
-    
+
     return {
         "id": device.id,
         "name": device.name,
@@ -157,15 +292,14 @@ async def add_device_from_template(project_id: str, equipment_key: str):
 
 @router.get("/projects/{project_id}/devices/{device_id}", response_model=dict)
 async def get_device(project_id: str, device_id: str):
-    """Получить детали устройства"""
     project = storage.get_project(project_id)
     if not project:
-        raise HTTPException(status_code=404, detail="Проект не найден")
-    
+        raise HTTPException(status_code=404, detail="Project not found")
+
     device = project.get_device(device_id)
     if not device:
-        raise HTTPException(status_code=404, detail="Устройство не найдено")
-    
+        raise HTTPException(status_code=404, detail="Device not found")
+
     return {
         "id": device.id,
         "name": device.name,
@@ -193,15 +327,14 @@ async def get_device(project_id: str, device_id: str):
 
 @router.delete("/projects/{project_id}/devices/{device_id}")
 async def delete_device(project_id: str, device_id: str):
-    """Удалить устройство из проекта"""
     project = storage.get_project(project_id)
     if not project:
-        raise HTTPException(status_code=404, detail="Проект не найден")
-    
+        raise HTTPException(status_code=404, detail="Project not found")
+
     if not project.get_device(device_id):
-        raise HTTPException(status_code=404, detail="Устройство не найдено")
-    
+        raise HTTPException(status_code=404, detail="Device not found")
+
     project.devices = [d for d in project.devices if d.id != device_id]
     storage.update_project(project_id, project)
-    
-    return {"message": "Устройство удалено"}
+
+    return {"message": "Device deleted"}

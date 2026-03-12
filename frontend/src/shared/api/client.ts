@@ -91,6 +91,12 @@ export interface NormalizedCatalogResponse {
   compatibility_rules: CompatibilityRuleDefinition[]
 }
 
+export interface ImportCatalogUrlRequest {
+  url: string
+  type_key?: string
+  lifecycle_status?: string
+}
+
 // Projects
 export const projectsApi = {
   listProjects: (): Promise<AxiosResponse<Project[]>> => 
@@ -123,12 +129,46 @@ export const devicesApi = {
     api.get('/equipment-catalog'),
   getEquipmentTypes: (): Promise<AxiosResponse<EquipmentTypeDefinition[]>> =>
     api.get('/equipment-catalog/types'),
+  upsertEquipmentType: (
+    payload: EquipmentTypeDefinition
+  ): Promise<AxiosResponse<EquipmentTypeDefinition>> =>
+    api.post('/equipment-catalog/types', payload),
+  deleteEquipmentType: (typeKey: string): Promise<AxiosResponse<{ message: string }>> =>
+    api.delete(`/equipment-catalog/types/${typeKey}`),
   getEquipmentModels: (): Promise<AxiosResponse<EquipmentModelDefinition[]>> =>
     api.get('/equipment-catalog/models'),
+  upsertEquipmentModel: (
+    payload: EquipmentModelDefinition
+  ): Promise<AxiosResponse<EquipmentModelDefinition>> =>
+    api.post('/equipment-catalog/models', payload),
+  upsertEquipmentModelsBulk: (
+    payload: EquipmentModelDefinition[]
+  ): Promise<AxiosResponse<EquipmentModelDefinition[]>> =>
+    api.post('/equipment-catalog/models/bulk', payload),
+  deleteEquipmentModel: (modelKey: string): Promise<AxiosResponse<{ message: string }>> =>
+    api.delete(`/equipment-catalog/models/${modelKey}`),
   getCatalogCompatibilityRules: (): Promise<AxiosResponse<CompatibilityRuleDefinition[]>> =>
     api.get('/equipment-catalog/compatibility-rules'),
+  upsertCatalogCompatibilityRule: (
+    payload: CompatibilityRuleDefinition
+  ): Promise<AxiosResponse<CompatibilityRuleDefinition>> =>
+    api.post('/equipment-catalog/compatibility-rules', payload),
+  deleteCatalogCompatibilityRule: (
+    ruleKey: string
+  ): Promise<AxiosResponse<{ message: string }>> =>
+    api.delete(`/equipment-catalog/compatibility-rules/${ruleKey}`),
   getNormalizedEquipmentCatalog: (): Promise<AxiosResponse<NormalizedCatalogResponse>> =>
     api.get('/equipment-catalog/normalized'),
+  refreshNormalizedEquipmentCatalog: (): Promise<AxiosResponse<NormalizedCatalogResponse>> =>
+    api.post('/equipment-catalog/normalized/refresh'),
+  importEquipmentModelFromUrl: (
+    payload: ImportCatalogUrlRequest
+  ): Promise<AxiosResponse<EquipmentModelDefinition>> =>
+    api.post('/equipment-catalog/models/import-url', payload),
+  importEquipmentModelsFromUrls: (
+    payload: ImportCatalogUrlRequest[]
+  ): Promise<AxiosResponse<EquipmentModelDefinition[]>> =>
+    api.post('/equipment-catalog/models/import-url/bulk', payload),
 }
 
 // Templates
