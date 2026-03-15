@@ -2,6 +2,7 @@
 Devices and equipment catalog API.
 """
 from copy import deepcopy
+from datetime import datetime, timezone
 from uuid import uuid4
 
 from fastapi import APIRouter, HTTPException
@@ -14,7 +15,10 @@ from app.catalog_schema import (
     EquipmentTypeDefinition,
     NormalizedCatalogResponse,
 )
-from app.catalog_importer import import_hikvision_model_from_url
+from app.catalog_importer import (
+    import_hikvision_model_from_url,
+    import_hikvision_models_from_category,
+)
 from app.equipment_catalog import EQUIPMENT_CATALOG
 from app.models import Device
 from app.models.device import PortType
@@ -30,8 +34,34 @@ class ImportCatalogUrlRequest(BaseModel):
     lifecycle_status: str = "verified"
 
 
+class ImportCatalogCategoryRequest(BaseModel):
+    category_url: str = Field(..., min_length=10)
+    type_key: str = "camera"
+    lifecycle_status: str = "verified"
+    max_items: int = Field(default=60, ge=1, le=300)
+
+
+class UpdateModelStatusRequest(BaseModel):
+    status: str = Field(..., min_length=3)
+    actor: str = "catalog-reviewer"
+    note: str | None = None
+
+
 def _catalog_snapshot() -> NormalizedCatalogResponse:
     return storage.get_normalized_catalog()
+
+
+def _now_iso() -> str:
+    return datetime.now(timezone.utc).isoformat()
+
+
+ALLOWED_STATUSES = {"draft", "verified", "deprecated"}
+
+STATUS_TRANSITIONS = {
+    "draft": {"verified", "deprecated"},
+    "verified": {"draft", "deprecated"},
+    "deprecated": {"draft", "verified"},
+}
 
 
 def _build_device_from_model(model: EquipmentModelDefinition) -> Device:
@@ -172,6 +202,29 @@ async def get_equipment_models():
 
 @router.post("/equipment-catalog/models", response_model=EquipmentModelDefinition)
 async def upsert_equipment_model(item: EquipmentModelDefinition):
+    existing = next((model for model in _catalog_snapshot().equipment_models if model.key == item.key), None)
+    current_time = _now_iso()
+    updated_by = item.updated_by or "catalog-editor"
+
+    status_history = list(item.status_history or [])
+    if existing and existing.lifecycle_status != item.lifecycle_status:
+        status_history.append(
+            {
+                "from_status": existing.lifecycle_status,
+                "to_status": item.lifecycle_status,
+                "changed_at": current_time,
+                "changed_by": updated_by,
+                "note": "Status updated via model edit",
+            }
+        )
+
+    item = item.model_copy(
+        update={
+            "updated_at": current_time,
+            "updated_by": updated_by,
+            "status_history": status_history,
+        }
+    )
     return storage.upsert_equipment_model(item)
 
 
@@ -185,6 +238,51 @@ async def delete_equipment_model(model_key: str):
     if not storage.delete_equipment_model(model_key):
         raise HTTPException(status_code=404, detail="Equipment model not found")
     return {"message": "Equipment model deleted"}
+
+
+@router.post("/equipment-catalog/models/{model_key}/status", response_model=EquipmentModelDefinition)
+async def update_equipment_model_status(model_key: str, payload: UpdateModelStatusRequest):
+    target_status = payload.status.strip().lower()
+    if target_status not in ALLOWED_STATUSES:
+        raise HTTPException(status_code=400, detail="Unsupported status transition target")
+
+    snapshot = _catalog_snapshot()
+    model = next((item for item in snapshot.equipment_models if item.key == model_key), None)
+    if not model:
+        raise HTTPException(status_code=404, detail="Equipment model not found")
+
+    current_status = (model.lifecycle_status or "draft").lower()
+    if current_status == target_status:
+        return model
+
+    allowed_targets = STATUS_TRANSITIONS.get(current_status, set())
+    if target_status not in allowed_targets:
+        raise HTTPException(
+            status_code=400,
+            detail=f"Transition from {current_status} to {target_status} is not allowed",
+        )
+
+    changed_at = _now_iso()
+    updated_history = list(model.status_history or [])
+    updated_history.append(
+        {
+            "from_status": current_status,
+            "to_status": target_status,
+            "changed_at": changed_at,
+            "changed_by": payload.actor.strip() or "catalog-reviewer",
+            "note": payload.note,
+        }
+    )
+
+    updated_model = model.model_copy(
+        update={
+            "lifecycle_status": target_status,
+            "updated_at": changed_at,
+            "updated_by": payload.actor.strip() or "catalog-reviewer",
+            "status_history": updated_history,
+        }
+    )
+    return storage.upsert_equipment_model(updated_model)
 
 
 @router.get(
@@ -252,6 +350,32 @@ async def import_equipment_models_from_urls(payload: list[ImportCatalogUrlReques
     if not results and errors:
         raise HTTPException(status_code=400, detail={"message": "Bulk import failed", "errors": errors})
     return results
+
+
+@router.post("/equipment-catalog/models/import-category", response_model=dict)
+async def import_equipment_models_from_category(payload: ImportCatalogCategoryRequest):
+    try:
+        imported_models, errors, discovered_urls = import_hikvision_models_from_category(
+            payload.category_url,
+            type_key=payload.type_key,
+            lifecycle_status=payload.lifecycle_status,
+            max_items=payload.max_items,
+        )
+    except Exception as error:
+        raise HTTPException(status_code=400, detail=f"Category import failed: {error}") from error
+
+    persisted: list[EquipmentModelDefinition] = []
+    for model in imported_models:
+        persisted.append(storage.upsert_equipment_model(model))
+
+    return {
+        "category_url": payload.category_url,
+        "discovered_urls": len(discovered_urls),
+        "imported_models": len(persisted),
+        "failed_models": len(errors),
+        "errors": errors,
+        "models": persisted,
+    }
 
 
 @router.post("/projects/{project_id}/devices-from-template", response_model=dict)

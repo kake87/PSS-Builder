@@ -13,7 +13,11 @@ import {
   X,
   Zap,
 } from 'lucide-react'
-import { devicesApi, EquipmentModelDefinition } from '@/shared/api/client'
+import {
+  devicesApi,
+  EquipmentModelDefinition,
+  ModelStatusHistoryEntry,
+} from '@/shared/api/client'
 import { emitToast } from '@/widgets/Toast'
 
 interface EquipmentLibraryProps {
@@ -130,6 +134,12 @@ function createEditForm(model: EquipmentLibraryItem): EditModelForm {
   }
 }
 
+function getStatusActionLabel(status: string): string {
+  if (status === 'draft') return 'Set Draft'
+  if (status === 'verified') return 'Verify'
+  return 'Deprecate'
+}
+
 export function EquipmentLibrary({ projectId, onAddDevice }: EquipmentLibraryProps) {
   const queryClient = useQueryClient()
   const [searchTerm, setSearchTerm] = useState('')
@@ -137,6 +147,7 @@ export function EquipmentLibrary({ projectId, onAddDevice }: EquipmentLibraryPro
   const [selectedLifecycle, setSelectedLifecycle] = useState<string>('verified')
   const [actionError, setActionError] = useState<string | null>(null)
   const [importUrl, setImportUrl] = useState('')
+  const [importCategoryUrl, setImportCategoryUrl] = useState('')
   const [importTypeKey, setImportTypeKey] = useState('camera')
   const [editingModelKey, setEditingModelKey] = useState<string | null>(null)
   const [editForm, setEditForm] = useState<EditModelForm | null>(null)
@@ -210,6 +221,32 @@ export function EquipmentLibrary({ projectId, onAddDevice }: EquipmentLibraryPro
     },
   })
 
+  const importByCategoryMutation = useMutation({
+    mutationFn: async () => {
+      if (!importCategoryUrl.trim()) {
+        throw new Error('Enter a category URL first.')
+      }
+      return devicesApi.importEquipmentModelsFromCategory({
+        category_url: importCategoryUrl.trim(),
+        type_key: importTypeKey,
+        lifecycle_status: 'verified',
+        max_items: 120,
+      })
+    },
+    onSuccess: (response) => {
+      const imported = response.data.imported_models || 0
+      const failed = response.data.failed_models || 0
+      emitToast(`Category import: ${imported} imported, ${failed} failed`, 'success')
+      setImportCategoryUrl('')
+      setSelectedLifecycle('verified')
+      invalidateCatalog()
+    },
+    onError: (error) => {
+      console.error('Import by category failed:', error)
+      emitToast('Category import failed. Check URL and try again.', 'error')
+    },
+  })
+
   const updateModelMutation = useMutation({
     mutationFn: (item: EquipmentModelDefinition) => devicesApi.upsertEquipmentModel(item),
     onSuccess: () => {
@@ -236,7 +273,27 @@ export function EquipmentLibrary({ projectId, onAddDevice }: EquipmentLibraryPro
     },
   })
 
+  const changeStatusMutation = useMutation({
+    mutationFn: ({ modelKey, status }: { modelKey: string; status: 'draft' | 'verified' | 'deprecated' }) =>
+      devicesApi.updateEquipmentModelStatus(modelKey, {
+        status,
+        actor: 'catalog-reviewer',
+      }),
+    onSuccess: (_, vars) => {
+      emitToast(`Status updated: ${getStatusActionLabel(vars.status)}`, 'success')
+      invalidateCatalog()
+    },
+    onError: (error) => {
+      console.error('Failed to update model status:', error)
+      emitToast('Failed to change lifecycle status', 'error')
+    },
+  })
+
   const equipmentList = payload?.models || []
+  const selectedModel = useMemo(
+    () => equipmentList.find((item) => item.key === editingModelKey) || null,
+    [editingModelKey, equipmentList]
+  )
 
   const filteredEquipment = useMemo(
     () =>
@@ -358,6 +415,23 @@ export function EquipmentLibrary({ projectId, onAddDevice }: EquipmentLibraryPro
             {importByUrlMutation.isPending ? 'Importing...' : 'Import URL'}
           </button>
         </div>
+        <div className="mt-2 flex items-center gap-2">
+          <input
+            type="url"
+            placeholder="Category URL (e.g. AcuSense-Series)"
+            value={importCategoryUrl}
+            onChange={(e) => setImportCategoryUrl(e.target.value)}
+            className="min-w-0 flex-1 rounded-md border border-gray-300 px-3 py-2 text-xs focus:outline-none focus:ring-2 focus:ring-brand-500"
+          />
+          <button
+            type="button"
+            onClick={() => importByCategoryMutation.mutate()}
+            disabled={importByCategoryMutation.isPending}
+            className="rounded-md bg-emerald-700 px-3 py-2 text-xs font-medium text-white transition hover:bg-emerald-800 disabled:cursor-not-allowed disabled:bg-emerald-400"
+          >
+            {importByCategoryMutation.isPending ? 'Importing...' : 'Import Category'}
+          </button>
+        </div>
       </div>
 
       <div className="shrink-0 space-y-2 border-b border-gray-200 px-4 py-2">
@@ -475,6 +549,30 @@ export function EquipmentLibrary({ projectId, onAddDevice }: EquipmentLibraryPro
                       {item.ports?.length ? (
                         <span className="text-gray-400">- {item.ports.length} ports</span>
                       ) : null}
+                    </div>
+                    <div className="mt-2 flex flex-wrap gap-1">
+                      {(['draft', 'verified', 'deprecated'] as const).map((statusOption) => (
+                        <button
+                          key={statusOption}
+                          type="button"
+                          onClick={(event) => {
+                            event.preventDefault()
+                            event.stopPropagation()
+                            if ((item.lifecycle_status || 'verified') === statusOption) return
+                            changeStatusMutation.mutate({
+                              modelKey: item.key,
+                              status: statusOption,
+                            })
+                          }}
+                          className={`rounded px-2 py-0.5 text-[10px] font-medium uppercase tracking-wide transition ${
+                            (item.lifecycle_status || 'verified') === statusOption
+                              ? 'bg-slate-700 text-white'
+                              : 'bg-slate-100 text-slate-600 hover:bg-slate-200'
+                          }`}
+                        >
+                          {statusOption}
+                        </button>
+                      ))}
                     </div>
                   </div>
 
@@ -630,6 +728,39 @@ export function EquipmentLibrary({ projectId, onAddDevice }: EquipmentLibraryPro
                   className="w-full rounded border border-slate-300 px-2 py-2 font-mono text-xs"
                 />
               </label>
+            </div>
+
+            <div className="mt-4 rounded-lg border border-slate-200 bg-slate-50 p-3">
+              <div className="mb-2 text-xs font-semibold uppercase tracking-wide text-slate-600">
+                Status history
+              </div>
+              {selectedModel?.status_history && selectedModel.status_history.length > 0 ? (
+                <div className="space-y-1">
+                  {[...selectedModel.status_history]
+                    .reverse()
+                    .slice(0, 10)
+                    .map((entry: ModelStatusHistoryEntry, index: number) => (
+                      <div
+                        key={`${entry.changed_at}-${index}`}
+                        className="rounded border border-slate-200 bg-white px-2 py-1 text-xs text-slate-700"
+                      >
+                        <div>
+                          {entry.from_status}
+                          {' -> '}
+                          {entry.to_status}
+                        </div>
+                        <div className="text-[11px] text-slate-500">
+                          {entry.changed_by} • {new Date(entry.changed_at).toLocaleString()}
+                        </div>
+                        {entry.note ? (
+                          <div className="text-[11px] text-slate-500">{entry.note}</div>
+                        ) : null}
+                      </div>
+                    ))}
+                </div>
+              ) : (
+                <div className="text-xs text-slate-500">No status transitions yet.</div>
+              )}
             </div>
 
             <div className="mt-4 flex justify-end gap-2">

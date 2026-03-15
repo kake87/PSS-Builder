@@ -17,6 +17,7 @@ import { HelpPanel } from '@/widgets/HelpPanel'
 import { OnboardingTutorial, useOnboardingState } from '@/widgets/OnboardingTutorial'
 import { StatusBar } from '@/widgets/StatusBar'
 import { emitToast } from '@/widgets/Toast'
+import { applyUISettings, readUISettings } from '@/shared/uiSettings'
 
 interface CreateProjectModalProps {
   isOpen: boolean
@@ -418,6 +419,18 @@ export function PSSBuilder() {
   const onboarding = useOnboardingState()
 
   useEffect(() => {
+    applyUISettings(readUISettings())
+    const handleUISettingsChanged = (event: Event) => {
+      const customEvent = event as CustomEvent
+      if (customEvent.detail) {
+        applyUISettings(customEvent.detail)
+      }
+    }
+    window.addEventListener('psb-ui-settings-changed', handleUISettingsChanged)
+    return () => window.removeEventListener('psb-ui-settings-changed', handleUISettingsChanged)
+  }, [])
+
+  useEffect(() => {
     const openHelp = () => setIsHelpOpen(true)
     const handleF1 = (event: KeyboardEvent) => {
       if (event.key !== 'F1') return
@@ -769,40 +782,146 @@ export function PSSBuilder() {
   )
 
   if (!projectStore.projectId) {
+    const overviewStats = [
+      { label: 'Equipment models', value: String(Object.keys(equipmentCatalog).length || 0) },
+      { label: 'Saved projects', value: String(projects.length) },
+      { label: 'Workspace mode', value: 'Visual builder' },
+    ]
+
+    const overviewHighlights = [
+      {
+        title: 'Visual topology editor',
+        description: 'Build CCTV and security system layouts on canvas with nodes, links and grouped zones.',
+      },
+      {
+        title: 'Equipment-aware modeling',
+        description: 'Add devices from the catalog with ports, bandwidth, storage and power metadata.',
+      },
+      {
+        title: 'Validation workflow',
+        description: 'Check structure quality, detect isolated devices and review connection problems early.',
+      },
+    ]
     return (
       <>
-        <div className="flex h-screen w-full flex-col">
-          <div className="bg-gradient-to-r from-brand-600 to-brand-800 p-6 text-white">
-            <h1 className="text-3xl font-bold">PSS Builder</h1>
-            <p className="text-brand-100">Security Systems Architecture Constructor</p>
+        <div className="pss-app-shell min-h-screen w-full">
+          <div className="pss-topbar p-6 text-white">
+            <div className="mx-auto flex w-full max-w-7xl items-center justify-between gap-6">
+              <div>
+                <h1 className="text-3xl font-bold">PSS Builder</h1>
+                <p className="text-slate-200">Security Systems Architecture Constructor</p>
+              </div>
+              <div className="rounded-full border border-white/20 bg-white/10 px-4 py-2 text-sm text-slate-100 backdrop-blur">
+                Overview mode
+              </div>
+            </div>
           </div>
 
-          <div className="flex flex-1 items-center justify-center bg-gray-50">
-            <div className="space-y-6 text-center">
-              <div>
-                <h2 className="mb-2 text-2xl font-bold text-gray-900">Get Started</h2>
-                <p className="text-gray-600">Create a new project or select an existing one</p>
+          <div className="mx-auto grid w-full max-w-7xl gap-8 px-6 py-8 lg:grid-cols-[minmax(0,1.3fr)_24rem]">
+            <section className="pss-overview space-y-8 rounded-[28px] border border-white/50 p-8 shadow-[0_24px_80px_rgba(15,23,42,0.16)]">
+              <div className="grid gap-8 lg:grid-cols-[minmax(0,1fr)_18rem] lg:items-end">
+                <div className="space-y-5">
+                  <div className="inline-flex items-center rounded-full border border-sky-200/80 bg-sky-50 px-4 py-1 text-sm font-medium text-sky-800">
+                    Project overview
+                  </div>
+                  <div className="space-y-4">
+                    <h2 className="max-w-3xl text-4xl font-semibold tracking-tight text-slate-950">
+                      Design, validate and review physical security systems in one workspace.
+                    </h2>
+                    <p className="max-w-2xl text-base leading-7 text-slate-600">
+                      The builder combines equipment catalog data, topology editing and validation so
+                      you can move from concept to structured project faster.
+                    </p>
+                  </div>
+                </div>
+
+                <div className="grid gap-3">
+                  {overviewStats.map((item) => (
+                    <div
+                      key={item.label}
+                      className="rounded-2xl border border-slate-200/80 bg-white/85 p-4 backdrop-blur"
+                    >
+                      <div className="text-xs uppercase tracking-[0.18em] text-slate-500">
+                        {item.label}
+                      </div>
+                      <div className="mt-2 text-2xl font-semibold text-slate-950">{item.value}</div>
+                    </div>
+                  ))}
+                </div>
               </div>
 
-              <div className="space-y-3">
-                <button
-                  onClick={() => setIsCreateModalOpen(true)}
-                  disabled={createProjectMutation.isPending}
-                  className="inline-flex items-center gap-2 rounded-lg bg-brand-600 px-6 py-3 text-white hover:bg-brand-700 disabled:opacity-50"
-                >
-                  <Plus className="h-5 w-5" />
-                  New Project
-                </button>
+              <div className="grid gap-4 md:grid-cols-3">
+                {overviewHighlights.map((item) => (
+                  <article
+                    key={item.title}
+                    className="rounded-3xl border border-slate-200/80 bg-white/78 p-5"
+                  >
+                    <h3 className="text-lg font-semibold text-slate-900">{item.title}</h3>
+                    <p className="mt-3 text-sm leading-6 text-slate-600">{item.description}</p>
+                  </article>
+                ))}
+              </div>
 
-                {projects.length > 0 && (
-                  <div className="mt-8 text-left">
-                    <h3 className="mb-4 font-semibold text-gray-900">Recent Projects</h3>
-                    <div className="space-y-2">
+              <div className="grid gap-4 rounded-3xl border border-slate-200/10 bg-slate-950 p-6 text-slate-50 md:grid-cols-3">
+                <div>
+                  <div className="text-sm uppercase tracking-[0.18em] text-slate-400">Step 1</div>
+                  <div className="mt-2 text-lg font-semibold">Create a project</div>
+                  <p className="mt-2 text-sm leading-6 text-slate-300">
+                    Start a new system scheme with project metadata and a clean canvas.
+                  </p>
+                </div>
+                <div>
+                  <div className="text-sm uppercase tracking-[0.18em] text-slate-400">Step 2</div>
+                  <div className="mt-2 text-lg font-semibold">Assemble topology</div>
+                  <p className="mt-2 text-sm leading-6 text-slate-300">
+                    Add devices from the library, connect ports and organize logical groups.
+                  </p>
+                </div>
+                <div>
+                  <div className="text-sm uppercase tracking-[0.18em] text-slate-400">Step 3</div>
+                  <div className="mt-2 text-lg font-semibold">Run validation</div>
+                  <p className="mt-2 text-sm leading-6 text-slate-300">
+                    Review warnings and errors before exporting or continuing project work.
+                  </p>
+                </div>
+              </div>
+            </section>
+
+            <aside className="space-y-6">
+              <div className="pss-panel rounded-[24px] p-6">
+                <div>
+                  <h2 className="text-2xl font-bold text-gray-900">Get Started</h2>
+                  <p className="mt-2 text-sm leading-6 text-gray-600">
+                    Create a new project or continue from an existing one.
+                  </p>
+                </div>
+
+                <div className="mt-6 space-y-3">
+                  <button
+                    onClick={() => setIsCreateModalOpen(true)}
+                    disabled={createProjectMutation.isPending}
+                    className="inline-flex w-full items-center justify-center gap-2 rounded-2xl px-6 py-3 text-white disabled:opacity-50"
+                    style={{ backgroundColor: 'var(--ui-accent)' }}
+                  >
+                    <Plus className="h-5 w-5" />
+                    New Project
+                  </button>
+
+                  <div className="rounded-2xl border border-slate-200 bg-slate-50 px-4 py-3 text-sm text-slate-600">
+                    Use the overview on the left as a quick introduction to the workspace.
+                  </div>
+                </div>
+              </div>
+
+              {projects.length > 0 && (
+                <div className="pss-panel rounded-[24px] p-6">
+                  <h3 className="mb-4 font-semibold text-gray-900">Recent Projects</h3>
+                  <div className="space-y-2">
                       {projects.map((project) => (
                         <button
                           key={project.id}
                           onClick={() => projectStore.setProjectId(project.id)}
-                          className="w-full rounded-lg border border-gray-300 p-3 text-left transition-colors hover:border-brand-500 hover:bg-brand-50"
+                          className="w-full rounded-2xl border border-gray-300 p-3 text-left transition-colors hover:border-brand-500 hover:bg-brand-50"
                         >
                           <div className="font-medium text-gray-900">{project.name}</div>
                           <div className="text-sm text-gray-600">
@@ -813,8 +932,7 @@ export function PSSBuilder() {
                     </div>
                   </div>
                 )}
-              </div>
-            </div>
+            </aside>
           </div>
         </div>
 
@@ -834,8 +952,8 @@ export function PSSBuilder() {
 
   if (projectQuery.isPending) {
     return (
-      <div className="flex h-screen w-full items-center justify-center bg-gray-50">
-        <div className="rounded-lg border border-slate-200 bg-white px-6 py-5 text-center shadow-sm">
+      <div className="pss-app-shell flex h-screen w-full items-center justify-center">
+        <div className="pss-panel px-6 py-5 text-center">
           <div className="text-lg font-semibold text-slate-900">Loading project...</div>
           <div className="mt-1 text-sm text-slate-600">
             Project is being opened after creation.
@@ -847,7 +965,7 @@ export function PSSBuilder() {
 
   if (projectQuery.isError) {
     return (
-      <div className="flex h-screen w-full items-center justify-center bg-gray-50 px-4">
+      <div className="pss-app-shell flex h-screen w-full items-center justify-center px-4">
         <div className="max-w-md rounded-lg border border-red-200 bg-white p-6 text-center shadow-sm">
           <div className="text-lg font-semibold text-slate-900">Project failed to load</div>
           <div className="mt-2 text-sm text-slate-600">
@@ -877,7 +995,7 @@ export function PSSBuilder() {
   return (
     <EditorErrorBoundary onReset={() => projectStore.setProjectId(null)}>
       <>
-        <div className="flex h-screen w-full flex-col bg-gray-50">
+        <div className="pss-app-shell flex h-screen w-full flex-col">
         <Toolbar
           projectId={projectStore.projectId}
           onValidate={handleValidate}
@@ -887,14 +1005,14 @@ export function PSSBuilder() {
         />
 
         <div className="grid flex-1 grid-cols-[18rem_minmax(0,1fr)_20rem] gap-4 overflow-hidden p-4">
-          <div className="flex flex-col overflow-hidden rounded-lg bg-white shadow-sm">
+          <div className="pss-panel flex flex-col overflow-hidden">
             <EquipmentLibrary projectId={projectStore.projectId} onAddDevice={handleAddDevice} />
           </div>
 
           <div className="grid min-w-0 grid-rows-[auto_minmax(0,1fr)] gap-4 overflow-hidden">
             <Dashboard nodes={projectStore.nodes} validationIssues={projectStore.validationErrors} />
 
-            <div className="min-w-0 overflow-hidden rounded-lg bg-white shadow-sm">
+            <div className="pss-panel min-w-0 overflow-hidden">
               <Canvas
                 initialNodes={projectStore.nodes}
                 initialEdges={projectStore.edges}
@@ -906,7 +1024,7 @@ export function PSSBuilder() {
           </div>
 
           <div className="flex flex-col gap-4 overflow-hidden">
-            <div className="min-h-0 flex-1 overflow-hidden rounded-lg bg-white shadow-sm">
+            <div className="pss-panel min-h-0 flex-1 overflow-hidden">
               <PropertiesPanel
                 selectedNodeId={projectStore.selectedNodeId}
                 selectedEdgeId={projectStore.selectedEdgeId}
@@ -916,7 +1034,7 @@ export function PSSBuilder() {
               />
             </div>
 
-            <div className="min-h-0 flex-1 overflow-hidden rounded-lg bg-white shadow-sm">
+            <div className="pss-panel min-h-0 flex-1 overflow-hidden">
               <ValidationPanel
                 errors={projectStore.validationErrors}
                 onSelectError={handleSelectValidationIssue}
@@ -924,7 +1042,7 @@ export function PSSBuilder() {
               />
             </div>
 
-            <div className="min-h-0 flex-1 overflow-hidden rounded-lg bg-white shadow-sm">
+            <div className="pss-panel min-h-0 flex-1 overflow-hidden">
               <GroupPanel
                 groups={projectStore.groups}
                 nodes={projectStore.nodes}

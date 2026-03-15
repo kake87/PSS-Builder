@@ -57,6 +57,14 @@ export interface CatalogPortDefinition {
   power_watts?: number
 }
 
+export interface ModelStatusHistoryEntry {
+  from_status: string
+  to_status: string
+  changed_at: string
+  changed_by: string
+  note?: string
+}
+
 export interface EquipmentModelDefinition {
   id: string
   key: string
@@ -66,11 +74,14 @@ export interface EquipmentModelDefinition {
   model: string
   lifecycle_status: string
   schema_version: string
+  updated_at?: string
+  updated_by?: string
   power_consumption_watts?: number
   resolution?: string
   storage_capacity_gb?: number
   bandwidth_requires_mbps?: number
   ports: CatalogPortDefinition[]
+  status_history?: ModelStatusHistoryEntry[]
 }
 
 export interface CompatibilityRuleDefinition {
@@ -95,6 +106,19 @@ export interface ImportCatalogUrlRequest {
   url: string
   type_key?: string
   lifecycle_status?: string
+}
+
+export interface ImportCatalogCategoryRequest {
+  category_url: string
+  type_key?: string
+  lifecycle_status?: string
+  max_items?: number
+}
+
+export interface UpdateModelStatusRequest {
+  status: 'draft' | 'verified' | 'deprecated'
+  actor?: string
+  note?: string
 }
 
 // Projects
@@ -147,6 +171,11 @@ export const devicesApi = {
     api.post('/equipment-catalog/models/bulk', payload),
   deleteEquipmentModel: (modelKey: string): Promise<AxiosResponse<{ message: string }>> =>
     api.delete(`/equipment-catalog/models/${modelKey}`),
+  updateEquipmentModelStatus: (
+    modelKey: string,
+    payload: UpdateModelStatusRequest
+  ): Promise<AxiosResponse<EquipmentModelDefinition>> =>
+    api.post(`/equipment-catalog/models/${modelKey}/status`, payload),
   getCatalogCompatibilityRules: (): Promise<AxiosResponse<CompatibilityRuleDefinition[]>> =>
     api.get('/equipment-catalog/compatibility-rules'),
   upsertCatalogCompatibilityRule: (
@@ -169,6 +198,18 @@ export const devicesApi = {
     payload: ImportCatalogUrlRequest[]
   ): Promise<AxiosResponse<EquipmentModelDefinition[]>> =>
     api.post('/equipment-catalog/models/import-url/bulk', payload),
+  importEquipmentModelsFromCategory: (
+    payload: ImportCatalogCategoryRequest
+  ): Promise<
+    AxiosResponse<{
+      category_url: string
+      discovered_urls: number
+      imported_models: number
+      failed_models: number
+      errors: string[]
+      models: EquipmentModelDefinition[]
+    }>
+  > => api.post('/equipment-catalog/models/import-category', payload),
 }
 
 // Templates

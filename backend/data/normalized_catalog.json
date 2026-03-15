@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "generated_at": "2026-03-12T11:52:56.968775+00:00",
+  "generated_at": "2026-03-12T13:34:51.224188+00:00",
   "equipment_types": [
     {
       "id": "type-access-controller",
@@ -102,6 +102,8 @@
       "model": "DS-2CD2143G2-I",
       "lifecycle_status": "verified",
       "schema_version": "1.0",
+      "updated_at": null,
+      "updated_by": null,
       "power_consumption_watts": 10.0,
       "resolution": "4K (8MP)",
       "storage_capacity_gb": null,
@@ -119,7 +121,8 @@
           "speed_mbps": null,
           "power_watts": 12.0
         }
-      ]
+      ],
+      "status_history": []
     },
     {
       "id": "16b96d95-fa73-41b1-b397-271dfc9399a7",
@@ -130,6 +133,8 @@
       "model": "IPC-HDBW2431E",
       "lifecycle_status": "verified",
       "schema_version": "1.0",
+      "updated_at": null,
+      "updated_by": null,
       "power_consumption_watts": 8.0,
       "resolution": "2K (4MP)",
       "storage_capacity_gb": null,
@@ -147,7 +152,8 @@
           "speed_mbps": null,
           "power_watts": 9.6
         }
-      ]
+      ],
+      "status_history": []
     },
     {
       "id": "2c383c53-fcf9-4b41-b1a7-abbeb38b2499",
@@ -158,6 +164,8 @@
       "model": "IPC322SR",
       "lifecycle_status": "verified",
       "schema_version": "1.0",
+      "updated_at": null,
+      "updated_by": null,
       "power_consumption_watts": 5.0,
       "resolution": "1080p (2MP)",
       "storage_capacity_gb": null,
@@ -175,7 +183,8 @@
           "speed_mbps": null,
           "power_watts": 6.0
         }
-      ]
+      ],
+      "status_history": []
     },
     {
       "id": "0015fa2e-6033-4846-bd80-3852f7263b99",
@@ -186,6 +195,8 @@
       "model": "C2960X-48TS-L",
       "lifecycle_status": "verified",
       "schema_version": "1.0",
+      "updated_at": null,
+      "updated_by": null,
       "power_consumption_watts": 150.0,
       "resolution": null,
       "storage_capacity_gb": null,
@@ -491,7 +502,8 @@
           "speed_mbps": null,
           "power_watts": 500.0
         }
-      ]
+      ],
+      "status_history": []
     },
     {
       "id": "caa83c6e-34c6-4b57-beca-f822ffe3d743",
@@ -502,6 +514,8 @@
       "model": "DS-3E0524P-E",
       "lifecycle_status": "verified",
       "schema_version": "1.0",
+      "updated_at": null,
+      "updated_by": null,
       "power_consumption_watts": 90.0,
       "resolution": null,
       "storage_capacity_gb": null,
@@ -657,7 +671,8 @@
           "speed_mbps": null,
           "power_watts": 120.0
         }
-      ]
+      ],
+      "status_history": []
     },
     {
       "id": "5f3766d5-40d6-40a6-bb6b-442ed5bf0428",
@@ -668,6 +683,8 @@
       "model": "GS716Pv3",
       "lifecycle_status": "verified",
       "schema_version": "1.0",
+      "updated_at": null,
+      "updated_by": null,
       "power_consumption_watts": 65.0,
       "resolution": null,
       "storage_capacity_gb": null,
@@ -775,7 +792,8 @@
           "speed_mbps": null,
           "power_watts": 180.0
         }
-      ]
+      ],
+      "status_history": []
     },
     {
       "id": "40d2a487-6fca-4731-b75d-dedf7ad848aa",
@@ -786,6 +804,8 @@
       "model": "DS-7632NI-K2",
       "lifecycle_status": "verified",
       "schema_version": "1.0",
+      "updated_at": null,
+      "updated_by": null,
       "power_consumption_watts": 300.0,
       "resolution": null,
       "storage_capacity_gb": 4000,
@@ -815,7 +835,8 @@
           "speed_mbps": null,
           "power_watts": 500.0
         }
-      ]
+      ],
+      "status_history": []
     },
     {
       "id": "c0d8a8bf-f410-4882-bd02-adb372a9c429",
@@ -826,6 +847,8 @@
       "model": "PowerEdge R750",
       "lifecycle_status": "verified",
       "schema_version": "1.0",
+      "updated_at": null,
+      "updated_by": null,
       "power_consumption_watts": 500.0,
       "resolution": null,
       "storage_capacity_gb": 8000,
@@ -861,7 +884,8 @@
           "speed_mbps": null,
           "power_watts": 1000.0
         }
-      ]
+      ],
+      "status_history": []
     },
     {
       "id": "b963b873-4340-481c-a250-e49ad8a20c0d",
@@ -872,6 +896,8 @@
       "model": "DS-K2604T",
       "lifecycle_status": "verified",
       "schema_version": "1.0",
+      "updated_at": null,
+      "updated_by": null,
       "power_consumption_watts": 50.0,
       "resolution": null,
       "storage_capacity_gb": null,
@@ -895,7 +921,8 @@
           "speed_mbps": null,
           "power_watts": 60.0
         }
-      ]
+      ],
+      "status_history": []
     },
     {
       "id": "07de5080-0cf1-45a0-a056-5e7b61e0ab5a",
@@ -906,6 +933,8 @@
       "model": "ProCapture EC220",
       "lifecycle_status": "verified",
       "schema_version": "1.0",
+      "updated_at": null,
+      "updated_by": null,
       "power_consumption_watts": 40.0,
       "resolution": null,
       "storage_capacity_gb": null,
@@ -929,7 +958,8 @@
           "speed_mbps": null,
           "power_watts": 50.0
         }
-      ]
+      ],
+      "status_history": []
     },
     {
       "id": "f0e8a10d-45f9-47f0-b723-6698183392e0",
@@ -940,6 +970,8 @@
       "model": "SUA5000RMI5U",
       "lifecycle_status": "verified",
       "schema_version": "1.0",
+      "updated_at": null,
+      "updated_by": null,
       "power_consumption_watts": 5000.0,
       "resolution": null,
       "storage_capacity_gb": null,
@@ -969,17 +1001,20 @@
           "speed_mbps": null,
           "power_watts": 5000.0
         }
-      ]
+      ],
+      "status_history": []
     },
     {
-      "id": "9f3a9766-2608-40f0-aed7-8f547b5ff063",
+      "id": "416eae51-88e7-4c40-8978-d37ff64fc1d9",
       "key": "ds-2cd2h23g2-izs",
       "type_key": "camera",
       "name": "DS-2CD2H23G2-IZS",
       "manufacturer": "Hikvision",
       "model": "DS-2CD2H23G2-IZS",
-      "lifecycle_status": "draft",
+      "lifecycle_status": "verified",
       "schema_version": "1.0",
+      "updated_at": "2026-03-12T13:33:36.290778+00:00",
+      "updated_by": "catalog-importer",
       "power_consumption_watts": null,
       "resolution": null,
       "storage_capacity_gb": null,
@@ -990,8 +1025,5472 @@
           "port_type": "ethernet",
           "speed_mbps": 1000,
           "power_watts": null
+        },
+        {
+          "name": "POE",
+          "port_type": "power",
+          "speed_mbps": null,
+          "power_watts": null
+        },
+        {
+          "name": "PWR",
+          "port_type": "power",
+          "speed_mbps": null,
+          "power_watts": null
+        },
+        {
+          "name": "AUDIO_IN",
+          "port_type": "serial",
+          "speed_mbps": null,
+          "power_watts": null
         }
-      ]
+      ],
+      "status_history": []
+    },
+    {
+      "id": "d6c480f5-0398-4dc8-93f1-bd5ce65441e0",
+      "key": "ds-2cd2t167g3p-lis2uy",
+      "type_key": "camera",
+      "name": "DS-2CD2T167G3P-LIS2UY",
+      "manufacturer": "Hikvision",
+      "model": "DS-2CD2T167G3P-LIS2UY",
+      "lifecycle_status": "verified",
+      "schema_version": "1.0",
+      "updated_at": "2026-03-12T12:16:51.594021+00:00",
+      "updated_by": "catalog-editor",
+      "power_consumption_watts": null,
+      "resolution": null,
+      "storage_capacity_gb": null,
+      "bandwidth_requires_mbps": null,
+      "ports": [
+        {
+          "name": "ETH1",
+          "port_type": "ethernet",
+          "speed_mbps": 1000,
+          "power_watts": null
+        },
+        {
+          "name": "POE",
+          "port_type": "power",
+          "speed_mbps": null,
+          "power_watts": null
+        },
+        {
+          "name": "PWR",
+          "port_type": "power",
+          "speed_mbps": null,
+          "power_watts": null
+        },
+        {
+          "name": "ALARM_IN",
+          "port_type": "serial",
+          "speed_mbps": null,
+          "power_watts": null
+        },
+        {
+          "name": "ALARM_OUT",
+          "port_type": "serial",
+          "speed_mbps": null,
+          "power_watts": null
+        },
+        {
+          "name": "AUDIO_IN",
+          "port_type": "serial",
+          "speed_mbps": null,
+          "power_watts": null
+        }
+      ],
+      "status_history": []
+    },
+    {
+      "id": "4718ea08-28b8-49d3-b918-03f26b5adeef",
+      "key": "ds-2cd2046g3-iz2uy",
+      "type_key": "camera",
+      "name": "DS-2CD2046G3-IZ2UY",
+      "manufacturer": "Hikvision",
+      "model": "DS-2CD2046G3-IZ2UY",
+      "lifecycle_status": "verified",
+      "schema_version": "1.0",
+      "updated_at": "2026-03-12T12:21:59.409424+00:00",
+      "updated_by": "catalog-importer",
+      "power_consumption_watts": null,
+      "resolution": null,
+      "storage_capacity_gb": null,
+      "bandwidth_requires_mbps": null,
+      "ports": [
+        {
+          "name": "ETH1",
+          "port_type": "ethernet",
+          "speed_mbps": 1000,
+          "power_watts": null
+        },
+        {
+          "name": "POE",
+          "port_type": "power",
+          "speed_mbps": null,
+          "power_watts": null
+        },
+        {
+          "name": "PWR",
+          "port_type": "power",
+          "speed_mbps": null,
+          "power_watts": null
+        },
+        {
+          "name": "AUDIO_IN",
+          "port_type": "serial",
+          "speed_mbps": null,
+          "power_watts": null
+        }
+      ],
+      "status_history": []
+    },
+    {
+      "id": "e98d8bba-1667-456f-afd1-473fc023bd75",
+      "key": "ds-3e1309p-ei",
+      "type_key": "switch",
+      "name": "DS-3E1309P-EI",
+      "manufacturer": "Hikvision",
+      "model": "DS-3E1309P-EI",
+      "lifecycle_status": "verified",
+      "schema_version": "1.0",
+      "updated_at": "2026-03-12T12:23:18.628131+00:00",
+      "updated_by": "catalog-importer",
+      "power_consumption_watts": null,
+      "resolution": null,
+      "storage_capacity_gb": null,
+      "bandwidth_requires_mbps": null,
+      "ports": [
+        {
+          "name": "ETH1",
+          "port_type": "ethernet",
+          "speed_mbps": 1000,
+          "power_watts": null
+        },
+        {
+          "name": "POE",
+          "port_type": "power",
+          "speed_mbps": null,
+          "power_watts": null
+        },
+        {
+          "name": "PWR",
+          "port_type": "power",
+          "speed_mbps": null,
+          "power_watts": null
+        },
+        {
+          "name": "AUDIO_IN",
+          "port_type": "serial",
+          "speed_mbps": null,
+          "power_watts": null
+        }
+      ],
+      "status_history": []
+    },
+    {
+      "id": "add48228-4f6f-438b-a35e-b52584e94ddf",
+      "key": "ds-2cd70854",
+      "type_key": "camera",
+      "name": "DS-2CD70854",
+      "manufacturer": "Hikvision",
+      "model": "DS-2CD70854",
+      "lifecycle_status": "verified",
+      "schema_version": "1.0",
+      "updated_at": "2026-03-12T13:29:31.486371+00:00",
+      "updated_by": "catalog-importer",
+      "power_consumption_watts": null,
+      "resolution": null,
+      "storage_capacity_gb": null,
+      "bandwidth_requires_mbps": null,
+      "ports": [
+        {
+          "name": "ETH1",
+          "port_type": "ethernet",
+          "speed_mbps": 1000,
+          "power_watts": null
+        },
+        {
+          "name": "PWR",
+          "port_type": "power",
+          "speed_mbps": null,
+          "power_watts": null
+        },
+        {
+          "name": "AUDIO_IN",
+          "port_type": "serial",
+          "speed_mbps": null,
+          "power_watts": null
+        }
+      ],
+      "status_history": []
+    },
+    {
+      "id": "14860988-895d-491d-9005-d0c37e9a6dd8",
+      "key": "ds-2xs6k01-c36s80",
+      "type_key": "camera",
+      "name": "DS-2XS6K01-C36S80",
+      "manufacturer": "Hikvision",
+      "model": "DS-2XS6K01-C36S80",
+      "lifecycle_status": "verified",
+      "schema_version": "1.0",
+      "updated_at": "2026-03-12T13:28:38.319584+00:00",
+      "updated_by": "catalog-importer",
+      "power_consumption_watts": null,
+      "resolution": null,
+      "storage_capacity_gb": null,
+      "bandwidth_requires_mbps": null,
+      "ports": [
+        {
+          "name": "ETH1",
+          "port_type": "ethernet",
+          "speed_mbps": 1000,
+          "power_watts": null
+        },
+        {
+          "name": "PWR",
+          "port_type": "power",
+          "speed_mbps": null,
+          "power_watts": null
+        },
+        {
+          "name": "AUDIO_IN",
+          "port_type": "serial",
+          "speed_mbps": null,
+          "power_watts": null
+        }
+      ],
+      "status_history": []
+    },
+    {
+      "id": "68c75cbb-cfd6-4b57-8492-51c243719fd3",
+      "key": "ds-2cd3746g2ht-lizsu",
+      "type_key": "camera",
+      "name": "DS-2CD3746G2HT-LIZSU",
+      "manufacturer": "Hikvision",
+      "model": "DS-2CD3746G2HT-LIZSU",
+      "lifecycle_status": "verified",
+      "schema_version": "1.0",
+      "updated_at": "2026-03-12T13:28:47.850385+00:00",
+      "updated_by": "catalog-importer",
+      "power_consumption_watts": null,
+      "resolution": null,
+      "storage_capacity_gb": null,
+      "bandwidth_requires_mbps": null,
+      "ports": [
+        {
+          "name": "ETH1",
+          "port_type": "ethernet",
+          "speed_mbps": 1000,
+          "power_watts": null
+        },
+        {
+          "name": "PWR",
+          "port_type": "power",
+          "speed_mbps": null,
+          "power_watts": null
+        },
+        {
+          "name": "AUDIO_IN",
+          "port_type": "serial",
+          "speed_mbps": null,
+          "power_watts": null
+        }
+      ],
+      "status_history": []
+    },
+    {
+      "id": "093ac03f-6381-469a-b7c4-9f1d326ab90c",
+      "key": "ds-2cd1023g2-liduf",
+      "type_key": "camera",
+      "name": "DS-2CD1023G2-LIDUF",
+      "manufacturer": "Hikvision",
+      "model": "DS-2CD1023G2-LIDUF",
+      "lifecycle_status": "verified",
+      "schema_version": "1.0",
+      "updated_at": "2026-03-12T13:28:50.606617+00:00",
+      "updated_by": "catalog-importer",
+      "power_consumption_watts": null,
+      "resolution": null,
+      "storage_capacity_gb": null,
+      "bandwidth_requires_mbps": null,
+      "ports": [
+        {
+          "name": "ETH1",
+          "port_type": "ethernet",
+          "speed_mbps": 1000,
+          "power_watts": null
+        },
+        {
+          "name": "PWR",
+          "port_type": "power",
+          "speed_mbps": null,
+          "power_watts": null
+        },
+        {
+          "name": "AUDIO_IN",
+          "port_type": "serial",
+          "speed_mbps": null,
+          "power_watts": null
+        }
+      ],
+      "status_history": []
+    },
+    {
+      "id": "c8b646b6-a7b3-4ed2-a772-58c712171e07",
+      "key": "ds-2cd2085g1-i",
+      "type_key": "camera",
+      "name": "DS-2CD2085G1-I",
+      "manufacturer": "Hikvision",
+      "model": "DS-2CD2085G1-I",
+      "lifecycle_status": "verified",
+      "schema_version": "1.0",
+      "updated_at": "2026-03-12T13:28:57.255108+00:00",
+      "updated_by": "catalog-importer",
+      "power_consumption_watts": null,
+      "resolution": null,
+      "storage_capacity_gb": null,
+      "bandwidth_requires_mbps": null,
+      "ports": [
+        {
+          "name": "ETH1",
+          "port_type": "ethernet",
+          "speed_mbps": 1000,
+          "power_watts": null
+        },
+        {
+          "name": "POE",
+          "port_type": "power",
+          "speed_mbps": null,
+          "power_watts": null
+        },
+        {
+          "name": "PWR",
+          "port_type": "power",
+          "speed_mbps": null,
+          "power_watts": null
+        },
+        {
+          "name": "ALARM_OUT",
+          "port_type": "serial",
+          "speed_mbps": null,
+          "power_watts": null
+        },
+        {
+          "name": "AUDIO_IN",
+          "port_type": "serial",
+          "speed_mbps": null,
+          "power_watts": null
+        }
+      ],
+      "status_history": []
+    },
+    {
+      "id": "27d3b6ac-c1b9-44a5-8883-fc9d3a60e9ad",
+      "key": "ds-2cd2185fwd-is",
+      "type_key": "camera",
+      "name": "DS-2CD2185FWD-IS",
+      "manufacturer": "Hikvision",
+      "model": "DS-2CD2185FWD-IS",
+      "lifecycle_status": "verified",
+      "schema_version": "1.0",
+      "updated_at": "2026-03-12T13:29:00.855022+00:00",
+      "updated_by": "catalog-importer",
+      "power_consumption_watts": null,
+      "resolution": null,
+      "storage_capacity_gb": null,
+      "bandwidth_requires_mbps": null,
+      "ports": [
+        {
+          "name": "ETH1",
+          "port_type": "ethernet",
+          "speed_mbps": 1000,
+          "power_watts": null
+        },
+        {
+          "name": "POE",
+          "port_type": "power",
+          "speed_mbps": null,
+          "power_watts": null
+        },
+        {
+          "name": "PWR",
+          "port_type": "power",
+          "speed_mbps": null,
+          "power_watts": null
+        },
+        {
+          "name": "ALARM_IN",
+          "port_type": "serial",
+          "speed_mbps": null,
+          "power_watts": null
+        },
+        {
+          "name": "AUDIO_IN",
+          "port_type": "serial",
+          "speed_mbps": null,
+          "power_watts": null
+        }
+      ],
+      "status_history": []
+    },
+    {
+      "id": "1fc4ed08-396f-4f7c-88ce-33bf6dcbac15",
+      "key": "ds-2cd2385g1-i",
+      "type_key": "camera",
+      "name": "DS-2CD2385G1-I",
+      "manufacturer": "Hikvision",
+      "model": "DS-2CD2385G1-I",
+      "lifecycle_status": "verified",
+      "schema_version": "1.0",
+      "updated_at": "2026-03-12T13:29:04.906399+00:00",
+      "updated_by": "catalog-importer",
+      "power_consumption_watts": null,
+      "resolution": null,
+      "storage_capacity_gb": null,
+      "bandwidth_requires_mbps": null,
+      "ports": [
+        {
+          "name": "ETH1",
+          "port_type": "ethernet",
+          "speed_mbps": 1000,
+          "power_watts": null
+        },
+        {
+          "name": "POE",
+          "port_type": "power",
+          "speed_mbps": null,
+          "power_watts": null
+        },
+        {
+          "name": "PWR",
+          "port_type": "power",
+          "speed_mbps": null,
+          "power_watts": null
+        },
+        {
+          "name": "AUDIO_IN",
+          "port_type": "serial",
+          "speed_mbps": null,
+          "power_watts": null
+        }
+      ],
+      "status_history": []
+    },
+    {
+      "id": "1e966927-1062-4734-b2d2-7b1d2efc15f5",
+      "key": "ds-2cd2685g0-izs",
+      "type_key": "camera",
+      "name": "DS-2CD2685G0-IZS",
+      "manufacturer": "Hikvision",
+      "model": "DS-2CD2685G0-IZS",
+      "lifecycle_status": "verified",
+      "schema_version": "1.0",
+      "updated_at": "2026-03-12T13:29:07.376822+00:00",
+      "updated_by": "catalog-importer",
+      "power_consumption_watts": null,
+      "resolution": null,
+      "storage_capacity_gb": null,
+      "bandwidth_requires_mbps": null,
+      "ports": [
+        {
+          "name": "ETH1",
+          "port_type": "ethernet",
+          "speed_mbps": 1000,
+          "power_watts": null
+        },
+        {
+          "name": "POE",
+          "port_type": "power",
+          "speed_mbps": null,
+          "power_watts": null
+        },
+        {
+          "name": "PWR",
+          "port_type": "power",
+          "speed_mbps": null,
+          "power_watts": null
+        },
+        {
+          "name": "ALARM_IN",
+          "port_type": "serial",
+          "speed_mbps": null,
+          "power_watts": null
+        },
+        {
+          "name": "ALARM_OUT",
+          "port_type": "serial",
+          "speed_mbps": null,
+          "power_watts": null
+        },
+        {
+          "name": "AUDIO_IN",
+          "port_type": "serial",
+          "speed_mbps": null,
+          "power_watts": null
+        }
+      ],
+      "status_history": []
+    },
+    {
+      "id": "e9e1c3ad-f569-4af9-bffd-da96dbb78ee0",
+      "key": "ds-2cd2785g0-izs",
+      "type_key": "camera",
+      "name": "DS-2CD2785G0-IZS",
+      "manufacturer": "Hikvision",
+      "model": "DS-2CD2785G0-IZS",
+      "lifecycle_status": "verified",
+      "schema_version": "1.0",
+      "updated_at": "2026-03-12T13:29:10.851069+00:00",
+      "updated_by": "catalog-importer",
+      "power_consumption_watts": null,
+      "resolution": null,
+      "storage_capacity_gb": null,
+      "bandwidth_requires_mbps": null,
+      "ports": [
+        {
+          "name": "ETH1",
+          "port_type": "ethernet",
+          "speed_mbps": 1000,
+          "power_watts": null
+        },
+        {
+          "name": "POE",
+          "port_type": "power",
+          "speed_mbps": null,
+          "power_watts": null
+        },
+        {
+          "name": "PWR",
+          "port_type": "power",
+          "speed_mbps": null,
+          "power_watts": null
+        },
+        {
+          "name": "ALARM_IN",
+          "port_type": "serial",
+          "speed_mbps": null,
+          "power_watts": null
+        },
+        {
+          "name": "ALARM_OUT",
+          "port_type": "serial",
+          "speed_mbps": null,
+          "power_watts": null
+        },
+        {
+          "name": "AUDIO_IN",
+          "port_type": "serial",
+          "speed_mbps": null,
+          "power_watts": null
+        }
+      ],
+      "status_history": []
+    },
+    {
+      "id": "6401340b-d296-4297-81f6-b7240d6a0e8f",
+      "key": "ds-2cd2045fwd-i",
+      "type_key": "camera",
+      "name": "DS-2CD2045FWD-I",
+      "manufacturer": "Hikvision",
+      "model": "DS-2CD2045FWD-I",
+      "lifecycle_status": "verified",
+      "schema_version": "1.0",
+      "updated_at": "2026-03-12T13:29:13.410083+00:00",
+      "updated_by": "catalog-importer",
+      "power_consumption_watts": null,
+      "resolution": null,
+      "storage_capacity_gb": null,
+      "bandwidth_requires_mbps": null,
+      "ports": [
+        {
+          "name": "ETH1",
+          "port_type": "ethernet",
+          "speed_mbps": 1000,
+          "power_watts": null
+        },
+        {
+          "name": "POE",
+          "port_type": "power",
+          "speed_mbps": null,
+          "power_watts": null
+        },
+        {
+          "name": "PWR",
+          "port_type": "power",
+          "speed_mbps": null,
+          "power_watts": null
+        },
+        {
+          "name": "ALARM_OUT",
+          "port_type": "serial",
+          "speed_mbps": null,
+          "power_watts": null
+        },
+        {
+          "name": "AUDIO_IN",
+          "port_type": "serial",
+          "speed_mbps": null,
+          "power_watts": null
+        }
+      ],
+      "status_history": []
+    },
+    {
+      "id": "538fdbf1-5d18-4851-8554-abaecca87909",
+      "key": "ds-2cd2145fwd-is",
+      "type_key": "camera",
+      "name": "DS-2CD2145FWD-IS",
+      "manufacturer": "Hikvision",
+      "model": "DS-2CD2145FWD-IS",
+      "lifecycle_status": "verified",
+      "schema_version": "1.0",
+      "updated_at": "2026-03-12T13:29:15.851360+00:00",
+      "updated_by": "catalog-importer",
+      "power_consumption_watts": null,
+      "resolution": null,
+      "storage_capacity_gb": null,
+      "bandwidth_requires_mbps": null,
+      "ports": [
+        {
+          "name": "ETH1",
+          "port_type": "ethernet",
+          "speed_mbps": 1000,
+          "power_watts": null
+        },
+        {
+          "name": "POE",
+          "port_type": "power",
+          "speed_mbps": null,
+          "power_watts": null
+        },
+        {
+          "name": "PWR",
+          "port_type": "power",
+          "speed_mbps": null,
+          "power_watts": null
+        },
+        {
+          "name": "ALARM_IN",
+          "port_type": "serial",
+          "speed_mbps": null,
+          "power_watts": null
+        },
+        {
+          "name": "AUDIO_IN",
+          "port_type": "serial",
+          "speed_mbps": null,
+          "power_watts": null
+        }
+      ],
+      "status_history": []
+    },
+    {
+      "id": "4fd2aead-bd99-464d-b475-85b66512d945",
+      "key": "ds-2cd2345fwd-i",
+      "type_key": "camera",
+      "name": "DS-2CD2345FWD-I",
+      "manufacturer": "Hikvision",
+      "model": "DS-2CD2345FWD-I",
+      "lifecycle_status": "verified",
+      "schema_version": "1.0",
+      "updated_at": "2026-03-12T13:29:19.071700+00:00",
+      "updated_by": "catalog-importer",
+      "power_consumption_watts": null,
+      "resolution": null,
+      "storage_capacity_gb": null,
+      "bandwidth_requires_mbps": null,
+      "ports": [
+        {
+          "name": "ETH1",
+          "port_type": "ethernet",
+          "speed_mbps": 1000,
+          "power_watts": null
+        },
+        {
+          "name": "POE",
+          "port_type": "power",
+          "speed_mbps": null,
+          "power_watts": null
+        },
+        {
+          "name": "PWR",
+          "port_type": "power",
+          "speed_mbps": null,
+          "power_watts": null
+        },
+        {
+          "name": "ALARM_OUT",
+          "port_type": "serial",
+          "speed_mbps": null,
+          "power_watts": null
+        },
+        {
+          "name": "AUDIO_IN",
+          "port_type": "serial",
+          "speed_mbps": null,
+          "power_watts": null
+        }
+      ],
+      "status_history": []
+    },
+    {
+      "id": "98404eac-24cf-49ee-85a2-8b2bafa87117",
+      "key": "ds-2cd2t45fwd-i5",
+      "type_key": "camera",
+      "name": "DS-2CD2T45FWD-I5",
+      "manufacturer": "Hikvision",
+      "model": "DS-2CD2T45FWD-I5",
+      "lifecycle_status": "verified",
+      "schema_version": "1.0",
+      "updated_at": "2026-03-12T13:29:22.174829+00:00",
+      "updated_by": "catalog-importer",
+      "power_consumption_watts": null,
+      "resolution": null,
+      "storage_capacity_gb": null,
+      "bandwidth_requires_mbps": null,
+      "ports": [
+        {
+          "name": "ETH1",
+          "port_type": "ethernet",
+          "speed_mbps": 1000,
+          "power_watts": null
+        },
+        {
+          "name": "POE",
+          "port_type": "power",
+          "speed_mbps": null,
+          "power_watts": null
+        },
+        {
+          "name": "PWR",
+          "port_type": "power",
+          "speed_mbps": null,
+          "power_watts": null
+        },
+        {
+          "name": "AUDIO_IN",
+          "port_type": "serial",
+          "speed_mbps": null,
+          "power_watts": null
+        }
+      ],
+      "status_history": []
+    },
+    {
+      "id": "053e0971-80ab-4be8-b101-0216f9d873cf",
+      "key": "ds-2cd2645fwd-izs",
+      "type_key": "camera",
+      "name": "DS-2CD2645FWD-IZS",
+      "manufacturer": "Hikvision",
+      "model": "DS-2CD2645FWD-IZS",
+      "lifecycle_status": "verified",
+      "schema_version": "1.0",
+      "updated_at": "2026-03-12T13:29:25.104246+00:00",
+      "updated_by": "catalog-importer",
+      "power_consumption_watts": null,
+      "resolution": null,
+      "storage_capacity_gb": null,
+      "bandwidth_requires_mbps": null,
+      "ports": [
+        {
+          "name": "ETH1",
+          "port_type": "ethernet",
+          "speed_mbps": 1000,
+          "power_watts": null
+        },
+        {
+          "name": "POE",
+          "port_type": "power",
+          "speed_mbps": null,
+          "power_watts": null
+        },
+        {
+          "name": "PWR",
+          "port_type": "power",
+          "speed_mbps": null,
+          "power_watts": null
+        },
+        {
+          "name": "ALARM_IN",
+          "port_type": "serial",
+          "speed_mbps": null,
+          "power_watts": null
+        },
+        {
+          "name": "ALARM_OUT",
+          "port_type": "serial",
+          "speed_mbps": null,
+          "power_watts": null
+        },
+        {
+          "name": "AUDIO_IN",
+          "port_type": "serial",
+          "speed_mbps": null,
+          "power_watts": null
+        }
+      ],
+      "status_history": []
+    },
+    {
+      "id": "cc141560-73bc-4db0-89e5-21546600d043",
+      "key": "ds-2cd2745fwd-izs",
+      "type_key": "camera",
+      "name": "DS-2CD2745FWD-IZS",
+      "manufacturer": "Hikvision",
+      "model": "DS-2CD2745FWD-IZS",
+      "lifecycle_status": "verified",
+      "schema_version": "1.0",
+      "updated_at": "2026-03-12T13:29:28.112385+00:00",
+      "updated_by": "catalog-importer",
+      "power_consumption_watts": null,
+      "resolution": null,
+      "storage_capacity_gb": null,
+      "bandwidth_requires_mbps": null,
+      "ports": [
+        {
+          "name": "ETH1",
+          "port_type": "ethernet",
+          "speed_mbps": 1000,
+          "power_watts": null
+        },
+        {
+          "name": "POE",
+          "port_type": "power",
+          "speed_mbps": null,
+          "power_watts": null
+        },
+        {
+          "name": "PWR",
+          "port_type": "power",
+          "speed_mbps": null,
+          "power_watts": null
+        },
+        {
+          "name": "ALARM_IN",
+          "port_type": "serial",
+          "speed_mbps": null,
+          "power_watts": null
+        },
+        {
+          "name": "ALARM_OUT",
+          "port_type": "serial",
+          "speed_mbps": null,
+          "power_watts": null
+        },
+        {
+          "name": "AUDIO_IN",
+          "port_type": "serial",
+          "speed_mbps": null,
+          "power_watts": null
+        }
+      ],
+      "status_history": []
+    },
+    {
+      "id": "dd27262e-a61e-44f8-bc62-825e1bea110a",
+      "key": "ds-2cd2545fwd-iws",
+      "type_key": "camera",
+      "name": "DS-2CD2545FWD-IWS",
+      "manufacturer": "Hikvision",
+      "model": "DS-2CD2545FWD-IWS",
+      "lifecycle_status": "verified",
+      "schema_version": "1.0",
+      "updated_at": "2026-03-12T13:29:33.963624+00:00",
+      "updated_by": "catalog-importer",
+      "power_consumption_watts": null,
+      "resolution": null,
+      "storage_capacity_gb": null,
+      "bandwidth_requires_mbps": null,
+      "ports": [
+        {
+          "name": "ETH1",
+          "port_type": "ethernet",
+          "speed_mbps": 1000,
+          "power_watts": null
+        },
+        {
+          "name": "POE",
+          "port_type": "power",
+          "speed_mbps": null,
+          "power_watts": null
+        },
+        {
+          "name": "PWR",
+          "port_type": "power",
+          "speed_mbps": null,
+          "power_watts": null
+        },
+        {
+          "name": "ALARM_IN",
+          "port_type": "serial",
+          "speed_mbps": null,
+          "power_watts": null
+        },
+        {
+          "name": "ALARM_OUT",
+          "port_type": "serial",
+          "speed_mbps": null,
+          "power_watts": null
+        },
+        {
+          "name": "AUDIO_IN",
+          "port_type": "serial",
+          "speed_mbps": null,
+          "power_watts": null
+        }
+      ],
+      "status_history": []
+    },
+    {
+      "id": "e5d8e95b-39ad-48c7-943a-2becd856a946",
+      "key": "ds-2cd2443g0-iw",
+      "type_key": "camera",
+      "name": "DS-2CD2443G0-IW",
+      "manufacturer": "Hikvision",
+      "model": "DS-2CD2443G0-IW",
+      "lifecycle_status": "verified",
+      "schema_version": "1.0",
+      "updated_at": "2026-03-12T13:29:37.021220+00:00",
+      "updated_by": "catalog-importer",
+      "power_consumption_watts": null,
+      "resolution": null,
+      "storage_capacity_gb": null,
+      "bandwidth_requires_mbps": null,
+      "ports": [
+        {
+          "name": "ETH1",
+          "port_type": "ethernet",
+          "speed_mbps": 1000,
+          "power_watts": null
+        },
+        {
+          "name": "POE",
+          "port_type": "power",
+          "speed_mbps": null,
+          "power_watts": null
+        },
+        {
+          "name": "PWR",
+          "port_type": "power",
+          "speed_mbps": null,
+          "power_watts": null
+        },
+        {
+          "name": "AUDIO_IN",
+          "port_type": "serial",
+          "speed_mbps": null,
+          "power_watts": null
+        }
+      ],
+      "status_history": []
+    },
+    {
+      "id": "61eeede0-c884-414f-8b1e-2c6d51e7524c",
+      "key": "ds-2cd2525fwd-iws",
+      "type_key": "camera",
+      "name": "DS-2CD2525FWD-IWS",
+      "manufacturer": "Hikvision",
+      "model": "DS-2CD2525FWD-IWS",
+      "lifecycle_status": "verified",
+      "schema_version": "1.0",
+      "updated_at": "2026-03-12T13:29:39.312590+00:00",
+      "updated_by": "catalog-importer",
+      "power_consumption_watts": null,
+      "resolution": null,
+      "storage_capacity_gb": null,
+      "bandwidth_requires_mbps": null,
+      "ports": [
+        {
+          "name": "ETH1",
+          "port_type": "ethernet",
+          "speed_mbps": 1000,
+          "power_watts": null
+        },
+        {
+          "name": "POE",
+          "port_type": "power",
+          "speed_mbps": null,
+          "power_watts": null
+        },
+        {
+          "name": "PWR",
+          "port_type": "power",
+          "speed_mbps": null,
+          "power_watts": null
+        },
+        {
+          "name": "ALARM_IN",
+          "port_type": "serial",
+          "speed_mbps": null,
+          "power_watts": null
+        },
+        {
+          "name": "ALARM_OUT",
+          "port_type": "serial",
+          "speed_mbps": null,
+          "power_watts": null
+        },
+        {
+          "name": "AUDIO_IN",
+          "port_type": "serial",
+          "speed_mbps": null,
+          "power_watts": null
+        }
+      ],
+      "status_history": []
+    },
+    {
+      "id": "b258a0f4-5bd9-4183-bb0a-72249a7aa03a",
+      "key": "ds-2cd2725fwd-izs",
+      "type_key": "camera",
+      "name": "DS-2CD2725FWD-IZS",
+      "manufacturer": "Hikvision",
+      "model": "DS-2CD2725FWD-IZS",
+      "lifecycle_status": "verified",
+      "schema_version": "1.0",
+      "updated_at": "2026-03-12T13:29:41.883752+00:00",
+      "updated_by": "catalog-importer",
+      "power_consumption_watts": null,
+      "resolution": null,
+      "storage_capacity_gb": null,
+      "bandwidth_requires_mbps": null,
+      "ports": [
+        {
+          "name": "ETH1",
+          "port_type": "ethernet",
+          "speed_mbps": 1000,
+          "power_watts": null
+        },
+        {
+          "name": "POE",
+          "port_type": "power",
+          "speed_mbps": null,
+          "power_watts": null
+        },
+        {
+          "name": "PWR",
+          "port_type": "power",
+          "speed_mbps": null,
+          "power_watts": null
+        },
+        {
+          "name": "ALARM_IN",
+          "port_type": "serial",
+          "speed_mbps": null,
+          "power_watts": null
+        },
+        {
+          "name": "ALARM_OUT",
+          "port_type": "serial",
+          "speed_mbps": null,
+          "power_watts": null
+        },
+        {
+          "name": "AUDIO_IN",
+          "port_type": "serial",
+          "speed_mbps": null,
+          "power_watts": null
+        }
+      ],
+      "status_history": []
+    },
+    {
+      "id": "b31a4d17-cbc6-43a8-b43d-a773150f78f8",
+      "key": "ds-2cd2543g0-iws",
+      "type_key": "camera",
+      "name": "DS-2CD2543G0-IWS",
+      "manufacturer": "Hikvision",
+      "model": "DS-2CD2543G0-IWS",
+      "lifecycle_status": "verified",
+      "schema_version": "1.0",
+      "updated_at": "2026-03-12T13:29:43.706131+00:00",
+      "updated_by": "catalog-importer",
+      "power_consumption_watts": null,
+      "resolution": null,
+      "storage_capacity_gb": null,
+      "bandwidth_requires_mbps": null,
+      "ports": [
+        {
+          "name": "ETH1",
+          "port_type": "ethernet",
+          "speed_mbps": 1000,
+          "power_watts": null
+        },
+        {
+          "name": "POE",
+          "port_type": "power",
+          "speed_mbps": null,
+          "power_watts": null
+        },
+        {
+          "name": "PWR",
+          "port_type": "power",
+          "speed_mbps": null,
+          "power_watts": null
+        },
+        {
+          "name": "ALARM_IN",
+          "port_type": "serial",
+          "speed_mbps": null,
+          "power_watts": null
+        },
+        {
+          "name": "ALARM_OUT",
+          "port_type": "serial",
+          "speed_mbps": null,
+          "power_watts": null
+        },
+        {
+          "name": "AUDIO_IN",
+          "port_type": "serial",
+          "speed_mbps": null,
+          "power_watts": null
+        }
+      ],
+      "status_history": []
+    },
+    {
+      "id": "2f77e255-69b1-4b68-9bf9-07658e1415c0",
+      "key": "ds-2cd2743g1-izs",
+      "type_key": "camera",
+      "name": "DS-2CD2743G1-IZS",
+      "manufacturer": "Hikvision",
+      "model": "DS-2CD2743G1-IZS",
+      "lifecycle_status": "verified",
+      "schema_version": "1.0",
+      "updated_at": "2026-03-12T13:29:46.079929+00:00",
+      "updated_by": "catalog-importer",
+      "power_consumption_watts": null,
+      "resolution": null,
+      "storage_capacity_gb": null,
+      "bandwidth_requires_mbps": null,
+      "ports": [
+        {
+          "name": "ETH1",
+          "port_type": "ethernet",
+          "speed_mbps": 1000,
+          "power_watts": null
+        },
+        {
+          "name": "POE",
+          "port_type": "power",
+          "speed_mbps": null,
+          "power_watts": null
+        },
+        {
+          "name": "PWR",
+          "port_type": "power",
+          "speed_mbps": null,
+          "power_watts": null
+        },
+        {
+          "name": "ALARM_IN",
+          "port_type": "serial",
+          "speed_mbps": null,
+          "power_watts": null
+        },
+        {
+          "name": "ALARM_OUT",
+          "port_type": "serial",
+          "speed_mbps": null,
+          "power_watts": null
+        },
+        {
+          "name": "AUDIO_IN",
+          "port_type": "serial",
+          "speed_mbps": null,
+          "power_watts": null
+        }
+      ],
+      "status_history": []
+    },
+    {
+      "id": "74cfdb0b-d40e-461d-8c4d-d6db57a7a580",
+      "key": "ds-2cd2125fhwd-is",
+      "type_key": "camera",
+      "name": "DS-2CD2125FHWD-IS",
+      "manufacturer": "Hikvision",
+      "model": "DS-2CD2125FHWD-IS",
+      "lifecycle_status": "verified",
+      "schema_version": "1.0",
+      "updated_at": "2026-03-12T13:29:48.773934+00:00",
+      "updated_by": "catalog-importer",
+      "power_consumption_watts": null,
+      "resolution": null,
+      "storage_capacity_gb": null,
+      "bandwidth_requires_mbps": null,
+      "ports": [
+        {
+          "name": "ETH1",
+          "port_type": "ethernet",
+          "speed_mbps": 1000,
+          "power_watts": null
+        },
+        {
+          "name": "POE",
+          "port_type": "power",
+          "speed_mbps": null,
+          "power_watts": null
+        },
+        {
+          "name": "PWR",
+          "port_type": "power",
+          "speed_mbps": null,
+          "power_watts": null
+        },
+        {
+          "name": "ALARM_IN",
+          "port_type": "serial",
+          "speed_mbps": null,
+          "power_watts": null
+        },
+        {
+          "name": "AUDIO_IN",
+          "port_type": "serial",
+          "speed_mbps": null,
+          "power_watts": null
+        }
+      ],
+      "status_history": []
+    },
+    {
+      "id": "535eeff7-c777-4528-ad82-27e7ed57e006",
+      "key": "ds-2cd2h43g1-izs",
+      "type_key": "camera",
+      "name": "DS-2CD2H43G1-IZS",
+      "manufacturer": "Hikvision",
+      "model": "DS-2CD2H43G1-IZS",
+      "lifecycle_status": "verified",
+      "schema_version": "1.0",
+      "updated_at": "2026-03-12T13:29:51.306548+00:00",
+      "updated_by": "catalog-importer",
+      "power_consumption_watts": null,
+      "resolution": null,
+      "storage_capacity_gb": null,
+      "bandwidth_requires_mbps": null,
+      "ports": [
+        {
+          "name": "ETH1",
+          "port_type": "ethernet",
+          "speed_mbps": 1000,
+          "power_watts": null
+        },
+        {
+          "name": "POE",
+          "port_type": "power",
+          "speed_mbps": null,
+          "power_watts": null
+        },
+        {
+          "name": "PWR",
+          "port_type": "power",
+          "speed_mbps": null,
+          "power_watts": null
+        },
+        {
+          "name": "ALARM_IN",
+          "port_type": "serial",
+          "speed_mbps": null,
+          "power_watts": null
+        },
+        {
+          "name": "ALARM_OUT",
+          "port_type": "serial",
+          "speed_mbps": null,
+          "power_watts": null
+        },
+        {
+          "name": "AUDIO_IN",
+          "port_type": "serial",
+          "speed_mbps": null,
+          "power_watts": null
+        }
+      ],
+      "status_history": []
+    },
+    {
+      "id": "6412533e-3803-48f1-aa8b-d61ff6e133a3",
+      "key": "ds-2cd2623g1-izs",
+      "type_key": "camera",
+      "name": "DS-2CD2623G1-IZS",
+      "manufacturer": "Hikvision",
+      "model": "DS-2CD2623G1-IZS",
+      "lifecycle_status": "verified",
+      "schema_version": "1.0",
+      "updated_at": "2026-03-12T13:29:53.896863+00:00",
+      "updated_by": "catalog-importer",
+      "power_consumption_watts": null,
+      "resolution": null,
+      "storage_capacity_gb": null,
+      "bandwidth_requires_mbps": null,
+      "ports": [
+        {
+          "name": "ETH1",
+          "port_type": "ethernet",
+          "speed_mbps": 1000,
+          "power_watts": null
+        },
+        {
+          "name": "POE",
+          "port_type": "power",
+          "speed_mbps": null,
+          "power_watts": null
+        },
+        {
+          "name": "PWR",
+          "port_type": "power",
+          "speed_mbps": null,
+          "power_watts": null
+        },
+        {
+          "name": "ALARM_IN",
+          "port_type": "serial",
+          "speed_mbps": null,
+          "power_watts": null
+        },
+        {
+          "name": "ALARM_OUT",
+          "port_type": "serial",
+          "speed_mbps": null,
+          "power_watts": null
+        },
+        {
+          "name": "AUDIO_IN",
+          "port_type": "serial",
+          "speed_mbps": null,
+          "power_watts": null
+        }
+      ],
+      "status_history": []
+    },
+    {
+      "id": "53c56342-13ea-4291-ad29-0e700798e979",
+      "key": "ds-2cd2165g0-is",
+      "type_key": "camera",
+      "name": "DS-2CD2165G0-IS",
+      "manufacturer": "Hikvision",
+      "model": "DS-2CD2165G0-IS",
+      "lifecycle_status": "verified",
+      "schema_version": "1.0",
+      "updated_at": "2026-03-12T13:29:56.472883+00:00",
+      "updated_by": "catalog-importer",
+      "power_consumption_watts": null,
+      "resolution": null,
+      "storage_capacity_gb": null,
+      "bandwidth_requires_mbps": null,
+      "ports": [
+        {
+          "name": "ETH1",
+          "port_type": "ethernet",
+          "speed_mbps": 1000,
+          "power_watts": null
+        },
+        {
+          "name": "POE",
+          "port_type": "power",
+          "speed_mbps": null,
+          "power_watts": null
+        },
+        {
+          "name": "PWR",
+          "port_type": "power",
+          "speed_mbps": null,
+          "power_watts": null
+        },
+        {
+          "name": "ALARM_IN",
+          "port_type": "serial",
+          "speed_mbps": null,
+          "power_watts": null
+        },
+        {
+          "name": "AUDIO_IN",
+          "port_type": "serial",
+          "speed_mbps": null,
+          "power_watts": null
+        }
+      ],
+      "status_history": []
+    },
+    {
+      "id": "8354554c-aa2a-4386-a078-94b2ad274a00",
+      "key": "ds-2cd2t23g0-i5",
+      "type_key": "camera",
+      "name": "DS-2CD2T23G0-I5",
+      "manufacturer": "Hikvision",
+      "model": "DS-2CD2T23G0-I5",
+      "lifecycle_status": "verified",
+      "schema_version": "1.0",
+      "updated_at": "2026-03-12T13:29:58.538166+00:00",
+      "updated_by": "catalog-importer",
+      "power_consumption_watts": null,
+      "resolution": null,
+      "storage_capacity_gb": null,
+      "bandwidth_requires_mbps": null,
+      "ports": [
+        {
+          "name": "ETH1",
+          "port_type": "ethernet",
+          "speed_mbps": 1000,
+          "power_watts": null
+        },
+        {
+          "name": "POE",
+          "port_type": "power",
+          "speed_mbps": null,
+          "power_watts": null
+        },
+        {
+          "name": "PWR",
+          "port_type": "power",
+          "speed_mbps": null,
+          "power_watts": null
+        },
+        {
+          "name": "AUDIO_IN",
+          "port_type": "serial",
+          "speed_mbps": null,
+          "power_watts": null
+        }
+      ],
+      "status_history": []
+    },
+    {
+      "id": "cd4d9989-eb4c-4ee0-a4a9-bd7c48d4e1c9",
+      "key": "ds-2cd2765g0-izs",
+      "type_key": "camera",
+      "name": "DS-2CD2765G0-IZS",
+      "manufacturer": "Hikvision",
+      "model": "DS-2CD2765G0-IZS",
+      "lifecycle_status": "verified",
+      "schema_version": "1.0",
+      "updated_at": "2026-03-12T13:30:01.450518+00:00",
+      "updated_by": "catalog-importer",
+      "power_consumption_watts": null,
+      "resolution": null,
+      "storage_capacity_gb": null,
+      "bandwidth_requires_mbps": null,
+      "ports": [
+        {
+          "name": "ETH1",
+          "port_type": "ethernet",
+          "speed_mbps": 1000,
+          "power_watts": null
+        },
+        {
+          "name": "POE",
+          "port_type": "power",
+          "speed_mbps": null,
+          "power_watts": null
+        },
+        {
+          "name": "PWR",
+          "port_type": "power",
+          "speed_mbps": null,
+          "power_watts": null
+        },
+        {
+          "name": "ALARM_IN",
+          "port_type": "serial",
+          "speed_mbps": null,
+          "power_watts": null
+        },
+        {
+          "name": "ALARM_OUT",
+          "port_type": "serial",
+          "speed_mbps": null,
+          "power_watts": null
+        },
+        {
+          "name": "AUDIO_IN",
+          "port_type": "serial",
+          "speed_mbps": null,
+          "power_watts": null
+        }
+      ],
+      "status_history": []
+    },
+    {
+      "id": "377ffcbb-4297-47b3-8a2e-be942ff6e5df",
+      "key": "ds-2cd2683g1-izs",
+      "type_key": "camera",
+      "name": "DS-2CD2683G1-IZS",
+      "manufacturer": "Hikvision",
+      "model": "DS-2CD2683G1-IZS",
+      "lifecycle_status": "verified",
+      "schema_version": "1.0",
+      "updated_at": "2026-03-12T13:30:09.129130+00:00",
+      "updated_by": "catalog-importer",
+      "power_consumption_watts": null,
+      "resolution": null,
+      "storage_capacity_gb": null,
+      "bandwidth_requires_mbps": null,
+      "ports": [
+        {
+          "name": "ETH1",
+          "port_type": "ethernet",
+          "speed_mbps": 1000,
+          "power_watts": null
+        },
+        {
+          "name": "POE",
+          "port_type": "power",
+          "speed_mbps": null,
+          "power_watts": null
+        },
+        {
+          "name": "PWR",
+          "port_type": "power",
+          "speed_mbps": null,
+          "power_watts": null
+        },
+        {
+          "name": "ALARM_IN",
+          "port_type": "serial",
+          "speed_mbps": null,
+          "power_watts": null
+        },
+        {
+          "name": "AUDIO_IN",
+          "port_type": "serial",
+          "speed_mbps": null,
+          "power_watts": null
+        }
+      ],
+      "status_history": []
+    },
+    {
+      "id": "be001380-d459-498b-89b7-c3320c9d3c57",
+      "key": "ds-2cd2t65g1-i5",
+      "type_key": "camera",
+      "name": "DS-2CD2T65G1-I5",
+      "manufacturer": "Hikvision",
+      "model": "DS-2CD2T65G1-I5",
+      "lifecycle_status": "verified",
+      "schema_version": "1.0",
+      "updated_at": "2026-03-12T13:30:11.728836+00:00",
+      "updated_by": "catalog-importer",
+      "power_consumption_watts": null,
+      "resolution": null,
+      "storage_capacity_gb": null,
+      "bandwidth_requires_mbps": null,
+      "ports": [
+        {
+          "name": "ETH1",
+          "port_type": "ethernet",
+          "speed_mbps": 1000,
+          "power_watts": null
+        },
+        {
+          "name": "POE",
+          "port_type": "power",
+          "speed_mbps": null,
+          "power_watts": null
+        },
+        {
+          "name": "PWR",
+          "port_type": "power",
+          "speed_mbps": null,
+          "power_watts": null
+        },
+        {
+          "name": "ALARM_OUT",
+          "port_type": "serial",
+          "speed_mbps": null,
+          "power_watts": null
+        },
+        {
+          "name": "AUDIO_IN",
+          "port_type": "serial",
+          "speed_mbps": null,
+          "power_watts": null
+        }
+      ],
+      "status_history": []
+    },
+    {
+      "id": "30422715-c587-472a-87ee-111b893ca4e8",
+      "key": "ds-2cd2425fwd-iw",
+      "type_key": "camera",
+      "name": "DS-2CD2425FWD-IW",
+      "manufacturer": "Hikvision",
+      "model": "DS-2CD2425FWD-IW",
+      "lifecycle_status": "verified",
+      "schema_version": "1.0",
+      "updated_at": "2026-03-12T13:30:14.969364+00:00",
+      "updated_by": "catalog-importer",
+      "power_consumption_watts": null,
+      "resolution": null,
+      "storage_capacity_gb": null,
+      "bandwidth_requires_mbps": null,
+      "ports": [
+        {
+          "name": "ETH1",
+          "port_type": "ethernet",
+          "speed_mbps": 1000,
+          "power_watts": null
+        },
+        {
+          "name": "POE",
+          "port_type": "power",
+          "speed_mbps": null,
+          "power_watts": null
+        },
+        {
+          "name": "PWR",
+          "port_type": "power",
+          "speed_mbps": null,
+          "power_watts": null
+        },
+        {
+          "name": "ALARM_OUT",
+          "port_type": "serial",
+          "speed_mbps": null,
+          "power_watts": null
+        },
+        {
+          "name": "AUDIO_IN",
+          "port_type": "serial",
+          "speed_mbps": null,
+          "power_watts": null
+        }
+      ],
+      "status_history": []
+    },
+    {
+      "id": "091a8365-2836-4583-a2b2-a5e743a4591e",
+      "key": "ds-2cd2h23g1-izs",
+      "type_key": "camera",
+      "name": "DS-2CD2H23G1-IZS",
+      "manufacturer": "Hikvision",
+      "model": "DS-2CD2H23G1-IZS",
+      "lifecycle_status": "verified",
+      "schema_version": "1.0",
+      "updated_at": "2026-03-12T13:30:17.735133+00:00",
+      "updated_by": "catalog-importer",
+      "power_consumption_watts": null,
+      "resolution": null,
+      "storage_capacity_gb": null,
+      "bandwidth_requires_mbps": null,
+      "ports": [
+        {
+          "name": "ETH1",
+          "port_type": "ethernet",
+          "speed_mbps": 1000,
+          "power_watts": null
+        },
+        {
+          "name": "POE",
+          "port_type": "power",
+          "speed_mbps": null,
+          "power_watts": null
+        },
+        {
+          "name": "PWR",
+          "port_type": "power",
+          "speed_mbps": null,
+          "power_watts": null
+        },
+        {
+          "name": "ALARM_IN",
+          "port_type": "serial",
+          "speed_mbps": null,
+          "power_watts": null
+        },
+        {
+          "name": "ALARM_OUT",
+          "port_type": "serial",
+          "speed_mbps": null,
+          "power_watts": null
+        },
+        {
+          "name": "AUDIO_IN",
+          "port_type": "serial",
+          "speed_mbps": null,
+          "power_watts": null
+        }
+      ],
+      "status_history": []
+    },
+    {
+      "id": "0c3512a5-b19a-4906-8ce8-4a7d80b172d6",
+      "key": "ds-2cd2t25fhwd-i5",
+      "type_key": "camera",
+      "name": "DS-2CD2T25FHWD-I5",
+      "manufacturer": "Hikvision",
+      "model": "DS-2CD2T25FHWD-I5",
+      "lifecycle_status": "verified",
+      "schema_version": "1.0",
+      "updated_at": "2026-03-12T13:30:23.759293+00:00",
+      "updated_by": "catalog-importer",
+      "power_consumption_watts": null,
+      "resolution": null,
+      "storage_capacity_gb": null,
+      "bandwidth_requires_mbps": null,
+      "ports": [
+        {
+          "name": "ETH1",
+          "port_type": "ethernet",
+          "speed_mbps": 1000,
+          "power_watts": null
+        },
+        {
+          "name": "POE",
+          "port_type": "power",
+          "speed_mbps": null,
+          "power_watts": null
+        },
+        {
+          "name": "PWR",
+          "port_type": "power",
+          "speed_mbps": null,
+          "power_watts": null
+        },
+        {
+          "name": "ALARM_OUT",
+          "port_type": "serial",
+          "speed_mbps": null,
+          "power_watts": null
+        },
+        {
+          "name": "AUDIO_IN",
+          "port_type": "serial",
+          "speed_mbps": null,
+          "power_watts": null
+        }
+      ],
+      "status_history": []
+    },
+    {
+      "id": "968a2cab-0fef-4e13-b05e-c457472254f8",
+      "key": "ds-2cd2725fhwd-izs",
+      "type_key": "camera",
+      "name": "DS-2CD2725FHWD-IZS",
+      "manufacturer": "Hikvision",
+      "model": "DS-2CD2725FHWD-IZS",
+      "lifecycle_status": "verified",
+      "schema_version": "1.0",
+      "updated_at": "2026-03-12T13:30:26.088318+00:00",
+      "updated_by": "catalog-importer",
+      "power_consumption_watts": null,
+      "resolution": null,
+      "storage_capacity_gb": null,
+      "bandwidth_requires_mbps": null,
+      "ports": [
+        {
+          "name": "ETH1",
+          "port_type": "ethernet",
+          "speed_mbps": 1000,
+          "power_watts": null
+        },
+        {
+          "name": "POE",
+          "port_type": "power",
+          "speed_mbps": null,
+          "power_watts": null
+        },
+        {
+          "name": "PWR",
+          "port_type": "power",
+          "speed_mbps": null,
+          "power_watts": null
+        },
+        {
+          "name": "ALARM_IN",
+          "port_type": "serial",
+          "speed_mbps": null,
+          "power_watts": null
+        },
+        {
+          "name": "ALARM_OUT",
+          "port_type": "serial",
+          "speed_mbps": null,
+          "power_watts": null
+        },
+        {
+          "name": "AUDIO_IN",
+          "port_type": "serial",
+          "speed_mbps": null,
+          "power_watts": null
+        }
+      ],
+      "status_history": []
+    },
+    {
+      "id": "2650d2d6-7ec6-4fba-be94-51a872676141",
+      "key": "ds-2cd2h83g1-izs",
+      "type_key": "camera",
+      "name": "DS-2CD2H83G1-IZS",
+      "manufacturer": "Hikvision",
+      "model": "DS-2CD2H83G1-IZS",
+      "lifecycle_status": "verified",
+      "schema_version": "1.0",
+      "updated_at": "2026-03-12T13:30:28.905394+00:00",
+      "updated_by": "catalog-importer",
+      "power_consumption_watts": null,
+      "resolution": null,
+      "storage_capacity_gb": null,
+      "bandwidth_requires_mbps": null,
+      "ports": [
+        {
+          "name": "ETH1",
+          "port_type": "ethernet",
+          "speed_mbps": 1000,
+          "power_watts": null
+        },
+        {
+          "name": "POE",
+          "port_type": "power",
+          "speed_mbps": null,
+          "power_watts": null
+        },
+        {
+          "name": "PWR",
+          "port_type": "power",
+          "speed_mbps": null,
+          "power_watts": null
+        },
+        {
+          "name": "ALARM_IN",
+          "port_type": "serial",
+          "speed_mbps": null,
+          "power_watts": null
+        },
+        {
+          "name": "ALARM_OUT",
+          "port_type": "serial",
+          "speed_mbps": null,
+          "power_watts": null
+        },
+        {
+          "name": "AUDIO_IN",
+          "port_type": "serial",
+          "speed_mbps": null,
+          "power_watts": null
+        }
+      ],
+      "status_history": []
+    },
+    {
+      "id": "09d47ff4-c638-47e6-9b1e-54d6dab0e032",
+      "key": "ds-2cd2665g0-izs",
+      "type_key": "camera",
+      "name": "DS-2CD2665G0-IZS",
+      "manufacturer": "Hikvision",
+      "model": "DS-2CD2665G0-IZS",
+      "lifecycle_status": "verified",
+      "schema_version": "1.0",
+      "updated_at": "2026-03-12T13:30:31.132778+00:00",
+      "updated_by": "catalog-importer",
+      "power_consumption_watts": null,
+      "resolution": null,
+      "storage_capacity_gb": null,
+      "bandwidth_requires_mbps": null,
+      "ports": [
+        {
+          "name": "ETH1",
+          "port_type": "ethernet",
+          "speed_mbps": 1000,
+          "power_watts": null
+        },
+        {
+          "name": "POE",
+          "port_type": "power",
+          "speed_mbps": null,
+          "power_watts": null
+        },
+        {
+          "name": "PWR",
+          "port_type": "power",
+          "speed_mbps": null,
+          "power_watts": null
+        },
+        {
+          "name": "ALARM_IN",
+          "port_type": "serial",
+          "speed_mbps": null,
+          "power_watts": null
+        },
+        {
+          "name": "ALARM_OUT",
+          "port_type": "serial",
+          "speed_mbps": null,
+          "power_watts": null
+        },
+        {
+          "name": "AUDIO_IN",
+          "port_type": "serial",
+          "speed_mbps": null,
+          "power_watts": null
+        }
+      ],
+      "status_history": []
+    },
+    {
+      "id": "8f76651c-4153-410c-bb7f-289038e90ae7",
+      "key": "ds-2cd2625fhwd-izs",
+      "type_key": "camera",
+      "name": "DS-2CD2625FHWD-IZS",
+      "manufacturer": "Hikvision",
+      "model": "DS-2CD2625FHWD-IZS",
+      "lifecycle_status": "verified",
+      "schema_version": "1.0",
+      "updated_at": "2026-03-12T13:30:34.283801+00:00",
+      "updated_by": "catalog-importer",
+      "power_consumption_watts": null,
+      "resolution": null,
+      "storage_capacity_gb": null,
+      "bandwidth_requires_mbps": null,
+      "ports": [
+        {
+          "name": "ETH1",
+          "port_type": "ethernet",
+          "speed_mbps": 1000,
+          "power_watts": null
+        },
+        {
+          "name": "POE",
+          "port_type": "power",
+          "speed_mbps": null,
+          "power_watts": null
+        },
+        {
+          "name": "PWR",
+          "port_type": "power",
+          "speed_mbps": null,
+          "power_watts": null
+        },
+        {
+          "name": "ALARM_IN",
+          "port_type": "serial",
+          "speed_mbps": null,
+          "power_watts": null
+        },
+        {
+          "name": "ALARM_OUT",
+          "port_type": "serial",
+          "speed_mbps": null,
+          "power_watts": null
+        },
+        {
+          "name": "AUDIO_IN",
+          "port_type": "serial",
+          "speed_mbps": null,
+          "power_watts": null
+        }
+      ],
+      "status_history": []
+    },
+    {
+      "id": "158249bb-2a21-4788-946f-c04968bc1edb",
+      "key": "ds-2cd2935fwd-is",
+      "type_key": "camera",
+      "name": "DS-2CD2935FWD-IS",
+      "manufacturer": "Hikvision",
+      "model": "DS-2CD2935FWD-IS",
+      "lifecycle_status": "verified",
+      "schema_version": "1.0",
+      "updated_at": "2026-03-12T13:30:36.788937+00:00",
+      "updated_by": "catalog-importer",
+      "power_consumption_watts": null,
+      "resolution": null,
+      "storage_capacity_gb": null,
+      "bandwidth_requires_mbps": null,
+      "ports": [
+        {
+          "name": "ETH1",
+          "port_type": "ethernet",
+          "speed_mbps": 1000,
+          "power_watts": null
+        },
+        {
+          "name": "POE",
+          "port_type": "power",
+          "speed_mbps": null,
+          "power_watts": null
+        },
+        {
+          "name": "PWR",
+          "port_type": "power",
+          "speed_mbps": null,
+          "power_watts": null
+        },
+        {
+          "name": "ALARM_IN",
+          "port_type": "serial",
+          "speed_mbps": null,
+          "power_watts": null
+        },
+        {
+          "name": "ALARM_OUT",
+          "port_type": "serial",
+          "speed_mbps": null,
+          "power_watts": null
+        },
+        {
+          "name": "AUDIO_IN",
+          "port_type": "serial",
+          "speed_mbps": null,
+          "power_watts": null
+        },
+        {
+          "name": "AUDIO_OUT",
+          "port_type": "serial",
+          "speed_mbps": null,
+          "power_watts": null
+        }
+      ],
+      "status_history": []
+    },
+    {
+      "id": "3c1599ac-63b8-4b49-932d-9197001c003d",
+      "key": "ds-2cd2t85g1-i8",
+      "type_key": "camera",
+      "name": "DS-2CD2T85G1-I8",
+      "manufacturer": "Hikvision",
+      "model": "DS-2CD2T85G1-I8",
+      "lifecycle_status": "verified",
+      "schema_version": "1.0",
+      "updated_at": "2026-03-12T13:30:39.187961+00:00",
+      "updated_by": "catalog-importer",
+      "power_consumption_watts": null,
+      "resolution": null,
+      "storage_capacity_gb": null,
+      "bandwidth_requires_mbps": null,
+      "ports": [
+        {
+          "name": "ETH1",
+          "port_type": "ethernet",
+          "speed_mbps": 1000,
+          "power_watts": null
+        },
+        {
+          "name": "POE",
+          "port_type": "power",
+          "speed_mbps": null,
+          "power_watts": null
+        },
+        {
+          "name": "PWR",
+          "port_type": "power",
+          "speed_mbps": null,
+          "power_watts": null
+        },
+        {
+          "name": "ALARM_OUT",
+          "port_type": "serial",
+          "speed_mbps": null,
+          "power_watts": null
+        },
+        {
+          "name": "AUDIO_IN",
+          "port_type": "serial",
+          "speed_mbps": null,
+          "power_watts": null
+        }
+      ],
+      "status_history": []
+    },
+    {
+      "id": "7cc713ff-c958-4ea0-a4c3-52c73217ac16",
+      "key": "ds-2cd2125fwd-is",
+      "type_key": "camera",
+      "name": "DS-2CD2125FWD-IS",
+      "manufacturer": "Hikvision",
+      "model": "DS-2CD2125FWD-IS",
+      "lifecycle_status": "verified",
+      "schema_version": "1.0",
+      "updated_at": "2026-03-12T13:30:42.043664+00:00",
+      "updated_by": "catalog-importer",
+      "power_consumption_watts": null,
+      "resolution": null,
+      "storage_capacity_gb": null,
+      "bandwidth_requires_mbps": null,
+      "ports": [
+        {
+          "name": "ETH1",
+          "port_type": "ethernet",
+          "speed_mbps": 1000,
+          "power_watts": null
+        },
+        {
+          "name": "POE",
+          "port_type": "power",
+          "speed_mbps": null,
+          "power_watts": null
+        },
+        {
+          "name": "PWR",
+          "port_type": "power",
+          "speed_mbps": null,
+          "power_watts": null
+        },
+        {
+          "name": "ALARM_IN",
+          "port_type": "serial",
+          "speed_mbps": null,
+          "power_watts": null
+        },
+        {
+          "name": "AUDIO_IN",
+          "port_type": "serial",
+          "speed_mbps": null,
+          "power_watts": null
+        }
+      ],
+      "status_history": []
+    },
+    {
+      "id": "bf80758c-cc02-45b6-88bf-15792de0aa90",
+      "key": "ds-2cd2365g1-i",
+      "type_key": "camera",
+      "name": "DS-2CD2365G1-I",
+      "manufacturer": "Hikvision",
+      "model": "DS-2CD2365G1-I",
+      "lifecycle_status": "verified",
+      "schema_version": "1.0",
+      "updated_at": "2026-03-12T13:30:45.946526+00:00",
+      "updated_by": "catalog-importer",
+      "power_consumption_watts": null,
+      "resolution": null,
+      "storage_capacity_gb": null,
+      "bandwidth_requires_mbps": null,
+      "ports": [
+        {
+          "name": "ETH1",
+          "port_type": "ethernet",
+          "speed_mbps": 1000,
+          "power_watts": null
+        },
+        {
+          "name": "POE",
+          "port_type": "power",
+          "speed_mbps": null,
+          "power_watts": null
+        },
+        {
+          "name": "PWR",
+          "port_type": "power",
+          "speed_mbps": null,
+          "power_watts": null
+        },
+        {
+          "name": "ALARM_OUT",
+          "port_type": "serial",
+          "speed_mbps": null,
+          "power_watts": null
+        },
+        {
+          "name": "AUDIO_IN",
+          "port_type": "serial",
+          "speed_mbps": null,
+          "power_watts": null
+        }
+      ],
+      "status_history": []
+    },
+    {
+      "id": "8263cb4d-a6df-4f29-87de-12ec8d871df4",
+      "key": "ds-2cd2t25fwd-i5",
+      "type_key": "camera",
+      "name": "DS-2CD2T25FWD-I5",
+      "manufacturer": "Hikvision",
+      "model": "DS-2CD2T25FWD-I5",
+      "lifecycle_status": "verified",
+      "schema_version": "1.0",
+      "updated_at": "2026-03-12T13:30:49.308684+00:00",
+      "updated_by": "catalog-importer",
+      "power_consumption_watts": null,
+      "resolution": null,
+      "storage_capacity_gb": null,
+      "bandwidth_requires_mbps": null,
+      "ports": [
+        {
+          "name": "ETH1",
+          "port_type": "ethernet",
+          "speed_mbps": 1000,
+          "power_watts": null
+        },
+        {
+          "name": "POE",
+          "port_type": "power",
+          "speed_mbps": null,
+          "power_watts": null
+        },
+        {
+          "name": "PWR",
+          "port_type": "power",
+          "speed_mbps": null,
+          "power_watts": null
+        },
+        {
+          "name": "AUDIO_IN",
+          "port_type": "serial",
+          "speed_mbps": null,
+          "power_watts": null
+        }
+      ],
+      "status_history": []
+    },
+    {
+      "id": "943e8f49-6881-40c5-a41d-4c0ae278e43d",
+      "key": "ds-2cd2143g0-is",
+      "type_key": "camera",
+      "name": "DS-2CD2143G0-IS",
+      "manufacturer": "Hikvision",
+      "model": "DS-2CD2143G0-IS",
+      "lifecycle_status": "verified",
+      "schema_version": "1.0",
+      "updated_at": "2026-03-12T13:30:52.816407+00:00",
+      "updated_by": "catalog-importer",
+      "power_consumption_watts": null,
+      "resolution": null,
+      "storage_capacity_gb": null,
+      "bandwidth_requires_mbps": null,
+      "ports": [
+        {
+          "name": "ETH1",
+          "port_type": "ethernet",
+          "speed_mbps": 1000,
+          "power_watts": null
+        },
+        {
+          "name": "POE",
+          "port_type": "power",
+          "speed_mbps": null,
+          "power_watts": null
+        },
+        {
+          "name": "PWR",
+          "port_type": "power",
+          "speed_mbps": null,
+          "power_watts": null
+        },
+        {
+          "name": "ALARM_IN",
+          "port_type": "serial",
+          "speed_mbps": null,
+          "power_watts": null
+        },
+        {
+          "name": "AUDIO_IN",
+          "port_type": "serial",
+          "speed_mbps": null,
+          "power_watts": null
+        }
+      ],
+      "status_history": []
+    },
+    {
+      "id": "b9a25692-5099-45e4-bd3f-00d583f59de9",
+      "key": "ds-2cd2021g1-i",
+      "type_key": "camera",
+      "name": "DS-2CD2021G1-I",
+      "manufacturer": "Hikvision",
+      "model": "DS-2CD2021G1-I",
+      "lifecycle_status": "verified",
+      "schema_version": "1.0",
+      "updated_at": "2026-03-12T13:30:57.474761+00:00",
+      "updated_by": "catalog-importer",
+      "power_consumption_watts": null,
+      "resolution": null,
+      "storage_capacity_gb": null,
+      "bandwidth_requires_mbps": null,
+      "ports": [
+        {
+          "name": "ETH1",
+          "port_type": "ethernet",
+          "speed_mbps": 1000,
+          "power_watts": null
+        },
+        {
+          "name": "POE",
+          "port_type": "power",
+          "speed_mbps": null,
+          "power_watts": null
+        },
+        {
+          "name": "PWR",
+          "port_type": "power",
+          "speed_mbps": null,
+          "power_watts": null
+        },
+        {
+          "name": "AUDIO_IN",
+          "port_type": "serial",
+          "speed_mbps": null,
+          "power_watts": null
+        }
+      ],
+      "status_history": []
+    },
+    {
+      "id": "4684e8a6-a51c-4150-9979-a421b48c5784",
+      "key": "ds-2cd2t83g0-i5",
+      "type_key": "camera",
+      "name": "DS-2CD2T83G0-I5",
+      "manufacturer": "Hikvision",
+      "model": "DS-2CD2T83G0-I5",
+      "lifecycle_status": "verified",
+      "schema_version": "1.0",
+      "updated_at": "2026-03-12T13:30:59.821536+00:00",
+      "updated_by": "catalog-importer",
+      "power_consumption_watts": null,
+      "resolution": null,
+      "storage_capacity_gb": null,
+      "bandwidth_requires_mbps": null,
+      "ports": [
+        {
+          "name": "ETH1",
+          "port_type": "ethernet",
+          "speed_mbps": 1000,
+          "power_watts": null
+        },
+        {
+          "name": "POE",
+          "port_type": "power",
+          "speed_mbps": null,
+          "power_watts": null
+        },
+        {
+          "name": "PWR",
+          "port_type": "power",
+          "speed_mbps": null,
+          "power_watts": null
+        },
+        {
+          "name": "AUDIO_IN",
+          "port_type": "serial",
+          "speed_mbps": null,
+          "power_watts": null
+        }
+      ],
+      "status_history": []
+    },
+    {
+      "id": "cc9f9997-684d-4103-8faf-840b1540f3b2",
+      "key": "ds-2cd2643g1-izs",
+      "type_key": "camera",
+      "name": "DS-2CD2643G1-IZS",
+      "manufacturer": "Hikvision",
+      "model": "DS-2CD2643G1-IZS",
+      "lifecycle_status": "verified",
+      "schema_version": "1.0",
+      "updated_at": "2026-03-12T13:31:03.413139+00:00",
+      "updated_by": "catalog-importer",
+      "power_consumption_watts": null,
+      "resolution": null,
+      "storage_capacity_gb": null,
+      "bandwidth_requires_mbps": null,
+      "ports": [
+        {
+          "name": "ETH1",
+          "port_type": "ethernet",
+          "speed_mbps": 1000,
+          "power_watts": null
+        },
+        {
+          "name": "POE",
+          "port_type": "power",
+          "speed_mbps": null,
+          "power_watts": null
+        },
+        {
+          "name": "PWR",
+          "port_type": "power",
+          "speed_mbps": null,
+          "power_watts": null
+        },
+        {
+          "name": "ALARM_IN",
+          "port_type": "serial",
+          "speed_mbps": null,
+          "power_watts": null
+        },
+        {
+          "name": "ALARM_OUT",
+          "port_type": "serial",
+          "speed_mbps": null,
+          "power_watts": null
+        },
+        {
+          "name": "AUDIO_IN",
+          "port_type": "serial",
+          "speed_mbps": null,
+          "power_watts": null
+        }
+      ],
+      "status_history": []
+    },
+    {
+      "id": "be7a5b41-292d-4bb6-b184-cf997d2e75af",
+      "key": "ds-1273zj-130b-trl",
+      "type_key": "camera",
+      "name": "DS-1273ZJ-130B-TRL",
+      "manufacturer": "Hikvision",
+      "model": "DS-1273ZJ-130B-TRL",
+      "lifecycle_status": "verified",
+      "schema_version": "1.0",
+      "updated_at": "2026-03-12T13:34:46.457015+00:00",
+      "updated_by": "catalog-importer",
+      "power_consumption_watts": null,
+      "resolution": null,
+      "storage_capacity_gb": null,
+      "bandwidth_requires_mbps": null,
+      "ports": [
+        {
+          "name": "ETH1",
+          "port_type": "ethernet",
+          "speed_mbps": 1000,
+          "power_watts": null
+        },
+        {
+          "name": "POE",
+          "port_type": "power",
+          "speed_mbps": null,
+          "power_watts": null
+        },
+        {
+          "name": "PWR",
+          "port_type": "power",
+          "speed_mbps": null,
+          "power_watts": null
+        },
+        {
+          "name": "AUDIO_IN",
+          "port_type": "serial",
+          "speed_mbps": null,
+          "power_watts": null
+        }
+      ],
+      "status_history": []
+    },
+    {
+      "id": "33c606f0-c1da-4fc8-866b-708b133f66ed",
+      "key": "ds-2cd2723g1-izs",
+      "type_key": "camera",
+      "name": "DS-2CD2723G1-IZS",
+      "manufacturer": "Hikvision",
+      "model": "DS-2CD2723G1-IZS",
+      "lifecycle_status": "verified",
+      "schema_version": "1.0",
+      "updated_at": "2026-03-12T13:31:09.920819+00:00",
+      "updated_by": "catalog-importer",
+      "power_consumption_watts": null,
+      "resolution": null,
+      "storage_capacity_gb": null,
+      "bandwidth_requires_mbps": null,
+      "ports": [
+        {
+          "name": "ETH1",
+          "port_type": "ethernet",
+          "speed_mbps": 1000,
+          "power_watts": null
+        },
+        {
+          "name": "POE",
+          "port_type": "power",
+          "speed_mbps": null,
+          "power_watts": null
+        },
+        {
+          "name": "PWR",
+          "port_type": "power",
+          "speed_mbps": null,
+          "power_watts": null
+        },
+        {
+          "name": "ALARM_IN",
+          "port_type": "serial",
+          "speed_mbps": null,
+          "power_watts": null
+        },
+        {
+          "name": "ALARM_OUT",
+          "port_type": "serial",
+          "speed_mbps": null,
+          "power_watts": null
+        },
+        {
+          "name": "AUDIO_IN",
+          "port_type": "serial",
+          "speed_mbps": null,
+          "power_watts": null
+        }
+      ],
+      "status_history": []
+    },
+    {
+      "id": "75732307-90a7-4a44-872b-ead7d35e623f",
+      "key": "ds-2cd2423g0-iw",
+      "type_key": "camera",
+      "name": "DS-2CD2423G0-IW",
+      "manufacturer": "Hikvision",
+      "model": "DS-2CD2423G0-IW",
+      "lifecycle_status": "verified",
+      "schema_version": "1.0",
+      "updated_at": "2026-03-12T13:31:17.101392+00:00",
+      "updated_by": "catalog-importer",
+      "power_consumption_watts": null,
+      "resolution": null,
+      "storage_capacity_gb": null,
+      "bandwidth_requires_mbps": null,
+      "ports": [
+        {
+          "name": "ETH1",
+          "port_type": "ethernet",
+          "speed_mbps": 1000,
+          "power_watts": null
+        },
+        {
+          "name": "POE",
+          "port_type": "power",
+          "speed_mbps": null,
+          "power_watts": null
+        },
+        {
+          "name": "PWR",
+          "port_type": "power",
+          "speed_mbps": null,
+          "power_watts": null
+        },
+        {
+          "name": "AUDIO_IN",
+          "port_type": "serial",
+          "speed_mbps": null,
+          "power_watts": null
+        }
+      ],
+      "status_history": []
+    },
+    {
+      "id": "1e41adf5-308b-40c7-a786-33c4797e0ab4",
+      "key": "ds-2cd2783g1-izs",
+      "type_key": "camera",
+      "name": "DS-2CD2783G1-IZS",
+      "manufacturer": "Hikvision",
+      "model": "DS-2CD2783G1-IZS",
+      "lifecycle_status": "verified",
+      "schema_version": "1.0",
+      "updated_at": "2026-03-12T13:31:20.222467+00:00",
+      "updated_by": "catalog-importer",
+      "power_consumption_watts": null,
+      "resolution": null,
+      "storage_capacity_gb": null,
+      "bandwidth_requires_mbps": null,
+      "ports": [
+        {
+          "name": "ETH1",
+          "port_type": "ethernet",
+          "speed_mbps": 1000,
+          "power_watts": null
+        },
+        {
+          "name": "POE",
+          "port_type": "power",
+          "speed_mbps": null,
+          "power_watts": null
+        },
+        {
+          "name": "PWR",
+          "port_type": "power",
+          "speed_mbps": null,
+          "power_watts": null
+        },
+        {
+          "name": "ALARM_IN",
+          "port_type": "serial",
+          "speed_mbps": null,
+          "power_watts": null
+        },
+        {
+          "name": "ALARM_OUT",
+          "port_type": "serial",
+          "speed_mbps": null,
+          "power_watts": null
+        },
+        {
+          "name": "AUDIO_IN",
+          "port_type": "serial",
+          "speed_mbps": null,
+          "power_watts": null
+        }
+      ],
+      "status_history": []
+    },
+    {
+      "id": "e5233113-118d-415e-a666-8f0baa7fedef",
+      "key": "ds-2cd2t43g0-i5",
+      "type_key": "camera",
+      "name": "DS-2CD2T43G0-I5",
+      "manufacturer": "Hikvision",
+      "model": "DS-2CD2T43G0-I5",
+      "lifecycle_status": "verified",
+      "schema_version": "1.0",
+      "updated_at": "2026-03-12T13:31:23.101058+00:00",
+      "updated_by": "catalog-importer",
+      "power_consumption_watts": null,
+      "resolution": null,
+      "storage_capacity_gb": null,
+      "bandwidth_requires_mbps": null,
+      "ports": [
+        {
+          "name": "ETH1",
+          "port_type": "ethernet",
+          "speed_mbps": 1000,
+          "power_watts": null
+        },
+        {
+          "name": "POE",
+          "port_type": "power",
+          "speed_mbps": null,
+          "power_watts": null
+        },
+        {
+          "name": "PWR",
+          "port_type": "power",
+          "speed_mbps": null,
+          "power_watts": null
+        },
+        {
+          "name": "AUDIO_IN",
+          "port_type": "serial",
+          "speed_mbps": null,
+          "power_watts": null
+        }
+      ],
+      "status_history": []
+    },
+    {
+      "id": "edc4876a-0a3d-4ed2-a4f0-758049434ab2",
+      "key": "ds-2cd2123g0-is",
+      "type_key": "camera",
+      "name": "DS-2CD2123G0-IS",
+      "manufacturer": "Hikvision",
+      "model": "DS-2CD2123G0-IS",
+      "lifecycle_status": "verified",
+      "schema_version": "1.0",
+      "updated_at": "2026-03-12T13:31:25.578004+00:00",
+      "updated_by": "catalog-importer",
+      "power_consumption_watts": null,
+      "resolution": null,
+      "storage_capacity_gb": null,
+      "bandwidth_requires_mbps": null,
+      "ports": [
+        {
+          "name": "ETH1",
+          "port_type": "ethernet",
+          "speed_mbps": 1000,
+          "power_watts": null
+        },
+        {
+          "name": "POE",
+          "port_type": "power",
+          "speed_mbps": null,
+          "power_watts": null
+        },
+        {
+          "name": "PWR",
+          "port_type": "power",
+          "speed_mbps": null,
+          "power_watts": null
+        },
+        {
+          "name": "ALARM_IN",
+          "port_type": "serial",
+          "speed_mbps": null,
+          "power_watts": null
+        },
+        {
+          "name": "ALARM_OUT",
+          "port_type": "serial",
+          "speed_mbps": null,
+          "power_watts": null
+        },
+        {
+          "name": "AUDIO_IN",
+          "port_type": "serial",
+          "speed_mbps": null,
+          "power_watts": null
+        }
+      ],
+      "status_history": []
+    },
+    {
+      "id": "513d4622-bf0f-4001-ab84-fe93f0b023b3",
+      "key": "ds-2cd2523g0-iws",
+      "type_key": "camera",
+      "name": "DS-2CD2523G0-IWS",
+      "manufacturer": "Hikvision",
+      "model": "DS-2CD2523G0-IWS",
+      "lifecycle_status": "verified",
+      "schema_version": "1.0",
+      "updated_at": "2026-03-12T13:31:31.361707+00:00",
+      "updated_by": "catalog-importer",
+      "power_consumption_watts": null,
+      "resolution": null,
+      "storage_capacity_gb": null,
+      "bandwidth_requires_mbps": null,
+      "ports": [
+        {
+          "name": "ETH1",
+          "port_type": "ethernet",
+          "speed_mbps": 1000,
+          "power_watts": null
+        },
+        {
+          "name": "POE",
+          "port_type": "power",
+          "speed_mbps": null,
+          "power_watts": null
+        },
+        {
+          "name": "PWR",
+          "port_type": "power",
+          "speed_mbps": null,
+          "power_watts": null
+        },
+        {
+          "name": "ALARM_IN",
+          "port_type": "serial",
+          "speed_mbps": null,
+          "power_watts": null
+        },
+        {
+          "name": "ALARM_OUT",
+          "port_type": "serial",
+          "speed_mbps": null,
+          "power_watts": null
+        },
+        {
+          "name": "AUDIO_IN",
+          "port_type": "serial",
+          "speed_mbps": null,
+          "power_watts": null
+        }
+      ],
+      "status_history": []
+    },
+    {
+      "id": "538d8c5c-41c6-46cf-93ce-9f39693b1572",
+      "key": "ds-2cd2183g0-is",
+      "type_key": "camera",
+      "name": "DS-2CD2183G0-IS",
+      "manufacturer": "Hikvision",
+      "model": "DS-2CD2183G0-IS",
+      "lifecycle_status": "verified",
+      "schema_version": "1.0",
+      "updated_at": "2026-03-12T13:31:36.469212+00:00",
+      "updated_by": "catalog-importer",
+      "power_consumption_watts": null,
+      "resolution": null,
+      "storage_capacity_gb": null,
+      "bandwidth_requires_mbps": null,
+      "ports": [
+        {
+          "name": "ETH1",
+          "port_type": "ethernet",
+          "speed_mbps": 1000,
+          "power_watts": null
+        },
+        {
+          "name": "POE",
+          "port_type": "power",
+          "speed_mbps": null,
+          "power_watts": null
+        },
+        {
+          "name": "PWR",
+          "port_type": "power",
+          "speed_mbps": null,
+          "power_watts": null
+        },
+        {
+          "name": "ALARM_IN",
+          "port_type": "serial",
+          "speed_mbps": null,
+          "power_watts": null
+        },
+        {
+          "name": "AUDIO_IN",
+          "port_type": "serial",
+          "speed_mbps": null,
+          "power_watts": null
+        }
+      ],
+      "status_history": []
+    },
+    {
+      "id": "894f9274-beb9-46ce-9660-234c706e3d23",
+      "key": "ds-2cd2621g0-izs",
+      "type_key": "camera",
+      "name": "DS-2CD2621G0-IZS",
+      "manufacturer": "Hikvision",
+      "model": "DS-2CD2621G0-IZS",
+      "lifecycle_status": "verified",
+      "schema_version": "1.0",
+      "updated_at": "2026-03-12T13:31:43.484680+00:00",
+      "updated_by": "catalog-importer",
+      "power_consumption_watts": null,
+      "resolution": null,
+      "storage_capacity_gb": null,
+      "bandwidth_requires_mbps": null,
+      "ports": [
+        {
+          "name": "ETH1",
+          "port_type": "ethernet",
+          "speed_mbps": 1000,
+          "power_watts": null
+        },
+        {
+          "name": "POE",
+          "port_type": "power",
+          "speed_mbps": null,
+          "power_watts": null
+        },
+        {
+          "name": "PWR",
+          "port_type": "power",
+          "speed_mbps": null,
+          "power_watts": null
+        },
+        {
+          "name": "ALARM_IN",
+          "port_type": "serial",
+          "speed_mbps": null,
+          "power_watts": null
+        },
+        {
+          "name": "ALARM_OUT",
+          "port_type": "serial",
+          "speed_mbps": null,
+          "power_watts": null
+        },
+        {
+          "name": "AUDIO_IN",
+          "port_type": "serial",
+          "speed_mbps": null,
+          "power_watts": null
+        }
+      ],
+      "status_history": []
+    },
+    {
+      "id": "bda1ff92-0d23-4e22-b0af-ba4c3416aef2",
+      "key": "ds-2cd2h25fwd-izs",
+      "type_key": "camera",
+      "name": "DS-2CD2H25FWD-IZS",
+      "manufacturer": "Hikvision",
+      "model": "DS-2CD2H25FWD-IZS",
+      "lifecycle_status": "verified",
+      "schema_version": "1.0",
+      "updated_at": "2026-03-12T13:31:46.654183+00:00",
+      "updated_by": "catalog-importer",
+      "power_consumption_watts": null,
+      "resolution": null,
+      "storage_capacity_gb": null,
+      "bandwidth_requires_mbps": null,
+      "ports": [
+        {
+          "name": "ETH1",
+          "port_type": "ethernet",
+          "speed_mbps": 1000,
+          "power_watts": null
+        },
+        {
+          "name": "POE",
+          "port_type": "power",
+          "speed_mbps": null,
+          "power_watts": null
+        },
+        {
+          "name": "PWR",
+          "port_type": "power",
+          "speed_mbps": null,
+          "power_watts": null
+        },
+        {
+          "name": "ALARM_IN",
+          "port_type": "serial",
+          "speed_mbps": null,
+          "power_watts": null
+        },
+        {
+          "name": "ALARM_OUT",
+          "port_type": "serial",
+          "speed_mbps": null,
+          "power_watts": null
+        },
+        {
+          "name": "AUDIO_IN",
+          "port_type": "serial",
+          "speed_mbps": null,
+          "power_watts": null
+        }
+      ],
+      "status_history": []
+    },
+    {
+      "id": "f482d22e-3906-45c0-9539-bfd5f1cfeda7",
+      "key": "ds-2cd2043g0-i",
+      "type_key": "camera",
+      "name": "DS-2CD2043G0-I",
+      "manufacturer": "Hikvision",
+      "model": "DS-2CD2043G0-I",
+      "lifecycle_status": "verified",
+      "schema_version": "1.0",
+      "updated_at": "2026-03-12T13:31:49.286319+00:00",
+      "updated_by": "catalog-importer",
+      "power_consumption_watts": null,
+      "resolution": null,
+      "storage_capacity_gb": null,
+      "bandwidth_requires_mbps": null,
+      "ports": [
+        {
+          "name": "ETH1",
+          "port_type": "ethernet",
+          "speed_mbps": 1000,
+          "power_watts": null
+        },
+        {
+          "name": "POE",
+          "port_type": "power",
+          "speed_mbps": null,
+          "power_watts": null
+        },
+        {
+          "name": "PWR",
+          "port_type": "power",
+          "speed_mbps": null,
+          "power_watts": null
+        },
+        {
+          "name": "AUDIO_IN",
+          "port_type": "serial",
+          "speed_mbps": null,
+          "power_watts": null
+        }
+      ],
+      "status_history": []
+    },
+    {
+      "id": "97598c0c-f9ab-4828-ac3d-fd0d7fdd0fcb",
+      "key": "ds-2cd2185g0-ims",
+      "type_key": "camera",
+      "name": "DS-2CD2185G0-IMS",
+      "manufacturer": "Hikvision",
+      "model": "DS-2CD2185G0-IMS",
+      "lifecycle_status": "verified",
+      "schema_version": "1.0",
+      "updated_at": "2026-03-12T13:31:55.334989+00:00",
+      "updated_by": "catalog-importer",
+      "power_consumption_watts": null,
+      "resolution": null,
+      "storage_capacity_gb": null,
+      "bandwidth_requires_mbps": null,
+      "ports": [
+        {
+          "name": "ETH1",
+          "port_type": "ethernet",
+          "speed_mbps": 1000,
+          "power_watts": null
+        },
+        {
+          "name": "POE",
+          "port_type": "power",
+          "speed_mbps": null,
+          "power_watts": null
+        },
+        {
+          "name": "PWR",
+          "port_type": "power",
+          "speed_mbps": null,
+          "power_watts": null
+        },
+        {
+          "name": "ALARM_IN",
+          "port_type": "serial",
+          "speed_mbps": null,
+          "power_watts": null
+        },
+        {
+          "name": "AUDIO_IN",
+          "port_type": "serial",
+          "speed_mbps": null,
+          "power_watts": null
+        }
+      ],
+      "status_history": []
+    },
+    {
+      "id": "f9217d21-75dd-4a21-814c-6a770e01fca3",
+      "key": "ds-2cd2025fwd-i",
+      "type_key": "camera",
+      "name": "DS-2CD2025FWD-I",
+      "manufacturer": "Hikvision",
+      "model": "DS-2CD2025FWD-I",
+      "lifecycle_status": "verified",
+      "schema_version": "1.0",
+      "updated_at": "2026-03-12T13:31:57.327690+00:00",
+      "updated_by": "catalog-importer",
+      "power_consumption_watts": null,
+      "resolution": null,
+      "storage_capacity_gb": null,
+      "bandwidth_requires_mbps": null,
+      "ports": [
+        {
+          "name": "ETH1",
+          "port_type": "ethernet",
+          "speed_mbps": 1000,
+          "power_watts": null
+        },
+        {
+          "name": "POE",
+          "port_type": "power",
+          "speed_mbps": null,
+          "power_watts": null
+        },
+        {
+          "name": "PWR",
+          "port_type": "power",
+          "speed_mbps": null,
+          "power_watts": null
+        },
+        {
+          "name": "ALARM_OUT",
+          "port_type": "serial",
+          "speed_mbps": null,
+          "power_watts": null
+        },
+        {
+          "name": "AUDIO_IN",
+          "port_type": "serial",
+          "speed_mbps": null,
+          "power_watts": null
+        }
+      ],
+      "status_history": []
+    },
+    {
+      "id": "8dacbc66-523e-43c2-871c-7ee271d38912",
+      "key": "ds-2cd2083g0-i",
+      "type_key": "camera",
+      "name": "DS-2CD2083G0-I",
+      "manufacturer": "Hikvision",
+      "model": "DS-2CD2083G0-I",
+      "lifecycle_status": "verified",
+      "schema_version": "1.0",
+      "updated_at": "2026-03-12T13:31:59.757683+00:00",
+      "updated_by": "catalog-importer",
+      "power_consumption_watts": null,
+      "resolution": null,
+      "storage_capacity_gb": null,
+      "bandwidth_requires_mbps": null,
+      "ports": [
+        {
+          "name": "ETH1",
+          "port_type": "ethernet",
+          "speed_mbps": 1000,
+          "power_watts": null
+        },
+        {
+          "name": "POE",
+          "port_type": "power",
+          "speed_mbps": null,
+          "power_watts": null
+        },
+        {
+          "name": "PWR",
+          "port_type": "power",
+          "speed_mbps": null,
+          "power_watts": null
+        },
+        {
+          "name": "AUDIO_IN",
+          "port_type": "serial",
+          "speed_mbps": null,
+          "power_watts": null
+        }
+      ],
+      "status_history": []
+    },
+    {
+      "id": "e40f3822-f6b6-4788-97f8-1d01f8e6829b",
+      "key": "ds-2cd2821g0",
+      "type_key": "camera",
+      "name": "DS-2CD2821G0",
+      "manufacturer": "Hikvision",
+      "model": "DS-2CD2821G0",
+      "lifecycle_status": "verified",
+      "schema_version": "1.0",
+      "updated_at": "2026-03-12T13:32:01.807120+00:00",
+      "updated_by": "catalog-importer",
+      "power_consumption_watts": null,
+      "resolution": null,
+      "storage_capacity_gb": null,
+      "bandwidth_requires_mbps": null,
+      "ports": [
+        {
+          "name": "ETH1",
+          "port_type": "ethernet",
+          "speed_mbps": 1000,
+          "power_watts": null
+        },
+        {
+          "name": "POE",
+          "port_type": "power",
+          "speed_mbps": null,
+          "power_watts": null
+        },
+        {
+          "name": "PWR",
+          "port_type": "power",
+          "speed_mbps": null,
+          "power_watts": null
+        },
+        {
+          "name": "RS-485",
+          "port_type": "serial",
+          "speed_mbps": null,
+          "power_watts": null
+        },
+        {
+          "name": "ALARM_IN",
+          "port_type": "serial",
+          "speed_mbps": null,
+          "power_watts": null
+        },
+        {
+          "name": "AUDIO_IN",
+          "port_type": "serial",
+          "speed_mbps": null,
+          "power_watts": null
+        }
+      ],
+      "status_history": []
+    },
+    {
+      "id": "5d4ce900-999a-4b3a-b7b3-26c16d9c1023",
+      "key": "ds-2cd2023g0-i",
+      "type_key": "camera",
+      "name": "DS-2CD2023G0-I",
+      "manufacturer": "Hikvision",
+      "model": "DS-2CD2023G0-I",
+      "lifecycle_status": "verified",
+      "schema_version": "1.0",
+      "updated_at": "2026-03-12T13:32:04.002356+00:00",
+      "updated_by": "catalog-importer",
+      "power_consumption_watts": null,
+      "resolution": null,
+      "storage_capacity_gb": null,
+      "bandwidth_requires_mbps": null,
+      "ports": [
+        {
+          "name": "ETH1",
+          "port_type": "ethernet",
+          "speed_mbps": 1000,
+          "power_watts": null
+        },
+        {
+          "name": "POE",
+          "port_type": "power",
+          "speed_mbps": null,
+          "power_watts": null
+        },
+        {
+          "name": "PWR",
+          "port_type": "power",
+          "speed_mbps": null,
+          "power_watts": null
+        },
+        {
+          "name": "AUDIO_IN",
+          "port_type": "serial",
+          "speed_mbps": null,
+          "power_watts": null
+        }
+      ],
+      "status_history": []
+    },
+    {
+      "id": "405112f6-f6ad-4ca3-957d-300d1f9cd1f8",
+      "key": "ds-2cd2125g0-ims",
+      "type_key": "camera",
+      "name": "DS-2CD2125G0-IMS",
+      "manufacturer": "Hikvision",
+      "model": "DS-2CD2125G0-IMS",
+      "lifecycle_status": "verified",
+      "schema_version": "1.0",
+      "updated_at": "2026-03-12T13:32:06.942126+00:00",
+      "updated_by": "catalog-importer",
+      "power_consumption_watts": null,
+      "resolution": null,
+      "storage_capacity_gb": null,
+      "bandwidth_requires_mbps": null,
+      "ports": [
+        {
+          "name": "ETH1",
+          "port_type": "ethernet",
+          "speed_mbps": 1000,
+          "power_watts": null
+        },
+        {
+          "name": "POE",
+          "port_type": "power",
+          "speed_mbps": null,
+          "power_watts": null
+        },
+        {
+          "name": "PWR",
+          "port_type": "power",
+          "speed_mbps": null,
+          "power_watts": null
+        },
+        {
+          "name": "ALARM_IN",
+          "port_type": "serial",
+          "speed_mbps": null,
+          "power_watts": null
+        },
+        {
+          "name": "AUDIO_IN",
+          "port_type": "serial",
+          "speed_mbps": null,
+          "power_watts": null
+        }
+      ],
+      "status_history": []
+    },
+    {
+      "id": "6198949f-0d03-4ace-b1e3-cc93572a1282",
+      "key": "ds-2cd2123g0-iu",
+      "type_key": "camera",
+      "name": "DS-2CD2123G0-IU",
+      "manufacturer": "Hikvision",
+      "model": "DS-2CD2123G0-IU",
+      "lifecycle_status": "verified",
+      "schema_version": "1.0",
+      "updated_at": "2026-03-12T13:32:09.493390+00:00",
+      "updated_by": "catalog-importer",
+      "power_consumption_watts": null,
+      "resolution": null,
+      "storage_capacity_gb": null,
+      "bandwidth_requires_mbps": null,
+      "ports": [
+        {
+          "name": "ETH1",
+          "port_type": "ethernet",
+          "speed_mbps": 1000,
+          "power_watts": null
+        },
+        {
+          "name": "POE",
+          "port_type": "power",
+          "speed_mbps": null,
+          "power_watts": null
+        },
+        {
+          "name": "PWR",
+          "port_type": "power",
+          "speed_mbps": null,
+          "power_watts": null
+        },
+        {
+          "name": "AUDIO_IN",
+          "port_type": "serial",
+          "speed_mbps": null,
+          "power_watts": null
+        }
+      ],
+      "status_history": []
+    },
+    {
+      "id": "4a369338-54cb-40e5-88e4-32e88e6b6603",
+      "key": "ds-2cd2025fhwd-i",
+      "type_key": "camera",
+      "name": "DS-2CD2025FHWD-I",
+      "manufacturer": "Hikvision",
+      "model": "DS-2CD2025FHWD-I",
+      "lifecycle_status": "verified",
+      "schema_version": "1.0",
+      "updated_at": "2026-03-12T13:32:15.654216+00:00",
+      "updated_by": "catalog-importer",
+      "power_consumption_watts": null,
+      "resolution": null,
+      "storage_capacity_gb": null,
+      "bandwidth_requires_mbps": null,
+      "ports": [
+        {
+          "name": "ETH1",
+          "port_type": "ethernet",
+          "speed_mbps": 1000,
+          "power_watts": null
+        },
+        {
+          "name": "POE",
+          "port_type": "power",
+          "speed_mbps": null,
+          "power_watts": null
+        },
+        {
+          "name": "PWR",
+          "port_type": "power",
+          "speed_mbps": null,
+          "power_watts": null
+        },
+        {
+          "name": "ALARM_OUT",
+          "port_type": "serial",
+          "speed_mbps": null,
+          "power_watts": null
+        },
+        {
+          "name": "AUDIO_IN",
+          "port_type": "serial",
+          "speed_mbps": null,
+          "power_watts": null
+        }
+      ],
+      "status_history": []
+    },
+    {
+      "id": "91759150-f4ae-499c-a594-fdbb47db11b3",
+      "key": "ds-2cd2h45fwd-izs",
+      "type_key": "camera",
+      "name": "DS-2CD2H45FWD-IZS",
+      "manufacturer": "Hikvision",
+      "model": "DS-2CD2H45FWD-IZS",
+      "lifecycle_status": "verified",
+      "schema_version": "1.0",
+      "updated_at": "2026-03-12T13:32:17.664976+00:00",
+      "updated_by": "catalog-importer",
+      "power_consumption_watts": null,
+      "resolution": null,
+      "storage_capacity_gb": null,
+      "bandwidth_requires_mbps": null,
+      "ports": [
+        {
+          "name": "ETH1",
+          "port_type": "ethernet",
+          "speed_mbps": 1000,
+          "power_watts": null
+        },
+        {
+          "name": "POE",
+          "port_type": "power",
+          "speed_mbps": null,
+          "power_watts": null
+        },
+        {
+          "name": "PWR",
+          "port_type": "power",
+          "speed_mbps": null,
+          "power_watts": null
+        },
+        {
+          "name": "ALARM_IN",
+          "port_type": "serial",
+          "speed_mbps": null,
+          "power_watts": null
+        },
+        {
+          "name": "ALARM_OUT",
+          "port_type": "serial",
+          "speed_mbps": null,
+          "power_watts": null
+        },
+        {
+          "name": "AUDIO_IN",
+          "port_type": "serial",
+          "speed_mbps": null,
+          "power_watts": null
+        }
+      ],
+      "status_history": []
+    },
+    {
+      "id": "a34d45f0-6e7e-40e0-9363-734d0858e3ee",
+      "key": "ds-2cd2183g0-iu",
+      "type_key": "camera",
+      "name": "DS-2CD2183G0-IU",
+      "manufacturer": "Hikvision",
+      "model": "DS-2CD2183G0-IU",
+      "lifecycle_status": "verified",
+      "schema_version": "1.0",
+      "updated_at": "2026-03-12T13:32:19.804587+00:00",
+      "updated_by": "catalog-importer",
+      "power_consumption_watts": null,
+      "resolution": null,
+      "storage_capacity_gb": null,
+      "bandwidth_requires_mbps": null,
+      "ports": [
+        {
+          "name": "ETH1",
+          "port_type": "ethernet",
+          "speed_mbps": 1000,
+          "power_watts": null
+        },
+        {
+          "name": "POE",
+          "port_type": "power",
+          "speed_mbps": null,
+          "power_watts": null
+        },
+        {
+          "name": "PWR",
+          "port_type": "power",
+          "speed_mbps": null,
+          "power_watts": null
+        },
+        {
+          "name": "AUDIO_IN",
+          "port_type": "serial",
+          "speed_mbps": null,
+          "power_watts": null
+        }
+      ],
+      "status_history": []
+    },
+    {
+      "id": "c20f4a5a-e3b2-4dda-8f67-82256e8c545f",
+      "key": "ds-2cd2955fwd-is",
+      "type_key": "camera",
+      "name": "DS-2CD2955FWD-IS",
+      "manufacturer": "Hikvision",
+      "model": "DS-2CD2955FWD-IS",
+      "lifecycle_status": "verified",
+      "schema_version": "1.0",
+      "updated_at": "2026-03-12T13:32:22.515258+00:00",
+      "updated_by": "catalog-importer",
+      "power_consumption_watts": null,
+      "resolution": null,
+      "storage_capacity_gb": null,
+      "bandwidth_requires_mbps": null,
+      "ports": [
+        {
+          "name": "ETH1",
+          "port_type": "ethernet",
+          "speed_mbps": 1000,
+          "power_watts": null
+        },
+        {
+          "name": "POE",
+          "port_type": "power",
+          "speed_mbps": null,
+          "power_watts": null
+        },
+        {
+          "name": "PWR",
+          "port_type": "power",
+          "speed_mbps": null,
+          "power_watts": null
+        },
+        {
+          "name": "ALARM_IN",
+          "port_type": "serial",
+          "speed_mbps": null,
+          "power_watts": null
+        },
+        {
+          "name": "ALARM_OUT",
+          "port_type": "serial",
+          "speed_mbps": null,
+          "power_watts": null
+        },
+        {
+          "name": "AUDIO_IN",
+          "port_type": "serial",
+          "speed_mbps": null,
+          "power_watts": null
+        },
+        {
+          "name": "AUDIO_OUT",
+          "port_type": "serial",
+          "speed_mbps": null,
+          "power_watts": null
+        }
+      ],
+      "status_history": []
+    },
+    {
+      "id": "89623f96-976e-46dd-a6ff-4e1749926ef1",
+      "key": "ds-2cd2143g0-iu",
+      "type_key": "camera",
+      "name": "DS-2CD2143G0-IU",
+      "manufacturer": "Hikvision",
+      "model": "DS-2CD2143G0-IU",
+      "lifecycle_status": "verified",
+      "schema_version": "1.0",
+      "updated_at": "2026-03-12T13:32:24.805657+00:00",
+      "updated_by": "catalog-importer",
+      "power_consumption_watts": null,
+      "resolution": null,
+      "storage_capacity_gb": null,
+      "bandwidth_requires_mbps": null,
+      "ports": [
+        {
+          "name": "ETH1",
+          "port_type": "ethernet",
+          "speed_mbps": 1000,
+          "power_watts": null
+        },
+        {
+          "name": "POE",
+          "port_type": "power",
+          "speed_mbps": null,
+          "power_watts": null
+        },
+        {
+          "name": "PWR",
+          "port_type": "power",
+          "speed_mbps": null,
+          "power_watts": null
+        },
+        {
+          "name": "ALARM_IN",
+          "port_type": "serial",
+          "speed_mbps": null,
+          "power_watts": null
+        },
+        {
+          "name": "AUDIO_IN",
+          "port_type": "serial",
+          "speed_mbps": null,
+          "power_watts": null
+        }
+      ],
+      "status_history": []
+    },
+    {
+      "id": "5d0cc879-cf69-4538-9157-73b353ecea2b",
+      "key": "ds-2cd2625fwd-izs",
+      "type_key": "camera",
+      "name": "DS-2CD2625FWD-IZS",
+      "manufacturer": "Hikvision",
+      "model": "DS-2CD2625FWD-IZS",
+      "lifecycle_status": "verified",
+      "schema_version": "1.0",
+      "updated_at": "2026-03-12T13:32:27.101958+00:00",
+      "updated_by": "catalog-importer",
+      "power_consumption_watts": null,
+      "resolution": null,
+      "storage_capacity_gb": null,
+      "bandwidth_requires_mbps": null,
+      "ports": [
+        {
+          "name": "ETH1",
+          "port_type": "ethernet",
+          "speed_mbps": 1000,
+          "power_watts": null
+        },
+        {
+          "name": "POE",
+          "port_type": "power",
+          "speed_mbps": null,
+          "power_watts": null
+        },
+        {
+          "name": "PWR",
+          "port_type": "power",
+          "speed_mbps": null,
+          "power_watts": null
+        },
+        {
+          "name": "ALARM_IN",
+          "port_type": "serial",
+          "speed_mbps": null,
+          "power_watts": null
+        },
+        {
+          "name": "ALARM_OUT",
+          "port_type": "serial",
+          "speed_mbps": null,
+          "power_watts": null
+        },
+        {
+          "name": "AUDIO_IN",
+          "port_type": "serial",
+          "speed_mbps": null,
+          "power_watts": null
+        }
+      ],
+      "status_history": []
+    },
+    {
+      "id": "b642618e-8d16-4114-95c7-45445bb05144",
+      "key": "ds-2cd2345g0p-i",
+      "type_key": "camera",
+      "name": "DS-2CD2345G0P-I",
+      "manufacturer": "Hikvision",
+      "model": "DS-2CD2345G0P-I",
+      "lifecycle_status": "verified",
+      "schema_version": "1.0",
+      "updated_at": "2026-03-12T13:32:29.113001+00:00",
+      "updated_by": "catalog-importer",
+      "power_consumption_watts": null,
+      "resolution": null,
+      "storage_capacity_gb": null,
+      "bandwidth_requires_mbps": null,
+      "ports": [
+        {
+          "name": "ETH1",
+          "port_type": "ethernet",
+          "speed_mbps": 1000,
+          "power_watts": null
+        },
+        {
+          "name": "POE",
+          "port_type": "power",
+          "speed_mbps": null,
+          "power_watts": null
+        },
+        {
+          "name": "PWR",
+          "port_type": "power",
+          "speed_mbps": null,
+          "power_watts": null
+        },
+        {
+          "name": "ALARM_OUT",
+          "port_type": "serial",
+          "speed_mbps": null,
+          "power_watts": null
+        },
+        {
+          "name": "AUDIO_IN",
+          "port_type": "serial",
+          "speed_mbps": null,
+          "power_watts": null
+        }
+      ],
+      "status_history": []
+    },
+    {
+      "id": "880c4c47-771a-4dff-8eb9-8c53a1b812d8",
+      "key": "ds-2cd2421g0-iw",
+      "type_key": "camera",
+      "name": "DS-2CD2421G0-IW",
+      "manufacturer": "Hikvision",
+      "model": "DS-2CD2421G0-IW",
+      "lifecycle_status": "verified",
+      "schema_version": "1.0",
+      "updated_at": "2026-03-12T13:32:31.050951+00:00",
+      "updated_by": "catalog-importer",
+      "power_consumption_watts": null,
+      "resolution": null,
+      "storage_capacity_gb": null,
+      "bandwidth_requires_mbps": null,
+      "ports": [
+        {
+          "name": "ETH1",
+          "port_type": "ethernet",
+          "speed_mbps": 1000,
+          "power_watts": null
+        },
+        {
+          "name": "POE",
+          "port_type": "power",
+          "speed_mbps": null,
+          "power_watts": null
+        },
+        {
+          "name": "PWR",
+          "port_type": "power",
+          "speed_mbps": null,
+          "power_watts": null
+        },
+        {
+          "name": "AUDIO_IN",
+          "port_type": "serial",
+          "speed_mbps": null,
+          "power_watts": null
+        }
+      ],
+      "status_history": []
+    },
+    {
+      "id": "e0259c9e-fc4a-4371-9ebc-6bf9af08c32d",
+      "key": "ds-2cd2t45g0p-i",
+      "type_key": "camera",
+      "name": "DS-2CD2T45G0P-I",
+      "manufacturer": "Hikvision",
+      "model": "DS-2CD2T45G0P-I",
+      "lifecycle_status": "verified",
+      "schema_version": "1.0",
+      "updated_at": "2026-03-12T13:32:33.915420+00:00",
+      "updated_by": "catalog-importer",
+      "power_consumption_watts": null,
+      "resolution": null,
+      "storage_capacity_gb": null,
+      "bandwidth_requires_mbps": null,
+      "ports": [
+        {
+          "name": "ETH1",
+          "port_type": "ethernet",
+          "speed_mbps": 1000,
+          "power_watts": null
+        },
+        {
+          "name": "POE",
+          "port_type": "power",
+          "speed_mbps": null,
+          "power_watts": null
+        },
+        {
+          "name": "PWR",
+          "port_type": "power",
+          "speed_mbps": null,
+          "power_watts": null
+        },
+        {
+          "name": "ALARM_OUT",
+          "port_type": "serial",
+          "speed_mbps": null,
+          "power_watts": null
+        },
+        {
+          "name": "AUDIO_IN",
+          "port_type": "serial",
+          "speed_mbps": null,
+          "power_watts": null
+        }
+      ],
+      "status_history": []
+    },
+    {
+      "id": "5e8a2f33-8501-4294-9250-3880d644c186",
+      "key": "ds-2cd2325fwd-i",
+      "type_key": "camera",
+      "name": "DS-2CD2325FWD-I",
+      "manufacturer": "Hikvision",
+      "model": "DS-2CD2325FWD-I",
+      "lifecycle_status": "verified",
+      "schema_version": "1.0",
+      "updated_at": "2026-03-12T13:32:35.937839+00:00",
+      "updated_by": "catalog-importer",
+      "power_consumption_watts": null,
+      "resolution": null,
+      "storage_capacity_gb": null,
+      "bandwidth_requires_mbps": null,
+      "ports": [
+        {
+          "name": "ETH1",
+          "port_type": "ethernet",
+          "speed_mbps": 1000,
+          "power_watts": null
+        },
+        {
+          "name": "POE",
+          "port_type": "power",
+          "speed_mbps": null,
+          "power_watts": null
+        },
+        {
+          "name": "PWR",
+          "port_type": "power",
+          "speed_mbps": null,
+          "power_watts": null
+        },
+        {
+          "name": "ALARM_OUT",
+          "port_type": "serial",
+          "speed_mbps": null,
+          "power_watts": null
+        },
+        {
+          "name": "AUDIO_IN",
+          "port_type": "serial",
+          "speed_mbps": null,
+          "power_watts": null
+        }
+      ],
+      "status_history": []
+    },
+    {
+      "id": "ab9a109d-8521-4912-ae70-8f84785697b0",
+      "key": "ds-2cd2065g1-i",
+      "type_key": "camera",
+      "name": "DS-2CD2065G1-I",
+      "manufacturer": "Hikvision",
+      "model": "DS-2CD2065G1-I",
+      "lifecycle_status": "verified",
+      "schema_version": "1.0",
+      "updated_at": "2026-03-12T13:32:39.779858+00:00",
+      "updated_by": "catalog-importer",
+      "power_consumption_watts": null,
+      "resolution": null,
+      "storage_capacity_gb": null,
+      "bandwidth_requires_mbps": null,
+      "ports": [
+        {
+          "name": "ETH1",
+          "port_type": "ethernet",
+          "speed_mbps": 1000,
+          "power_watts": null
+        },
+        {
+          "name": "POE",
+          "port_type": "power",
+          "speed_mbps": null,
+          "power_watts": null
+        },
+        {
+          "name": "PWR",
+          "port_type": "power",
+          "speed_mbps": null,
+          "power_watts": null
+        },
+        {
+          "name": "ALARM_OUT",
+          "port_type": "serial",
+          "speed_mbps": null,
+          "power_watts": null
+        },
+        {
+          "name": "AUDIO_IN",
+          "port_type": "serial",
+          "speed_mbps": null,
+          "power_watts": null
+        }
+      ],
+      "status_history": []
+    },
+    {
+      "id": "1a0d61eb-c49b-4bd2-87b8-270fe210e0ba",
+      "key": "ds-2cd2h86g2-izs",
+      "type_key": "camera",
+      "name": "DS-2CD2H86G2-IZS",
+      "manufacturer": "Hikvision",
+      "model": "DS-2CD2H86G2-IZS",
+      "lifecycle_status": "verified",
+      "schema_version": "1.0",
+      "updated_at": "2026-03-12T13:32:45.959182+00:00",
+      "updated_by": "catalog-importer",
+      "power_consumption_watts": null,
+      "resolution": null,
+      "storage_capacity_gb": null,
+      "bandwidth_requires_mbps": null,
+      "ports": [
+        {
+          "name": "ETH1",
+          "port_type": "ethernet",
+          "speed_mbps": 1000,
+          "power_watts": null
+        },
+        {
+          "name": "POE",
+          "port_type": "power",
+          "speed_mbps": null,
+          "power_watts": null
+        },
+        {
+          "name": "PWR",
+          "port_type": "power",
+          "speed_mbps": null,
+          "power_watts": null
+        },
+        {
+          "name": "ALARM_IN",
+          "port_type": "serial",
+          "speed_mbps": null,
+          "power_watts": null
+        },
+        {
+          "name": "ALARM_OUT",
+          "port_type": "serial",
+          "speed_mbps": null,
+          "power_watts": null
+        },
+        {
+          "name": "AUDIO_IN",
+          "port_type": "serial",
+          "speed_mbps": null,
+          "power_watts": null
+        }
+      ],
+      "status_history": []
+    },
+    {
+      "id": "0aa763fe-201b-483c-87cd-b70bd2437e64",
+      "key": "ds-2cd2h46g2-izs",
+      "type_key": "camera",
+      "name": "DS-2CD2H46G2-IZS",
+      "manufacturer": "Hikvision",
+      "model": "DS-2CD2H46G2-IZS",
+      "lifecycle_status": "verified",
+      "schema_version": "1.0",
+      "updated_at": "2026-03-12T13:32:48.239158+00:00",
+      "updated_by": "catalog-importer",
+      "power_consumption_watts": null,
+      "resolution": null,
+      "storage_capacity_gb": null,
+      "bandwidth_requires_mbps": null,
+      "ports": [
+        {
+          "name": "ETH1",
+          "port_type": "ethernet",
+          "speed_mbps": 1000,
+          "power_watts": null
+        },
+        {
+          "name": "POE",
+          "port_type": "power",
+          "speed_mbps": null,
+          "power_watts": null
+        },
+        {
+          "name": "PWR",
+          "port_type": "power",
+          "speed_mbps": null,
+          "power_watts": null
+        },
+        {
+          "name": "ALARM_IN",
+          "port_type": "serial",
+          "speed_mbps": null,
+          "power_watts": null
+        },
+        {
+          "name": "AUDIO_IN",
+          "port_type": "serial",
+          "speed_mbps": null,
+          "power_watts": null
+        }
+      ],
+      "status_history": []
+    },
+    {
+      "id": "563a85f0-6056-4ed5-a0a6-6dbb67fe7b13",
+      "key": "ds-2cd2h26g2-izs",
+      "type_key": "camera",
+      "name": "DS-2CD2H26G2-IZS",
+      "manufacturer": "Hikvision",
+      "model": "DS-2CD2H26G2-IZS",
+      "lifecycle_status": "verified",
+      "schema_version": "1.0",
+      "updated_at": "2026-03-12T13:32:50.700832+00:00",
+      "updated_by": "catalog-importer",
+      "power_consumption_watts": null,
+      "resolution": null,
+      "storage_capacity_gb": null,
+      "bandwidth_requires_mbps": null,
+      "ports": [
+        {
+          "name": "ETH1",
+          "port_type": "ethernet",
+          "speed_mbps": 1000,
+          "power_watts": null
+        },
+        {
+          "name": "POE",
+          "port_type": "power",
+          "speed_mbps": null,
+          "power_watts": null
+        },
+        {
+          "name": "PWR",
+          "port_type": "power",
+          "speed_mbps": null,
+          "power_watts": null
+        },
+        {
+          "name": "ALARM_IN",
+          "port_type": "serial",
+          "speed_mbps": null,
+          "power_watts": null
+        },
+        {
+          "name": "ALARM_OUT",
+          "port_type": "serial",
+          "speed_mbps": null,
+          "power_watts": null
+        },
+        {
+          "name": "AUDIO_IN",
+          "port_type": "serial",
+          "speed_mbps": null,
+          "power_watts": null
+        }
+      ],
+      "status_history": []
+    },
+    {
+      "id": "ec5ed3a9-5223-478d-a4b7-2698b87c2e6a",
+      "key": "ds-2cd2546g2-iws",
+      "type_key": "camera",
+      "name": "DS-2CD2546G2-IWS",
+      "manufacturer": "Hikvision",
+      "model": "DS-2CD2546G2-IWS",
+      "lifecycle_status": "verified",
+      "schema_version": "1.0",
+      "updated_at": "2026-03-12T13:32:52.875863+00:00",
+      "updated_by": "catalog-importer",
+      "power_consumption_watts": null,
+      "resolution": null,
+      "storage_capacity_gb": null,
+      "bandwidth_requires_mbps": null,
+      "ports": [
+        {
+          "name": "ETH1",
+          "port_type": "ethernet",
+          "speed_mbps": 1000,
+          "power_watts": null
+        },
+        {
+          "name": "POE",
+          "port_type": "power",
+          "speed_mbps": null,
+          "power_watts": null
+        },
+        {
+          "name": "PWR",
+          "port_type": "power",
+          "speed_mbps": null,
+          "power_watts": null
+        },
+        {
+          "name": "ALARM_IN",
+          "port_type": "serial",
+          "speed_mbps": null,
+          "power_watts": null
+        },
+        {
+          "name": "AUDIO_IN",
+          "port_type": "serial",
+          "speed_mbps": null,
+          "power_watts": null
+        }
+      ],
+      "status_history": []
+    },
+    {
+      "id": "b4dd3545-ccb8-4429-9084-837c43b45dc2",
+      "key": "ds-2cd2526g2-is",
+      "type_key": "camera",
+      "name": "DS-2CD2526G2-IS",
+      "manufacturer": "Hikvision",
+      "model": "DS-2CD2526G2-IS",
+      "lifecycle_status": "verified",
+      "schema_version": "1.0",
+      "updated_at": "2026-03-12T13:32:56.423374+00:00",
+      "updated_by": "catalog-importer",
+      "power_consumption_watts": null,
+      "resolution": null,
+      "storage_capacity_gb": null,
+      "bandwidth_requires_mbps": null,
+      "ports": [
+        {
+          "name": "ETH1",
+          "port_type": "ethernet",
+          "speed_mbps": 1000,
+          "power_watts": null
+        },
+        {
+          "name": "POE",
+          "port_type": "power",
+          "speed_mbps": null,
+          "power_watts": null
+        },
+        {
+          "name": "PWR",
+          "port_type": "power",
+          "speed_mbps": null,
+          "power_watts": null
+        },
+        {
+          "name": "ALARM_IN",
+          "port_type": "serial",
+          "speed_mbps": null,
+          "power_watts": null
+        },
+        {
+          "name": "ALARM_OUT",
+          "port_type": "serial",
+          "speed_mbps": null,
+          "power_watts": null
+        },
+        {
+          "name": "AUDIO_IN",
+          "port_type": "serial",
+          "speed_mbps": null,
+          "power_watts": null
+        }
+      ],
+      "status_history": []
+    },
+    {
+      "id": "b41c502a-a590-41ac-9449-c5288251b551",
+      "key": "ds-2cd2643g2-izs",
+      "type_key": "camera",
+      "name": "DS-2CD2643G2-IZS",
+      "manufacturer": "Hikvision",
+      "model": "DS-2CD2643G2-IZS",
+      "lifecycle_status": "verified",
+      "schema_version": "1.0",
+      "updated_at": "2026-03-12T13:32:59.533286+00:00",
+      "updated_by": "catalog-importer",
+      "power_consumption_watts": null,
+      "resolution": null,
+      "storage_capacity_gb": null,
+      "bandwidth_requires_mbps": null,
+      "ports": [
+        {
+          "name": "ETH1",
+          "port_type": "ethernet",
+          "speed_mbps": 1000,
+          "power_watts": null
+        },
+        {
+          "name": "POE",
+          "port_type": "power",
+          "speed_mbps": null,
+          "power_watts": null
+        },
+        {
+          "name": "PWR",
+          "port_type": "power",
+          "speed_mbps": null,
+          "power_watts": null
+        },
+        {
+          "name": "AUDIO_IN",
+          "port_type": "serial",
+          "speed_mbps": null,
+          "power_watts": null
+        }
+      ],
+      "status_history": []
+    },
+    {
+      "id": "00038deb-01ba-41ea-a299-f2fcde3f5077",
+      "key": "ds-2cd2t43g2-2i",
+      "type_key": "camera",
+      "name": "DS-2CD2T43G2-2I",
+      "manufacturer": "Hikvision",
+      "model": "DS-2CD2T43G2-2I",
+      "lifecycle_status": "verified",
+      "schema_version": "1.0",
+      "updated_at": "2026-03-12T13:33:01.317026+00:00",
+      "updated_by": "catalog-importer",
+      "power_consumption_watts": null,
+      "resolution": null,
+      "storage_capacity_gb": null,
+      "bandwidth_requires_mbps": null,
+      "ports": [
+        {
+          "name": "ETH1",
+          "port_type": "ethernet",
+          "speed_mbps": 1000,
+          "power_watts": null
+        },
+        {
+          "name": "POE",
+          "port_type": "power",
+          "speed_mbps": null,
+          "power_watts": null
+        },
+        {
+          "name": "PWR",
+          "port_type": "power",
+          "speed_mbps": null,
+          "power_watts": null
+        },
+        {
+          "name": "AUDIO_IN",
+          "port_type": "serial",
+          "speed_mbps": null,
+          "power_watts": null
+        }
+      ],
+      "status_history": []
+    },
+    {
+      "id": "7ddf133d-71e2-449a-b86c-75c2437c5cce",
+      "key": "ds-2cd2043g2-iu",
+      "type_key": "camera",
+      "name": "DS-2CD2043G2-IU",
+      "manufacturer": "Hikvision",
+      "model": "DS-2CD2043G2-IU",
+      "lifecycle_status": "verified",
+      "schema_version": "1.0",
+      "updated_at": "2026-03-12T13:33:03.623246+00:00",
+      "updated_by": "catalog-importer",
+      "power_consumption_watts": null,
+      "resolution": null,
+      "storage_capacity_gb": null,
+      "bandwidth_requires_mbps": null,
+      "ports": [
+        {
+          "name": "ETH1",
+          "port_type": "ethernet",
+          "speed_mbps": 1000,
+          "power_watts": null
+        },
+        {
+          "name": "POE",
+          "port_type": "power",
+          "speed_mbps": null,
+          "power_watts": null
+        },
+        {
+          "name": "PWR",
+          "port_type": "power",
+          "speed_mbps": null,
+          "power_watts": null
+        },
+        {
+          "name": "AUDIO_IN",
+          "port_type": "serial",
+          "speed_mbps": null,
+          "power_watts": null
+        }
+      ],
+      "status_history": []
+    },
+    {
+      "id": "3c0834db-ff23-4aef-a15b-a5004bbdb712",
+      "key": "ds-2cd2h43g2-izs",
+      "type_key": "camera",
+      "name": "DS-2CD2H43G2-IZS",
+      "manufacturer": "Hikvision",
+      "model": "DS-2CD2H43G2-IZS",
+      "lifecycle_status": "verified",
+      "schema_version": "1.0",
+      "updated_at": "2026-03-12T13:33:06.518700+00:00",
+      "updated_by": "catalog-importer",
+      "power_consumption_watts": null,
+      "resolution": null,
+      "storage_capacity_gb": null,
+      "bandwidth_requires_mbps": null,
+      "ports": [
+        {
+          "name": "ETH1",
+          "port_type": "ethernet",
+          "speed_mbps": 1000,
+          "power_watts": null
+        },
+        {
+          "name": "POE",
+          "port_type": "power",
+          "speed_mbps": null,
+          "power_watts": null
+        },
+        {
+          "name": "PWR",
+          "port_type": "power",
+          "speed_mbps": null,
+          "power_watts": null
+        },
+        {
+          "name": "AUDIO_IN",
+          "port_type": "serial",
+          "speed_mbps": null,
+          "power_watts": null
+        }
+      ],
+      "status_history": []
+    },
+    {
+      "id": "666e6121-438e-4cf9-99a9-12a72628fd6a",
+      "key": "ds-2cd2123g2-is",
+      "type_key": "camera",
+      "name": "DS-2CD2123G2-IS",
+      "manufacturer": "Hikvision",
+      "model": "DS-2CD2123G2-IS",
+      "lifecycle_status": "verified",
+      "schema_version": "1.0",
+      "updated_at": "2026-03-12T13:33:09.530540+00:00",
+      "updated_by": "catalog-importer",
+      "power_consumption_watts": null,
+      "resolution": null,
+      "storage_capacity_gb": null,
+      "bandwidth_requires_mbps": null,
+      "ports": [
+        {
+          "name": "ETH1",
+          "port_type": "ethernet",
+          "speed_mbps": 1000,
+          "power_watts": null
+        },
+        {
+          "name": "POE",
+          "port_type": "power",
+          "speed_mbps": null,
+          "power_watts": null
+        },
+        {
+          "name": "PWR",
+          "port_type": "power",
+          "speed_mbps": null,
+          "power_watts": null
+        },
+        {
+          "name": "ALARM_IN",
+          "port_type": "serial",
+          "speed_mbps": null,
+          "power_watts": null
+        },
+        {
+          "name": "ALARM_OUT",
+          "port_type": "serial",
+          "speed_mbps": null,
+          "power_watts": null
+        },
+        {
+          "name": "AUDIO_IN",
+          "port_type": "serial",
+          "speed_mbps": null,
+          "power_watts": null
+        }
+      ],
+      "status_history": []
+    },
+    {
+      "id": "9426c4ba-6a72-491e-a730-0611f0ba023c",
+      "key": "ds-2cd2123g2-iu",
+      "type_key": "camera",
+      "name": "DS-2CD2123G2-IU",
+      "manufacturer": "Hikvision",
+      "model": "DS-2CD2123G2-IU",
+      "lifecycle_status": "verified",
+      "schema_version": "1.0",
+      "updated_at": "2026-03-12T13:33:13.201333+00:00",
+      "updated_by": "catalog-importer",
+      "power_consumption_watts": null,
+      "resolution": null,
+      "storage_capacity_gb": null,
+      "bandwidth_requires_mbps": null,
+      "ports": [
+        {
+          "name": "ETH1",
+          "port_type": "ethernet",
+          "speed_mbps": 1000,
+          "power_watts": null
+        },
+        {
+          "name": "POE",
+          "port_type": "power",
+          "speed_mbps": null,
+          "power_watts": null
+        },
+        {
+          "name": "PWR",
+          "port_type": "power",
+          "speed_mbps": null,
+          "power_watts": null
+        },
+        {
+          "name": "AUDIO_IN",
+          "port_type": "serial",
+          "speed_mbps": null,
+          "power_watts": null
+        }
+      ],
+      "status_history": []
+    },
+    {
+      "id": "0e71c59f-d877-4031-bca6-b8991d73d657",
+      "key": "ds-2cd2143g2-is",
+      "type_key": "camera",
+      "name": "DS-2CD2143G2-IS",
+      "manufacturer": "Hikvision",
+      "model": "DS-2CD2143G2-IS",
+      "lifecycle_status": "verified",
+      "schema_version": "1.0",
+      "updated_at": "2026-03-12T13:33:16.165495+00:00",
+      "updated_by": "catalog-importer",
+      "power_consumption_watts": null,
+      "resolution": null,
+      "storage_capacity_gb": null,
+      "bandwidth_requires_mbps": null,
+      "ports": [
+        {
+          "name": "ETH1",
+          "port_type": "ethernet",
+          "speed_mbps": 1000,
+          "power_watts": null
+        },
+        {
+          "name": "POE",
+          "port_type": "power",
+          "speed_mbps": null,
+          "power_watts": null
+        },
+        {
+          "name": "PWR",
+          "port_type": "power",
+          "speed_mbps": null,
+          "power_watts": null
+        },
+        {
+          "name": "ALARM_OUT",
+          "port_type": "serial",
+          "speed_mbps": null,
+          "power_watts": null
+        },
+        {
+          "name": "AUDIO_IN",
+          "port_type": "serial",
+          "speed_mbps": null,
+          "power_watts": null
+        }
+      ],
+      "status_history": []
+    },
+    {
+      "id": "4730c545-acc9-4c49-ad12-ec3632b8eaf7",
+      "key": "ds-2cd2343g2-iu",
+      "type_key": "camera",
+      "name": "DS-2CD2343G2-IU",
+      "manufacturer": "Hikvision",
+      "model": "DS-2CD2343G2-IU",
+      "lifecycle_status": "verified",
+      "schema_version": "1.0",
+      "updated_at": "2026-03-12T13:33:19.908743+00:00",
+      "updated_by": "catalog-importer",
+      "power_consumption_watts": null,
+      "resolution": null,
+      "storage_capacity_gb": null,
+      "bandwidth_requires_mbps": null,
+      "ports": [
+        {
+          "name": "ETH1",
+          "port_type": "ethernet",
+          "speed_mbps": 1000,
+          "power_watts": null
+        },
+        {
+          "name": "POE",
+          "port_type": "power",
+          "speed_mbps": null,
+          "power_watts": null
+        },
+        {
+          "name": "PWR",
+          "port_type": "power",
+          "speed_mbps": null,
+          "power_watts": null
+        },
+        {
+          "name": "AUDIO_IN",
+          "port_type": "serial",
+          "speed_mbps": null,
+          "power_watts": null
+        }
+      ],
+      "status_history": []
+    },
+    {
+      "id": "e832e65e-f0af-4e46-b8fe-7fd597601b0b",
+      "key": "ds-2cd2143g2-iu",
+      "type_key": "camera",
+      "name": "DS-2CD2143G2-IU",
+      "manufacturer": "Hikvision",
+      "model": "DS-2CD2143G2-IU",
+      "lifecycle_status": "verified",
+      "schema_version": "1.0",
+      "updated_at": "2026-03-12T13:33:23.151795+00:00",
+      "updated_by": "catalog-importer",
+      "power_consumption_watts": null,
+      "resolution": null,
+      "storage_capacity_gb": null,
+      "bandwidth_requires_mbps": null,
+      "ports": [
+        {
+          "name": "ETH1",
+          "port_type": "ethernet",
+          "speed_mbps": 1000,
+          "power_watts": null
+        },
+        {
+          "name": "POE",
+          "port_type": "power",
+          "speed_mbps": null,
+          "power_watts": null
+        },
+        {
+          "name": "PWR",
+          "port_type": "power",
+          "speed_mbps": null,
+          "power_watts": null
+        },
+        {
+          "name": "AUDIO_IN",
+          "port_type": "serial",
+          "speed_mbps": null,
+          "power_watts": null
+        }
+      ],
+      "status_history": []
+    },
+    {
+      "id": "3e381dfa-56ee-47e2-8f6c-2dfd43a83a5f",
+      "key": "ds-2cd2023g2-iu",
+      "type_key": "camera",
+      "name": "DS-2CD2023G2-IU",
+      "manufacturer": "Hikvision",
+      "model": "DS-2CD2023G2-IU",
+      "lifecycle_status": "verified",
+      "schema_version": "1.0",
+      "updated_at": "2026-03-12T13:33:31.087330+00:00",
+      "updated_by": "catalog-importer",
+      "power_consumption_watts": null,
+      "resolution": null,
+      "storage_capacity_gb": null,
+      "bandwidth_requires_mbps": null,
+      "ports": [
+        {
+          "name": "ETH1",
+          "port_type": "ethernet",
+          "speed_mbps": 1000,
+          "power_watts": null
+        },
+        {
+          "name": "POE",
+          "port_type": "power",
+          "speed_mbps": null,
+          "power_watts": null
+        },
+        {
+          "name": "PWR",
+          "port_type": "power",
+          "speed_mbps": null,
+          "power_watts": null
+        },
+        {
+          "name": "AUDIO_IN",
+          "port_type": "serial",
+          "speed_mbps": null,
+          "power_watts": null
+        }
+      ],
+      "status_history": []
+    },
+    {
+      "id": "461cc403-a851-4302-9fe4-83f55beb7bcc",
+      "key": "ds-2cd2623g2-izs",
+      "type_key": "camera",
+      "name": "DS-2CD2623G2-IZS",
+      "manufacturer": "Hikvision",
+      "model": "DS-2CD2623G2-IZS",
+      "lifecycle_status": "verified",
+      "schema_version": "1.0",
+      "updated_at": "2026-03-12T13:33:39.555580+00:00",
+      "updated_by": "catalog-importer",
+      "power_consumption_watts": null,
+      "resolution": null,
+      "storage_capacity_gb": null,
+      "bandwidth_requires_mbps": null,
+      "ports": [
+        {
+          "name": "ETH1",
+          "port_type": "ethernet",
+          "speed_mbps": 1000,
+          "power_watts": null
+        },
+        {
+          "name": "POE",
+          "port_type": "power",
+          "speed_mbps": null,
+          "power_watts": null
+        },
+        {
+          "name": "PWR",
+          "port_type": "power",
+          "speed_mbps": null,
+          "power_watts": null
+        },
+        {
+          "name": "ALARM_OUT",
+          "port_type": "serial",
+          "speed_mbps": null,
+          "power_watts": null
+        },
+        {
+          "name": "AUDIO_IN",
+          "port_type": "serial",
+          "speed_mbps": null,
+          "power_watts": null
+        }
+      ],
+      "status_history": []
+    },
+    {
+      "id": "c8ed8e15-8a3c-44cd-b5b9-81a384f02610",
+      "key": "ds-2cd2147g2-su",
+      "type_key": "camera",
+      "name": "DS-2CD2147G2-SU",
+      "manufacturer": "Hikvision",
+      "model": "DS-2CD2147G2-SU",
+      "lifecycle_status": "verified",
+      "schema_version": "1.0",
+      "updated_at": "2026-03-12T13:33:43.022812+00:00",
+      "updated_by": "catalog-importer",
+      "power_consumption_watts": null,
+      "resolution": null,
+      "storage_capacity_gb": null,
+      "bandwidth_requires_mbps": null,
+      "ports": [
+        {
+          "name": "ETH1",
+          "port_type": "ethernet",
+          "speed_mbps": 1000,
+          "power_watts": null
+        },
+        {
+          "name": "POE",
+          "port_type": "power",
+          "speed_mbps": null,
+          "power_watts": null
+        },
+        {
+          "name": "PWR",
+          "port_type": "power",
+          "speed_mbps": null,
+          "power_watts": null
+        },
+        {
+          "name": "ALARM_IN",
+          "port_type": "serial",
+          "speed_mbps": null,
+          "power_watts": null
+        },
+        {
+          "name": "AUDIO_IN",
+          "port_type": "serial",
+          "speed_mbps": null,
+          "power_watts": null
+        }
+      ],
+      "status_history": []
+    },
+    {
+      "id": "20870c28-99a8-458f-b163-b06058cd1c3c",
+      "key": "ds-2cd2t87g2-l",
+      "type_key": "camera",
+      "name": "DS-2CD2T87G2-L",
+      "manufacturer": "Hikvision",
+      "model": "DS-2CD2T87G2-L",
+      "lifecycle_status": "verified",
+      "schema_version": "1.0",
+      "updated_at": "2026-03-12T13:33:46.633205+00:00",
+      "updated_by": "catalog-importer",
+      "power_consumption_watts": null,
+      "resolution": null,
+      "storage_capacity_gb": null,
+      "bandwidth_requires_mbps": null,
+      "ports": [
+        {
+          "name": "ETH1",
+          "port_type": "ethernet",
+          "speed_mbps": 1000,
+          "power_watts": null
+        },
+        {
+          "name": "POE",
+          "port_type": "power",
+          "speed_mbps": null,
+          "power_watts": null
+        },
+        {
+          "name": "PWR",
+          "port_type": "power",
+          "speed_mbps": null,
+          "power_watts": null
+        },
+        {
+          "name": "AUDIO_IN",
+          "port_type": "serial",
+          "speed_mbps": null,
+          "power_watts": null
+        }
+      ],
+      "status_history": []
+    },
+    {
+      "id": "cacac3ec-92fd-4292-ae52-ef6a09eb6643",
+      "key": "ds-2cd2127g2-su",
+      "type_key": "camera",
+      "name": "DS-2CD2127G2-SU",
+      "manufacturer": "Hikvision",
+      "model": "DS-2CD2127G2-SU",
+      "lifecycle_status": "verified",
+      "schema_version": "1.0",
+      "updated_at": "2026-03-12T13:33:49.989359+00:00",
+      "updated_by": "catalog-importer",
+      "power_consumption_watts": null,
+      "resolution": null,
+      "storage_capacity_gb": null,
+      "bandwidth_requires_mbps": null,
+      "ports": [
+        {
+          "name": "ETH1",
+          "port_type": "ethernet",
+          "speed_mbps": 1000,
+          "power_watts": null
+        },
+        {
+          "name": "POE",
+          "port_type": "power",
+          "speed_mbps": null,
+          "power_watts": null
+        },
+        {
+          "name": "PWR",
+          "port_type": "power",
+          "speed_mbps": null,
+          "power_watts": null
+        },
+        {
+          "name": "ALARM_IN",
+          "port_type": "serial",
+          "speed_mbps": null,
+          "power_watts": null
+        },
+        {
+          "name": "ALARM_OUT",
+          "port_type": "serial",
+          "speed_mbps": null,
+          "power_watts": null
+        },
+        {
+          "name": "AUDIO_IN",
+          "port_type": "serial",
+          "speed_mbps": null,
+          "power_watts": null
+        }
+      ],
+      "status_history": []
+    },
+    {
+      "id": "f5916169-97e1-4eeb-8a62-75a5339f083e",
+      "key": "ds-2cd2087g2-lu",
+      "type_key": "camera",
+      "name": "DS-2CD2087G2-LU",
+      "manufacturer": "Hikvision",
+      "model": "DS-2CD2087G2-LU",
+      "lifecycle_status": "verified",
+      "schema_version": "1.0",
+      "updated_at": "2026-03-12T13:33:53.764799+00:00",
+      "updated_by": "catalog-importer",
+      "power_consumption_watts": null,
+      "resolution": null,
+      "storage_capacity_gb": null,
+      "bandwidth_requires_mbps": null,
+      "ports": [
+        {
+          "name": "ETH1",
+          "port_type": "ethernet",
+          "speed_mbps": 1000,
+          "power_watts": null
+        },
+        {
+          "name": "POE",
+          "port_type": "power",
+          "speed_mbps": null,
+          "power_watts": null
+        },
+        {
+          "name": "PWR",
+          "port_type": "power",
+          "speed_mbps": null,
+          "power_watts": null
+        },
+        {
+          "name": "AUDIO_IN",
+          "port_type": "serial",
+          "speed_mbps": null,
+          "power_watts": null
+        }
+      ],
+      "status_history": []
+    },
+    {
+      "id": "3708103b-4767-4c01-ba1f-4e000617a209",
+      "key": "ds-2cd2743g2-izs",
+      "type_key": "camera",
+      "name": "DS-2CD2743G2-IZS",
+      "manufacturer": "Hikvision",
+      "model": "DS-2CD2743G2-IZS",
+      "lifecycle_status": "verified",
+      "schema_version": "1.0",
+      "updated_at": "2026-03-12T13:33:57.506677+00:00",
+      "updated_by": "catalog-importer",
+      "power_consumption_watts": null,
+      "resolution": null,
+      "storage_capacity_gb": null,
+      "bandwidth_requires_mbps": null,
+      "ports": [
+        {
+          "name": "ETH1",
+          "port_type": "ethernet",
+          "speed_mbps": 1000,
+          "power_watts": null
+        },
+        {
+          "name": "POE",
+          "port_type": "power",
+          "speed_mbps": null,
+          "power_watts": null
+        },
+        {
+          "name": "PWR",
+          "port_type": "power",
+          "speed_mbps": null,
+          "power_watts": null
+        },
+        {
+          "name": "AUDIO_IN",
+          "port_type": "serial",
+          "speed_mbps": null,
+          "power_watts": null
+        }
+      ],
+      "status_history": []
+    },
+    {
+      "id": "c737c9a7-cdbf-4eba-b0c8-a914917ff008",
+      "key": "ds-2cd2723g2-izs",
+      "type_key": "camera",
+      "name": "DS-2CD2723G2-IZS",
+      "manufacturer": "Hikvision",
+      "model": "DS-2CD2723G2-IZS",
+      "lifecycle_status": "verified",
+      "schema_version": "1.0",
+      "updated_at": "2026-03-12T13:34:00.627408+00:00",
+      "updated_by": "catalog-importer",
+      "power_consumption_watts": null,
+      "resolution": null,
+      "storage_capacity_gb": null,
+      "bandwidth_requires_mbps": null,
+      "ports": [
+        {
+          "name": "ETH1",
+          "port_type": "ethernet",
+          "speed_mbps": 1000,
+          "power_watts": null
+        },
+        {
+          "name": "POE",
+          "port_type": "power",
+          "speed_mbps": null,
+          "power_watts": null
+        },
+        {
+          "name": "PWR",
+          "port_type": "power",
+          "speed_mbps": null,
+          "power_watts": null
+        },
+        {
+          "name": "ALARM_OUT",
+          "port_type": "serial",
+          "speed_mbps": null,
+          "power_watts": null
+        },
+        {
+          "name": "AUDIO_IN",
+          "port_type": "serial",
+          "speed_mbps": null,
+          "power_watts": null
+        }
+      ],
+      "status_history": []
+    },
+    {
+      "id": "51a13528-809d-424e-8ff8-242d5b95a9b4",
+      "key": "ds-2cd2163g2-is",
+      "type_key": "camera",
+      "name": "DS-2CD2163G2-IS",
+      "manufacturer": "Hikvision",
+      "model": "DS-2CD2163G2-IS",
+      "lifecycle_status": "verified",
+      "schema_version": "1.0",
+      "updated_at": "2026-03-12T13:34:03.758423+00:00",
+      "updated_by": "catalog-importer",
+      "power_consumption_watts": null,
+      "resolution": null,
+      "storage_capacity_gb": null,
+      "bandwidth_requires_mbps": null,
+      "ports": [
+        {
+          "name": "ETH1",
+          "port_type": "ethernet",
+          "speed_mbps": 1000,
+          "power_watts": null
+        },
+        {
+          "name": "POE",
+          "port_type": "power",
+          "speed_mbps": null,
+          "power_watts": null
+        },
+        {
+          "name": "PWR",
+          "port_type": "power",
+          "speed_mbps": null,
+          "power_watts": null
+        },
+        {
+          "name": "ALARM_IN",
+          "port_type": "serial",
+          "speed_mbps": null,
+          "power_watts": null
+        },
+        {
+          "name": "ALARM_OUT",
+          "port_type": "serial",
+          "speed_mbps": null,
+          "power_watts": null
+        },
+        {
+          "name": "AUDIO_IN",
+          "port_type": "serial",
+          "speed_mbps": null,
+          "power_watts": null
+        }
+      ],
+      "status_history": []
+    },
+    {
+      "id": "e4b1b06c-c117-4c26-8410-6ae52be0691c",
+      "key": "ds-2cd2183g2-iu",
+      "type_key": "camera",
+      "name": "DS-2CD2183G2-IU",
+      "manufacturer": "Hikvision",
+      "model": "DS-2CD2183G2-IU",
+      "lifecycle_status": "verified",
+      "schema_version": "1.0",
+      "updated_at": "2026-03-12T13:34:07.423246+00:00",
+      "updated_by": "catalog-importer",
+      "power_consumption_watts": null,
+      "resolution": null,
+      "storage_capacity_gb": null,
+      "bandwidth_requires_mbps": null,
+      "ports": [
+        {
+          "name": "ETH1",
+          "port_type": "ethernet",
+          "speed_mbps": 1000,
+          "power_watts": null
+        },
+        {
+          "name": "POE",
+          "port_type": "power",
+          "speed_mbps": null,
+          "power_watts": null
+        },
+        {
+          "name": "PWR",
+          "port_type": "power",
+          "speed_mbps": null,
+          "power_watts": null
+        },
+        {
+          "name": "AUDIO_IN",
+          "port_type": "serial",
+          "speed_mbps": null,
+          "power_watts": null
+        }
+      ],
+      "status_history": []
+    },
+    {
+      "id": "c1cc6b6d-6ff5-42ad-969f-f470d66dfe68",
+      "key": "ds-2cd2163g2-iu",
+      "type_key": "camera",
+      "name": "DS-2CD2163G2-IU",
+      "manufacturer": "Hikvision",
+      "model": "DS-2CD2163G2-IU",
+      "lifecycle_status": "verified",
+      "schema_version": "1.0",
+      "updated_at": "2026-03-12T13:34:10.389782+00:00",
+      "updated_by": "catalog-importer",
+      "power_consumption_watts": null,
+      "resolution": null,
+      "storage_capacity_gb": null,
+      "bandwidth_requires_mbps": null,
+      "ports": [
+        {
+          "name": "ETH1",
+          "port_type": "ethernet",
+          "speed_mbps": 1000,
+          "power_watts": null
+        },
+        {
+          "name": "POE",
+          "port_type": "power",
+          "speed_mbps": null,
+          "power_watts": null
+        },
+        {
+          "name": "PWR",
+          "port_type": "power",
+          "speed_mbps": null,
+          "power_watts": null
+        },
+        {
+          "name": "AUDIO_IN",
+          "port_type": "serial",
+          "speed_mbps": null,
+          "power_watts": null
+        }
+      ],
+      "status_history": []
+    },
+    {
+      "id": "99296f5f-7fcb-4596-9c9e-2ac55a69412c",
+      "key": "ds-2cd2083g2-iu",
+      "type_key": "camera",
+      "name": "DS-2CD2083G2-IU",
+      "manufacturer": "Hikvision",
+      "model": "DS-2CD2083G2-IU",
+      "lifecycle_status": "verified",
+      "schema_version": "1.0",
+      "updated_at": "2026-03-12T13:34:12.739437+00:00",
+      "updated_by": "catalog-importer",
+      "power_consumption_watts": null,
+      "resolution": null,
+      "storage_capacity_gb": null,
+      "bandwidth_requires_mbps": null,
+      "ports": [
+        {
+          "name": "ETH1",
+          "port_type": "ethernet",
+          "speed_mbps": 1000,
+          "power_watts": null
+        },
+        {
+          "name": "POE",
+          "port_type": "power",
+          "speed_mbps": null,
+          "power_watts": null
+        },
+        {
+          "name": "PWR",
+          "port_type": "power",
+          "speed_mbps": null,
+          "power_watts": null
+        },
+        {
+          "name": "AUDIO_IN",
+          "port_type": "serial",
+          "speed_mbps": null,
+          "power_watts": null
+        }
+      ],
+      "status_history": []
+    },
+    {
+      "id": "50216d78-690c-4c99-90b3-d1b107a909fe",
+      "key": "ds-2cd2663g2-izs",
+      "type_key": "camera",
+      "name": "DS-2CD2663G2-IZS",
+      "manufacturer": "Hikvision",
+      "model": "DS-2CD2663G2-IZS",
+      "lifecycle_status": "verified",
+      "schema_version": "1.0",
+      "updated_at": "2026-03-12T13:34:16.690544+00:00",
+      "updated_by": "catalog-importer",
+      "power_consumption_watts": null,
+      "resolution": null,
+      "storage_capacity_gb": null,
+      "bandwidth_requires_mbps": null,
+      "ports": [
+        {
+          "name": "ETH1",
+          "port_type": "ethernet",
+          "speed_mbps": 1000,
+          "power_watts": null
+        },
+        {
+          "name": "POE",
+          "port_type": "power",
+          "speed_mbps": null,
+          "power_watts": null
+        },
+        {
+          "name": "PWR",
+          "port_type": "power",
+          "speed_mbps": null,
+          "power_watts": null
+        },
+        {
+          "name": "ALARM_IN",
+          "port_type": "serial",
+          "speed_mbps": null,
+          "power_watts": null
+        },
+        {
+          "name": "ALARM_OUT",
+          "port_type": "serial",
+          "speed_mbps": null,
+          "power_watts": null
+        },
+        {
+          "name": "AUDIO_IN",
+          "port_type": "serial",
+          "speed_mbps": null,
+          "power_watts": null
+        }
+      ],
+      "status_history": []
+    },
+    {
+      "id": "d3e97b4e-678d-454a-ba5b-7aff62df2828",
+      "key": "ds-2cd2783g2-izs",
+      "type_key": "camera",
+      "name": "DS-2CD2783G2-IZS",
+      "manufacturer": "Hikvision",
+      "model": "DS-2CD2783G2-IZS",
+      "lifecycle_status": "verified",
+      "schema_version": "1.0",
+      "updated_at": "2026-03-12T13:34:20.718405+00:00",
+      "updated_by": "catalog-importer",
+      "power_consumption_watts": null,
+      "resolution": null,
+      "storage_capacity_gb": null,
+      "bandwidth_requires_mbps": null,
+      "ports": [
+        {
+          "name": "ETH1",
+          "port_type": "ethernet",
+          "speed_mbps": 1000,
+          "power_watts": null
+        },
+        {
+          "name": "POE",
+          "port_type": "power",
+          "speed_mbps": null,
+          "power_watts": null
+        },
+        {
+          "name": "PWR",
+          "port_type": "power",
+          "speed_mbps": null,
+          "power_watts": null
+        },
+        {
+          "name": "ALARM_IN",
+          "port_type": "serial",
+          "speed_mbps": null,
+          "power_watts": null
+        },
+        {
+          "name": "AUDIO_IN",
+          "port_type": "serial",
+          "speed_mbps": null,
+          "power_watts": null
+        }
+      ],
+      "status_history": []
+    },
+    {
+      "id": "7ded0925-9d45-4c98-99ca-1d7425a5422e",
+      "key": "ds-2cd2063g2-iu",
+      "type_key": "camera",
+      "name": "DS-2CD2063G2-IU",
+      "manufacturer": "Hikvision",
+      "model": "DS-2CD2063G2-IU",
+      "lifecycle_status": "verified",
+      "schema_version": "1.0",
+      "updated_at": "2026-03-12T13:34:24.071593+00:00",
+      "updated_by": "catalog-importer",
+      "power_consumption_watts": null,
+      "resolution": null,
+      "storage_capacity_gb": null,
+      "bandwidth_requires_mbps": null,
+      "ports": [
+        {
+          "name": "ETH1",
+          "port_type": "ethernet",
+          "speed_mbps": 1000,
+          "power_watts": null
+        },
+        {
+          "name": "POE",
+          "port_type": "power",
+          "speed_mbps": null,
+          "power_watts": null
+        },
+        {
+          "name": "PWR",
+          "port_type": "power",
+          "speed_mbps": null,
+          "power_watts": null
+        },
+        {
+          "name": "ALARM_OUT",
+          "port_type": "serial",
+          "speed_mbps": null,
+          "power_watts": null
+        },
+        {
+          "name": "AUDIO_IN",
+          "port_type": "serial",
+          "speed_mbps": null,
+          "power_watts": null
+        }
+      ],
+      "status_history": []
+    },
+    {
+      "id": "deb235ed-5fa8-4b16-84bb-0cc47c90bfcd",
+      "key": "ds-2cd2h83g2-izs",
+      "type_key": "camera",
+      "name": "DS-2CD2H83G2-IZS",
+      "manufacturer": "Hikvision",
+      "model": "DS-2CD2H83G2-IZS",
+      "lifecycle_status": "verified",
+      "schema_version": "1.0",
+      "updated_at": "2026-03-12T13:34:27.738910+00:00",
+      "updated_by": "catalog-importer",
+      "power_consumption_watts": null,
+      "resolution": null,
+      "storage_capacity_gb": null,
+      "bandwidth_requires_mbps": null,
+      "ports": [
+        {
+          "name": "ETH1",
+          "port_type": "ethernet",
+          "speed_mbps": 1000,
+          "power_watts": null
+        },
+        {
+          "name": "POE",
+          "port_type": "power",
+          "speed_mbps": null,
+          "power_watts": null
+        },
+        {
+          "name": "PWR",
+          "port_type": "power",
+          "speed_mbps": null,
+          "power_watts": null
+        },
+        {
+          "name": "ALARM_IN",
+          "port_type": "serial",
+          "speed_mbps": null,
+          "power_watts": null
+        },
+        {
+          "name": "AUDIO_IN",
+          "port_type": "serial",
+          "speed_mbps": null,
+          "power_watts": null
+        }
+      ],
+      "status_history": []
+    },
+    {
+      "id": "52bea505-bd47-4021-b983-7da96f2af7ef",
+      "key": "ds-2cd2683g2-izs",
+      "type_key": "camera",
+      "name": "DS-2CD2683G2-IZS",
+      "manufacturer": "Hikvision",
+      "model": "DS-2CD2683G2-IZS",
+      "lifecycle_status": "verified",
+      "schema_version": "1.0",
+      "updated_at": "2026-03-12T13:34:30.539464+00:00",
+      "updated_by": "catalog-importer",
+      "power_consumption_watts": null,
+      "resolution": null,
+      "storage_capacity_gb": null,
+      "bandwidth_requires_mbps": null,
+      "ports": [
+        {
+          "name": "ETH1",
+          "port_type": "ethernet",
+          "speed_mbps": 1000,
+          "power_watts": null
+        },
+        {
+          "name": "POE",
+          "port_type": "power",
+          "speed_mbps": null,
+          "power_watts": null
+        },
+        {
+          "name": "PWR",
+          "port_type": "power",
+          "speed_mbps": null,
+          "power_watts": null
+        },
+        {
+          "name": "ALARM_IN",
+          "port_type": "serial",
+          "speed_mbps": null,
+          "power_watts": null
+        },
+        {
+          "name": "AUDIO_IN",
+          "port_type": "serial",
+          "speed_mbps": null,
+          "power_watts": null
+        }
+      ],
+      "status_history": []
+    },
+    {
+      "id": "4a3c8745-a263-4ae6-b0d6-628358bcda5b",
+      "key": "ds-2cd2183g2-is",
+      "type_key": "camera",
+      "name": "DS-2CD2183G2-IS",
+      "manufacturer": "Hikvision",
+      "model": "DS-2CD2183G2-IS",
+      "lifecycle_status": "verified",
+      "schema_version": "1.0",
+      "updated_at": "2026-03-12T13:34:33.475376+00:00",
+      "updated_by": "catalog-importer",
+      "power_consumption_watts": null,
+      "resolution": null,
+      "storage_capacity_gb": null,
+      "bandwidth_requires_mbps": null,
+      "ports": [
+        {
+          "name": "ETH1",
+          "port_type": "ethernet",
+          "speed_mbps": 1000,
+          "power_watts": null
+        },
+        {
+          "name": "POE",
+          "port_type": "power",
+          "speed_mbps": null,
+          "power_watts": null
+        },
+        {
+          "name": "PWR",
+          "port_type": "power",
+          "speed_mbps": null,
+          "power_watts": null
+        },
+        {
+          "name": "ALARM_IN",
+          "port_type": "serial",
+          "speed_mbps": null,
+          "power_watts": null
+        },
+        {
+          "name": "ALARM_OUT",
+          "port_type": "serial",
+          "speed_mbps": null,
+          "power_watts": null
+        },
+        {
+          "name": "AUDIO_IN",
+          "port_type": "serial",
+          "speed_mbps": null,
+          "power_watts": null
+        }
+      ],
+      "status_history": []
+    },
+    {
+      "id": "f4bc16e1-5de5-4120-9987-acef3c9726d5",
+      "key": "ds-2cd2763g2-izs",
+      "type_key": "camera",
+      "name": "DS-2CD2763G2-IZS",
+      "manufacturer": "Hikvision",
+      "model": "DS-2CD2763G2-IZS",
+      "lifecycle_status": "verified",
+      "schema_version": "1.0",
+      "updated_at": "2026-03-12T13:34:37.402099+00:00",
+      "updated_by": "catalog-importer",
+      "power_consumption_watts": null,
+      "resolution": null,
+      "storage_capacity_gb": null,
+      "bandwidth_requires_mbps": null,
+      "ports": [
+        {
+          "name": "ETH1",
+          "port_type": "ethernet",
+          "speed_mbps": 1000,
+          "power_watts": null
+        },
+        {
+          "name": "POE",
+          "port_type": "power",
+          "speed_mbps": null,
+          "power_watts": null
+        },
+        {
+          "name": "PWR",
+          "port_type": "power",
+          "speed_mbps": null,
+          "power_watts": null
+        },
+        {
+          "name": "ALARM_IN",
+          "port_type": "serial",
+          "speed_mbps": null,
+          "power_watts": null
+        },
+        {
+          "name": "ALARM_OUT",
+          "port_type": "serial",
+          "speed_mbps": null,
+          "power_watts": null
+        },
+        {
+          "name": "AUDIO_IN",
+          "port_type": "serial",
+          "speed_mbps": null,
+          "power_watts": null
+        }
+      ],
+      "status_history": []
+    },
+    {
+      "id": "cab2afcd-b6ea-4f85-aaea-9a1d18d90069",
+      "key": "ds-2cd2h63g2-izs",
+      "type_key": "camera",
+      "name": "DS-2CD2H63G2-IZS",
+      "manufacturer": "Hikvision",
+      "model": "DS-2CD2H63G2-IZS",
+      "lifecycle_status": "verified",
+      "schema_version": "1.0",
+      "updated_at": "2026-03-12T13:34:40.728345+00:00",
+      "updated_by": "catalog-importer",
+      "power_consumption_watts": null,
+      "resolution": null,
+      "storage_capacity_gb": null,
+      "bandwidth_requires_mbps": null,
+      "ports": [
+        {
+          "name": "ETH1",
+          "port_type": "ethernet",
+          "speed_mbps": 1000,
+          "power_watts": null
+        },
+        {
+          "name": "POE",
+          "port_type": "power",
+          "speed_mbps": null,
+          "power_watts": null
+        },
+        {
+          "name": "PWR",
+          "port_type": "power",
+          "speed_mbps": null,
+          "power_watts": null
+        },
+        {
+          "name": "ALARM_IN",
+          "port_type": "serial",
+          "speed_mbps": null,
+          "power_watts": null
+        },
+        {
+          "name": "AUDIO_IN",
+          "port_type": "serial",
+          "speed_mbps": null,
+          "power_watts": null
+        }
+      ],
+      "status_history": []
     }
   ],
   "compatibility_rules": [

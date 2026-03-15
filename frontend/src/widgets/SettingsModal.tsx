@@ -1,5 +1,11 @@
 import React, { useState, useEffect } from 'react'
 import { X, Grid3x3, Minimize2, Palette } from 'lucide-react'
+import {
+  applyUISettings,
+  DEFAULT_UI_SETTINGS,
+  readUISettings,
+  UISettings,
+} from '@/shared/uiSettings'
 
 interface SettingsModalProps {
   isOpen: boolean
@@ -33,6 +39,7 @@ export function SettingsModal({ isOpen, onClose }: SettingsModalProps) {
   const [nodeVisualSettings, setNodeVisualSettings] = useState<NodeVisualSettings>(
     DEFAULT_NODE_VISUAL_SETTINGS
   )
+  const [uiSettings, setUISettings] = useState<UISettings>(DEFAULT_UI_SETTINGS)
 
   // Load settings from localStorage on mount
   useEffect(() => {
@@ -53,6 +60,10 @@ export function SettingsModal({ isOpen, onClose }: SettingsModalProps) {
         console.error('Failed to load node visual settings:', e)
       }
     }
+
+    const currentUISettings = readUISettings()
+    setUISettings(currentUISettings)
+    applyUISettings(currentUISettings)
   }, [])
 
   // Save settings to localStorage when they change
@@ -69,6 +80,14 @@ export function SettingsModal({ isOpen, onClose }: SettingsModalProps) {
     setNodeVisualSettings(nextSettings)
     localStorage.setItem('psb-node-visual-settings', JSON.stringify(nextSettings))
     window.dispatchEvent(new CustomEvent('psb-node-visuals-changed', { detail: nextSettings }))
+  }
+
+  const updateUISetting = (key: keyof UISettings, value: UISettings[keyof UISettings]) => {
+    const nextSettings = { ...uiSettings, [key]: value }
+    setUISettings(nextSettings)
+    localStorage.setItem('psb-ui-settings', JSON.stringify(nextSettings))
+    applyUISettings(nextSettings)
+    window.dispatchEvent(new CustomEvent('psb-ui-settings-changed', { detail: nextSettings }))
   }
 
   if (!isOpen) return null
@@ -238,6 +257,115 @@ export function SettingsModal({ isOpen, onClose }: SettingsModalProps) {
             </div>
           </div>
 
+          <div className="border-b border-gray-200 pb-6">
+            <h3 className="mb-4 font-semibold text-gray-900 flex items-center gap-2">
+              <Minimize2 className="w-4 h-4" />
+              Interface Design
+            </h3>
+
+            <div className="mb-4">
+              <label className="mb-2 block text-sm font-medium text-gray-700">Theme Preset</label>
+              <div className="grid grid-cols-1 gap-2">
+                {[
+                  { value: 'steel', label: 'Steel', desc: 'Cool enterprise look' },
+                  { value: 'sand', label: 'Sand', desc: 'Warm neutral look' },
+                  { value: 'forest', label: 'Forest', desc: 'Calm green look' },
+                ].map((preset) => (
+                  <button
+                    key={preset.value}
+                    onClick={() =>
+                      updateUISetting('themePreset', preset.value as UISettings['themePreset'])
+                    }
+                    className={`rounded-lg border-2 p-3 text-left transition ${
+                      uiSettings.themePreset === preset.value
+                        ? 'border-brand-500 bg-brand-50'
+                        : 'border-gray-200 hover:border-gray-300'
+                    }`}
+                  >
+                    <div className="text-sm font-medium text-gray-900">{preset.label}</div>
+                    <div className="text-xs text-gray-500">{preset.desc}</div>
+                  </button>
+                ))}
+              </div>
+            </div>
+
+            <div className="mb-4">
+              <label className="mb-2 block text-sm font-medium text-gray-700">Density</label>
+              <div className="grid grid-cols-2 gap-2">
+                {[
+                  { value: 'comfortable', label: 'Comfortable' },
+                  { value: 'compact', label: 'Compact' },
+                ].map((density) => (
+                  <button
+                    key={density.value}
+                    onClick={() => updateUISetting('density', density.value as UISettings['density'])}
+                    className={`rounded-lg border-2 p-3 text-sm font-medium transition ${
+                      uiSettings.density === density.value
+                        ? 'border-brand-500 bg-brand-50 text-gray-900'
+                        : 'border-gray-200 text-gray-700 hover:border-gray-300'
+                    }`}
+                  >
+                    {density.label}
+                  </button>
+                ))}
+              </div>
+            </div>
+
+            <div className="mb-4">
+              <label className="mb-2 block text-sm font-medium text-gray-700">Panel Shape</label>
+              <div className="grid grid-cols-2 gap-2">
+                {[
+                  { value: 'rounded', label: 'Rounded' },
+                  { value: 'sharp', label: 'Sharp' },
+                ].map((radius) => (
+                  <button
+                    key={radius.value}
+                    onClick={() => updateUISetting('radius', radius.value as UISettings['radius'])}
+                    className={`rounded-lg border-2 p-3 text-sm font-medium transition ${
+                      uiSettings.radius === radius.value
+                        ? 'border-brand-500 bg-brand-50 text-gray-900'
+                        : 'border-gray-200 text-gray-700 hover:border-gray-300'
+                    }`}
+                  >
+                    {radius.label}
+                  </button>
+                ))}
+              </div>
+            </div>
+
+            <div className="mb-4">
+              <label className="mb-2 block text-sm font-medium text-gray-700">Panel Depth</label>
+              <div className="grid grid-cols-2 gap-2">
+                {[
+                  { value: 'soft', label: 'Soft shadow' },
+                  { value: 'flat', label: 'Flat border' },
+                ].map((shadow) => (
+                  <button
+                    key={shadow.value}
+                    onClick={() => updateUISetting('shadow', shadow.value as UISettings['shadow'])}
+                    className={`rounded-lg border-2 p-3 text-sm font-medium transition ${
+                      uiSettings.shadow === shadow.value
+                        ? 'border-brand-500 bg-brand-50 text-gray-900'
+                        : 'border-gray-200 text-gray-700 hover:border-gray-300'
+                    }`}
+                  >
+                    {shadow.label}
+                  </button>
+                ))}
+              </div>
+            </div>
+
+            <label className="flex items-center justify-between rounded-lg border border-gray-200 px-3 py-2">
+              <span className="text-sm font-medium text-gray-700">Accent header glow</span>
+              <input
+                type="checkbox"
+                checked={uiSettings.accentHeader}
+                onChange={(event) => updateUISetting('accentHeader', event.target.checked)}
+                className="h-4 w-4 rounded border-gray-300 text-brand-500 focus:ring-brand-500"
+              />
+            </label>
+          </div>
+
           {/* Preview */}
           <div>
             <h3 className="font-semibold text-gray-900 mb-3">Preview</h3>
@@ -281,6 +409,9 @@ export function SettingsModal({ isOpen, onClose }: SettingsModalProps) {
                 localStorage.removeItem('psb-canvas-settings')
                 setNodeVisualSettings(DEFAULT_NODE_VISUAL_SETTINGS)
                 localStorage.removeItem('psb-node-visual-settings')
+                setUISettings(DEFAULT_UI_SETTINGS)
+                localStorage.removeItem('psb-ui-settings')
+                applyUISettings(DEFAULT_UI_SETTINGS)
                 window.dispatchEvent(
                   new CustomEvent('psb-settings-changed', { detail: DEFAULT_SETTINGS })
                 )
@@ -288,6 +419,9 @@ export function SettingsModal({ isOpen, onClose }: SettingsModalProps) {
                   new CustomEvent('psb-node-visuals-changed', {
                     detail: DEFAULT_NODE_VISUAL_SETTINGS,
                   })
+                )
+                window.dispatchEvent(
+                  new CustomEvent('psb-ui-settings-changed', { detail: DEFAULT_UI_SETTINGS })
                 )
               }}
               className="flex-1 px-4 py-2 text-sm font-medium text-gray-700 bg-gray-100 hover:bg-gray-200 rounded-lg transition"

@@ -1,8 +1,9 @@
 """
 Import helpers for equipment catalog enrichment from vendor product pages.
 """
+from datetime import datetime, timezone
 import re
-from urllib.parse import parse_qs, urlparse
+from urllib.parse import parse_qs, urljoin, urlparse
 from uuid import uuid4
 
 import requests
@@ -13,6 +14,8 @@ from app.version import CATALOG_SCHEMA_VERSION
 
 
 MODEL_PATTERN = re.compile(r"\b([A-Z0-9]{2,8}-[A-Z0-9\-]{3,})\b")
+URL_PATTERN = re.compile(r"https?://[^\s\"'<>]+")
+SITEMAP_LOC_PATTERN = re.compile(r"<loc>(.*?)</loc>", re.IGNORECASE)
 
 
 def _slugify(value: str) -> str:
@@ -134,6 +137,7 @@ def import_hikvision_model_from_url(
     lifecycle_status: str = "verified",
     timeout_seconds: int = 20,
 ) -> EquipmentModelDefinition:
+    imported_at = datetime.now(timezone.utc).isoformat()
     headers = {"User-Agent": "Mozilla/5.0"}
     response = requests.get(url, headers=headers, timeout=timeout_seconds)
     response.raise_for_status()
@@ -163,5 +167,145 @@ def import_hikvision_model_from_url(
         model=model,
         lifecycle_status=lifecycle_status,
         schema_version=CATALOG_SCHEMA_VERSION,
+        updated_at=imported_at,
+        updated_by="catalog-importer",
         ports=ports,
     )
+
+
+def discover_hikvision_product_urls(category_url: str, *, max_items: int = 120) -> list[str]:
+    headers = {"User-Agent": "Mozilla/5.0"}
+    response = requests.get(category_url, headers=headers, timeout=20)
+    response.raise_for_status()
+
+    soup = BeautifulSoup(response.text, "html.parser")
+    base = urlparse(category_url)
+    base_path = base.path.rstrip("/")
+    base_segments = [segment for segment in base_path.split("/") if segment]
+    category_prefix = base_path
+    if base_segments:
+        last_segment = base_segments[-1]
+        if MODEL_PATTERN.search(last_segment.upper()):
+            category_prefix = "/" + "/".join(base_segments[:-1])
+    category_prefix = category_prefix.rstrip("/")
+
+    discovered: list[str] = []
+    seen: set[str] = set()
+
+    def should_keep(url_value: str) -> str | None:
+        parsed = urlparse(url_value)
+        if "hikvision.com" not in parsed.netloc:
+            return None
+        if "/products/" not in parsed.path.lower():
+            return None
+
+        normalized_path = parsed.path.rstrip("/")
+        if not normalized_path:
+            return None
+        if normalized_path == base_path or normalized_path == category_prefix:
+            return None
+        if category_prefix and not normalized_path.startswith(category_prefix + "/"):
+            return None
+
+        path_tail = normalized_path.split("/")[-1]
+        has_model_marker = bool(MODEL_PATTERN.search(path_tail.upper()))
+        has_subname = "subname=" in parsed.query.lower()
+        if not has_model_marker and not has_subname:
+            return None
+
+        clean_url = f"{parsed.scheme}://{parsed.netloc}{parsed.path}"
+        if parsed.query:
+            clean_url = f"{clean_url}?{parsed.query}"
+        return clean_url
+
+    def collect_from_html(html: str, source_url: str) -> None:
+        inner_soup = BeautifulSoup(html, "html.parser")
+        for anchor in inner_soup.find_all("a", href=True):
+            href = anchor["href"].strip()
+            if not href or href.startswith("#"):
+                continue
+            candidate = should_keep(urljoin(source_url, href))
+            if not candidate or candidate in seen:
+                continue
+            seen.add(candidate)
+            discovered.append(candidate)
+            if len(discovered) >= max_items:
+                return
+
+        for raw_url in URL_PATTERN.findall(html):
+            candidate = should_keep(raw_url)
+            if not candidate or candidate in seen:
+                continue
+            seen.add(candidate)
+            discovered.append(candidate)
+            if len(discovered) >= max_items:
+                return
+
+    collect_from_html(response.text, category_url)
+    if len(discovered) >= max_items:
+        return discovered
+
+    # If a product URL was provided, fallback to category landing page.
+    if category_prefix and category_prefix != base_path:
+        landing_url = f"{base.scheme}://{base.netloc}{category_prefix}/"
+        try:
+            landing_resp = requests.get(landing_url, headers=headers, timeout=20)
+            landing_resp.raise_for_status()
+            collect_from_html(landing_resp.text, landing_url)
+        except Exception:
+            pass
+
+    if len(discovered) >= max_items:
+        return discovered[:max_items]
+
+    # Final fallback for JS-rendered category pages: parse locale sitemap.
+    locale = base.path.strip("/").split("/")[0] if base.path.strip("/") else "en"
+    sitemap_url = f"{base.scheme}://{base.netloc}/{locale}/sitemap.xml"
+    try:
+        sitemap_resp = requests.get(sitemap_url, headers=headers, timeout=30)
+        sitemap_resp.raise_for_status()
+        for loc in SITEMAP_LOC_PATTERN.findall(sitemap_resp.text):
+            loc = loc.strip()
+            parsed_loc = urlparse(loc)
+            normalized_path = parsed_loc.path.rstrip("/")
+            if category_prefix and not normalized_path.startswith(category_prefix + "/"):
+                continue
+            tail = normalized_path.split("/")[-1]
+            if not MODEL_PATTERN.search(tail.upper()):
+                continue
+            if loc in seen:
+                continue
+            seen.add(loc)
+            discovered.append(loc)
+            if len(discovered) >= max_items:
+                break
+    except Exception:
+        pass
+
+    return discovered[:max_items]
+
+
+def import_hikvision_models_from_category(
+    category_url: str,
+    *,
+    type_key: str = "camera",
+    lifecycle_status: str = "verified",
+    max_items: int = 120,
+) -> tuple[list[EquipmentModelDefinition], list[str], list[str]]:
+    urls = discover_hikvision_product_urls(category_url, max_items=max_items)
+    imported: list[EquipmentModelDefinition] = []
+    errors: list[str] = []
+
+    for url in urls:
+        try:
+            imported.append(
+                import_hikvision_model_from_url(
+                    url,
+                    type_key=type_key,
+                    lifecycle_status=lifecycle_status,
+                )
+            )
+        except Exception as error:  # pragma: no cover - network and remote HTML dependent
+            errors.append(f"{url}: {error}")
+
+    return imported, errors, urls

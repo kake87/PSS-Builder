@@ -27,6 +27,14 @@ class CatalogPortDefinition(BaseModel):
     power_watts: Optional[float] = None
 
 
+class StatusHistoryEntry(BaseModel):
+    from_status: str
+    to_status: str
+    changed_at: str
+    changed_by: str = "system"
+    note: Optional[str] = None
+
+
 class EquipmentModelDefinition(BaseModel):
     id: str
     key: str
@@ -36,11 +44,14 @@ class EquipmentModelDefinition(BaseModel):
     model: str
     lifecycle_status: str = "verified"
     schema_version: str = CATALOG_SCHEMA_VERSION
+    updated_at: Optional[str] = None
+    updated_by: Optional[str] = None
     power_consumption_watts: Optional[float] = None
     resolution: Optional[str] = None
     storage_capacity_gb: Optional[int] = None
     bandwidth_requires_mbps: Optional[int] = None
     ports: List[CatalogPortDefinition] = Field(default_factory=list)
+    status_history: List[StatusHistoryEntry] = Field(default_factory=list)
 
 
 class CompatibilityRuleDefinition(BaseModel):
@@ -155,6 +166,7 @@ def _make_compatibility_rules() -> List[CompatibilityRuleDefinition]:
 
 
 def build_normalized_catalog(equipment_catalog: Dict[str, Device]) -> NormalizedCatalogResponse:
+    generated_at = datetime.now(timezone.utc).isoformat()
     type_keys = sorted({str(device.device_type) for device in equipment_catalog.values()})
     equipment_types: List[EquipmentTypeDefinition] = [
         TYPE_DEFINITIONS.get(type_key, _default_type_definition(type_key)) for type_key in type_keys
@@ -170,6 +182,8 @@ def build_normalized_catalog(equipment_catalog: Dict[str, Device]) -> Normalized
                 name=device.name,
                 manufacturer=device.manufacturer,
                 model=device.model,
+                updated_at=generated_at,
+                updated_by="system",
                 power_consumption_watts=device.power_consumption_watts,
                 resolution=device.resolution,
                 storage_capacity_gb=device.storage_capacity_gb,
@@ -187,7 +201,7 @@ def build_normalized_catalog(equipment_catalog: Dict[str, Device]) -> Normalized
         )
 
     return NormalizedCatalogResponse(
-        generated_at=datetime.now(timezone.utc).isoformat(),
+        generated_at=generated_at,
         equipment_types=equipment_types,
         equipment_models=equipment_models,
         compatibility_rules=_make_compatibility_rules(),
