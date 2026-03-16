@@ -13,7 +13,9 @@ from app.catalog_schema import (
     CompatibilityRuleDefinition,
     EquipmentModelDefinition,
     EquipmentTypeDefinition,
+    InterfaceDefinition,
     NormalizedCatalogResponse,
+    derive_interfaces_from_ports,
 )
 from app.catalog_importer import (
     import_hikvision_model_from_url,
@@ -53,6 +55,17 @@ def _catalog_snapshot() -> NormalizedCatalogResponse:
 
 def _now_iso() -> str:
     return datetime.now(timezone.utc).isoformat()
+
+
+def _resolve_model_interfaces(model: EquipmentModelDefinition) -> list[InterfaceDefinition]:
+    return model.interfaces or derive_interfaces_from_ports(
+        model.ports,
+        device_type=model.type_key,
+        name=model.name,
+        model=model.model,
+        key=model.key,
+        power_consumption_watts=model.power_consumption_watts,
+    )
 
 
 ALLOWED_STATUSES = {"draft", "verified", "deprecated"}
@@ -100,6 +113,22 @@ def _build_device_from_model(model: EquipmentModelDefinition) -> Device:
             power_watts=port.power_watts,
         )
     return device
+
+
+def _interfaces_payload(interfaces: list[InterfaceDefinition]) -> list[dict]:
+    return [
+        {
+            "id": item.id,
+            "label": item.label,
+            "kind": item.kind,
+            "role": item.role,
+            "direction": item.direction,
+            "connection_mode": item.connection_mode,
+            "visible_by_default": item.visible_by_default,
+            "capacity": item.capacity.model_dump(),
+        }
+        for item in interfaces
+    ]
 
 
 @router.get("/projects/{project_id}/devices", response_model=list)
@@ -174,6 +203,7 @@ async def get_equipment_catalog():
                 }
                 for p in model.ports
             ],
+            "interfaces": _interfaces_payload(_resolve_model_interfaces(model)),
         }
     return catalog
 
@@ -411,6 +441,9 @@ async def add_device_from_template(project_id: str, equipment_key: str):
         "model": device.model,
         "manufacturer": device.manufacturer,
         "port_count": len(device.ports),
+        "interfaces": _interfaces_payload(
+            _resolve_model_interfaces(model)
+        ) if model else [],
     }
 
 
@@ -444,6 +477,16 @@ async def get_device(project_id: str, device_id: str):
             }
             for p in device.ports
         ],
+        "interfaces": _interfaces_payload(
+            _resolve_model_interfaces(model)
+        ) if (model := next(
+            (
+                item
+                for item in _catalog_snapshot().equipment_models
+                if item.model == device.model and item.manufacturer == device.manufacturer
+            ),
+            None,
+        )) else [],
         "location": device.location,
         "notes": device.notes,
     }

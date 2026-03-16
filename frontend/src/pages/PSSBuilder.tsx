@@ -18,6 +18,7 @@ import { OnboardingTutorial, useOnboardingState } from '@/widgets/OnboardingTuto
 import { StatusBar } from '@/widgets/StatusBar'
 import { emitToast } from '@/widgets/Toast'
 import { applyUISettings, readUISettings } from '@/shared/uiSettings'
+import { SpecificationPanel } from '@/widgets/SpecificationPanel'
 
 interface CreateProjectModalProps {
   isOpen: boolean
@@ -43,6 +44,34 @@ interface ExportedProjectPayload {
   nodes: Node[]
   edges: Edge[]
   groups: NodeGroup[]
+}
+
+interface ImportReport {
+  fileName: string
+  importedVersion: string
+  migratedFromVersion?: string
+  importedNodes: number
+  importedEdges: number
+  importedGroups: number
+  warnings: string[]
+}
+
+type WorkspaceView = 'design' | 'catalog' | 'specification'
+
+interface DeviceInterfaceData {
+  id: string
+  label: string
+  kind: string
+  role?: 'primary' | 'secondary' | 'advanced'
+  direction?: 'input' | 'output' | 'bidirectional'
+  connection_mode?: 'combined' | 'data' | 'power'
+  visible_by_default?: boolean
+  capacity?: {
+    speed_mbps?: number
+    power_watts?: number
+    port_count?: number
+    poe_budget_watts?: number
+  }
 }
 
 class EditorErrorBoundary extends React.Component<
@@ -121,6 +150,15 @@ function mapProjectToCanvas(project: any): { nodes: Node[]; edges: Edge[] } {
         speed_mbps: port.speed_mbps,
         power_watts: port.power_watts,
       })),
+      interfaces: Array.isArray(device.interfaces) && device.interfaces.length > 0
+        ? device.interfaces
+        : deriveInterfacesFromPorts(device.ports || [], {
+            deviceType: device.type || device.device_type,
+            name: device.name,
+            model: device.model,
+            key: device.id || device.key,
+            powerConsumptionWatts: device.power_consumption_watts,
+          }),
     },
   }))
 
@@ -260,8 +298,14 @@ function buildLocalValidation(nodes: Node[], edges: Edge[]): ValidationIssue[] {
     const targetPortExists = target?.data?.ports?.some(
       (port: any) => `in-${port.id}` === edge.targetHandle
     )
+    const sourceInterfaceExists = source?.data?.interfaces?.some(
+      (item: any) => `out-${item.id}` === edge.sourceHandle
+    ) || String(edge.sourceHandle || '').startsWith('out-group-')
+    const targetInterfaceExists = target?.data?.interfaces?.some(
+      (item: any) => `in-${item.id}` === edge.targetHandle
+    ) || String(edge.targetHandle || '').startsWith('in-group-')
 
-    if (source && edge.sourceHandle && !sourcePortExists) {
+    if (source && edge.sourceHandle && !sourcePortExists && !sourceInterfaceExists) {
       issues.push({
         id: `missing-source-port-${edge.id}`,
         type: 'warning',
@@ -271,7 +315,7 @@ function buildLocalValidation(nodes: Node[], edges: Edge[]): ValidationIssue[] {
       })
     }
 
-    if (target && edge.targetHandle && !targetPortExists) {
+    if (target && edge.targetHandle && !targetPortExists && !targetInterfaceExists) {
       issues.push({
         id: `missing-target-port-${edge.id}`,
         type: 'warning',
@@ -293,6 +337,65 @@ function buildLocalValidation(nodes: Node[], edges: Edge[]): ValidationIssue[] {
         targetType: 'node',
       })
     }
+
+    const interfaces = Array.isArray(node.data?.interfaces) ? node.data.interfaces : []
+    const groupedByKind = interfaces.reduce((acc: Record<string, any[]>, item: any) => {
+      const key = String(item?.kind || 'unknown')
+      acc[key] = acc[key] || []
+      acc[key].push(item)
+      return acc
+    }, {})
+
+    Object.entries(groupedByKind).forEach(([kind, items]) => {
+      const capacity = items.length
+      if (capacity <= 0) return
+
+      const groupEdges = edges.filter((edge) => {
+        const sourceHandle = String(edge.sourceHandle || '')
+        const targetHandle = String(edge.targetHandle || '')
+        return (
+          items.some(
+            (item: any) =>
+              sourceHandle === `out-${item.id}` || targetHandle === `in-${item.id}`
+          ) ||
+          sourceHandle === `out-group-${kind}` ||
+          targetHandle === `in-group-${kind}`
+        )
+      })
+      const occupied = groupEdges.length
+
+      if (occupied > capacity) {
+        issues.push({
+          id: `capacity-${node.id}-${kind}`,
+          type: 'error',
+          message: `Interface group "${kind}" on "${node.data?.name}" is over capacity (${occupied}/${capacity}).`,
+          targetId: node.id,
+          targetType: 'node',
+        })
+      }
+
+      const poeBudget = items.reduce(
+        (sum: number, item: any) => sum + Number(item?.capacity?.poe_budget_watts || 0),
+        0
+      )
+      if (kind === 'poe_ethernet' && poeBudget > 0) {
+        const poeDraw = groupEdges.reduce((sum, edge) => {
+          const peerNodeId = edge.source === node.id ? edge.target : edge.source
+          const peerNode = nodes.find((candidate) => candidate.id === peerNodeId)
+          return sum + Number(peerNode?.data?.power_consumption_watts || 0)
+        }, 0)
+
+        if (poeDraw > poeBudget) {
+          issues.push({
+            id: `poe-budget-${node.id}-${kind}`,
+            type: 'error',
+            message: `PoE budget on "${node.data?.name}" is exceeded (${poeDraw.toFixed(1)}W/${poeBudget.toFixed(1)}W).`,
+            targetId: node.id,
+            targetType: 'node',
+          })
+        }
+      }
+    })
   })
 
   return issues
@@ -323,6 +426,226 @@ function buildRealtimeValidation(nodes: Node[], edges: Edge[]): ValidationIssue[
     ...issue,
     source: 'local',
   }))
+}
+
+function deriveInterfacesFromPorts(
+  ports: any[] = [],
+  options?: {
+    deviceType?: string
+    name?: string
+    model?: string
+    key?: string
+    powerConsumptionWatts?: number
+  }
+): DeviceInterfaceData[] {
+  const poeHint = [
+    options?.deviceType,
+    options?.name,
+    options?.model,
+    options?.key,
+  ]
+    .filter(Boolean)
+    .join(' ')
+    .toLowerCase()
+  const inferredPoeSwitch = String(options?.deviceType || '').toLowerCase() === 'switch' && poeHint.includes('poe')
+  const hasPoeLikeInterface =
+    inferredPoeSwitch ||
+    ports.some((port) => String(port?.port_type || port?.type || '').toLowerCase().includes('poe'))
+  return ports.map((port, index) => {
+    const portType = String(port?.port_type || port?.type || '').toLowerCase()
+    let kind = 'ethernet'
+    let label = port?.name || `Port ${index + 1}`
+    let role: DeviceInterfaceData['role'] = 'secondary'
+    let connectionMode: DeviceInterfaceData['connection_mode'] = 'data'
+    let poeBudgetWatts = port?.power_watts
+
+    if (portType.includes('poe') || (inferredPoeSwitch && portType.includes('ethernet'))) {
+      kind = 'poe_ethernet'
+      label = inferredPoeSwitch ? 'PoE Access' : 'PoE / LAN'
+      role = 'primary'
+      connectionMode = 'combined'
+      poeBudgetWatts =
+        port?.power_watts ??
+        (inferredPoeSwitch && options?.powerConsumptionWatts
+          ? options.powerConsumptionWatts / Math.max(ports.length, 1)
+          : undefined)
+    } else if (portType.includes('ethernet') || portType.includes('network') || portType.includes('rj45')) {
+      kind = 'ethernet'
+      label = index === 0 ? 'LAN' : label
+      role = index === 0 ? 'primary' : 'secondary'
+    } else if (portType.includes('power')) {
+      kind = 'power_input'
+      label = 'Power In'
+      role = 'secondary'
+      connectionMode = 'power'
+    } else if (portType.includes('fiber') || portType.includes('optical') || portType.includes('sfp')) {
+      kind = 'fiber'
+      label = 'Fiber'
+      role = 'primary'
+    } else if (portType.includes('serial')) {
+      kind = 'serial'
+      role = 'advanced'
+    }
+
+    return {
+      id: String(port?.id || `if-${index}`),
+      label,
+      kind,
+      role,
+      connection_mode: connectionMode,
+      direction: 'bidirectional',
+      visible_by_default: role !== 'advanced' && !(hasPoeLikeInterface && kind === 'power_input'),
+      capacity: {
+        speed_mbps: port?.speed_mbps,
+        power_watts: port?.power_watts,
+        poe_budget_watts: kind === 'poe_ethernet' ? poeBudgetWatts : undefined,
+      },
+    }
+  })
+}
+
+function normalizeImportedNode(rawNode: any, index: number): Node {
+  const fallbackId = `imported-node-${index + 1}`
+  const rawPorts = Array.isArray(rawNode?.data?.ports) ? rawNode.data.ports : []
+
+  return {
+    id: String(rawNode?.id || fallbackId),
+    type: rawNode?.type || 'device',
+    position: {
+      x: Number(rawNode?.position?.x ?? 0),
+      y: Number(rawNode?.position?.y ?? 0),
+    },
+    data: {
+      ...(rawNode?.data || {}),
+      name: String(rawNode?.data?.name || rawNode?.label || `Imported device ${index + 1}`),
+      type: String(rawNode?.data?.type || rawNode?.device_type || 'device'),
+      model: String(rawNode?.data?.model || rawNode?.model || 'Unknown'),
+      ports: rawPorts.map((port: any, portIndex: number) => ({
+        ...port,
+        id: String(port?.id || `${rawNode?.id || fallbackId}-port-${portIndex}`),
+        name: String(port?.name || `Port ${portIndex + 1}`),
+        type: port?.type || port?.port_type || 'unknown',
+      })),
+    },
+  } as Node
+}
+
+function normalizeImportedEdge(rawEdge: any, index: number): Edge {
+  return {
+    id: String(rawEdge?.id || `imported-edge-${index + 1}`),
+    source: String(rawEdge?.source || rawEdge?.from_device_id || ''),
+    target: String(rawEdge?.target || rawEdge?.to_device_id || ''),
+    sourceHandle:
+      rawEdge?.sourceHandle ||
+      (rawEdge?.from_port_id ? `out-${rawEdge.from_port_id}` : undefined),
+    targetHandle:
+      rawEdge?.targetHandle ||
+      (rawEdge?.to_port_id ? `in-${rawEdge.to_port_id}` : undefined),
+    label: rawEdge?.label,
+    data: rawEdge?.data || {
+      cable_type: rawEdge?.cable_type,
+      length_meters: rawEdge?.length_meters,
+      bandwidth_mbps: rawEdge?.bandwidth_mbps,
+    },
+  } as Edge
+}
+
+function normalizeImportedGroup(rawGroup: any, index: number): NodeGroup {
+  return {
+    id: String(rawGroup?.id || `group-${Date.now()}-${index}`),
+    name: String(rawGroup?.name || `Group ${index + 1}`),
+    nodeIds: Array.isArray(rawGroup?.nodeIds) ? rawGroup.nodeIds.map(String) : [],
+    hidden: Boolean(rawGroup?.hidden),
+    collapsed: Boolean(rawGroup?.collapsed),
+  }
+}
+
+function migrateAndValidateImportPayload(raw: unknown): {
+  payload: ExportedProjectPayload
+  report: ImportReport
+} {
+  if (!raw || typeof raw !== 'object') {
+    throw new Error('Import file must contain a JSON object.')
+  }
+
+  const parsed = raw as Record<string, any>
+  const warnings: string[] = []
+  const importedVersion = String(parsed.version || 'legacy')
+
+  let migratedFromVersion: string | undefined
+  if (!parsed.version || parsed.version !== '1.0') {
+    migratedFromVersion = importedVersion
+    warnings.push(`Project file version "${importedVersion}" was migrated to 1.0.`)
+  }
+
+  if (!Array.isArray(parsed.nodes)) {
+    throw new Error('Import failed: "nodes" array is missing.')
+  }
+  if (!Array.isArray(parsed.edges)) {
+    throw new Error('Import failed: "edges" array is missing.')
+  }
+
+  const nodes = parsed.nodes.map(normalizeImportedNode)
+  const edges = parsed.edges.map(normalizeImportedEdge)
+  const groups = Array.isArray(parsed.groups) ? parsed.groups.map(normalizeImportedGroup) : []
+  if (!Array.isArray(parsed.groups)) {
+    warnings.push('Groups were missing and were replaced with an empty list.')
+  }
+
+  const nodeIds = new Set<string>()
+  nodes.forEach((node, index) => {
+    if (nodeIds.has(node.id)) {
+      throw new Error(`Import failed: duplicate node id "${node.id}" at item ${index + 1}.`)
+    }
+    nodeIds.add(node.id)
+  })
+
+  const edgeIds = new Set<string>()
+  edges.forEach((edge, index) => {
+    if (!edge.source || !edge.target) {
+      throw new Error(`Import failed: edge ${edge.id || index + 1} has no source or target.`)
+    }
+    if (!nodeIds.has(edge.source) || !nodeIds.has(edge.target)) {
+      throw new Error(
+        `Import failed: edge "${edge.id}" references missing node "${edge.source}" or "${edge.target}".`
+      )
+    }
+    if (edgeIds.has(edge.id)) {
+      throw new Error(`Import failed: duplicate edge id "${edge.id}" at item ${index + 1}.`)
+    }
+    edgeIds.add(edge.id)
+  })
+
+  const sanitizedGroups = groups
+    .map((group) => ({
+      ...group,
+      nodeIds: group.nodeIds.filter((id) => nodeIds.has(id)),
+    }))
+    .filter((group) => group.nodeIds.length > 0)
+
+  if (groups.length !== sanitizedGroups.length) {
+    warnings.push('Some groups referenced missing nodes and were removed during import.')
+  }
+
+  return {
+    payload: {
+      version: '1.0',
+      exportedAt: String(parsed.exportedAt || new Date().toISOString()),
+      projectId: parsed.projectId ? String(parsed.projectId) : null,
+      nodes,
+      edges,
+      groups: sanitizedGroups,
+    },
+    report: {
+      fileName: '',
+      importedVersion: '1.0',
+      migratedFromVersion,
+      importedNodes: nodes.length,
+      importedEdges: edges.length,
+      importedGroups: sanitizedGroups.length,
+      warnings,
+    },
+  }
 }
 
 function CreateProjectModal({
@@ -409,10 +732,91 @@ function CreateProjectModal({
   )
 }
 
+function ImportReportModal({
+  report,
+  onClose,
+}: {
+  report: ImportReport | null
+  onClose: () => void
+}) {
+  if (!report) return null
+
+  return (
+    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 px-4">
+      <div className="w-full max-w-lg rounded-xl bg-white p-6 shadow-xl">
+        <div className="flex items-start justify-between gap-4">
+          <div>
+            <h2 className="text-xl font-bold text-slate-900">Import Report</h2>
+            <p className="mt-1 text-sm text-slate-600">{report.fileName}</p>
+          </div>
+          <button onClick={onClose} className="text-slate-400 transition hover:text-slate-600">
+            <X size={20} />
+          </button>
+        </div>
+
+        <div className="mt-5 grid grid-cols-3 gap-3 text-center">
+          <div className="rounded-lg bg-slate-100 px-3 py-3">
+            <div className="text-xs uppercase tracking-[0.18em] text-slate-500">Nodes</div>
+            <div className="mt-1 text-xl font-semibold text-slate-900">{report.importedNodes}</div>
+          </div>
+          <div className="rounded-lg bg-slate-100 px-3 py-3">
+            <div className="text-xs uppercase tracking-[0.18em] text-slate-500">Edges</div>
+            <div className="mt-1 text-xl font-semibold text-slate-900">{report.importedEdges}</div>
+          </div>
+          <div className="rounded-lg bg-slate-100 px-3 py-3">
+            <div className="text-xs uppercase tracking-[0.18em] text-slate-500">Groups</div>
+            <div className="mt-1 text-xl font-semibold text-slate-900">{report.importedGroups}</div>
+          </div>
+        </div>
+
+        <div className="mt-4 rounded-lg border border-slate-200 bg-slate-50 px-4 py-3 text-sm text-slate-700">
+          Imported as version <span className="font-semibold">{report.importedVersion}</span>
+          {report.migratedFromVersion ? (
+            <span> from <span className="font-semibold">{report.migratedFromVersion}</span>.</span>
+          ) : (
+            '.'
+          )}
+        </div>
+
+        <div className="mt-4">
+          <div className="text-sm font-semibold text-slate-900">Warnings</div>
+          {report.warnings.length === 0 ? (
+            <div className="mt-2 rounded-lg border border-green-200 bg-green-50 px-4 py-3 text-sm text-green-700">
+              No warnings. Import completed cleanly.
+            </div>
+          ) : (
+            <div className="mt-2 space-y-2">
+              {report.warnings.map((warning) => (
+                <div
+                  key={warning}
+                  className="rounded-lg border border-amber-200 bg-amber-50 px-4 py-3 text-sm text-amber-800"
+                >
+                  {warning}
+                </div>
+              ))}
+            </div>
+          )}
+        </div>
+
+        <div className="mt-6 flex justify-end">
+          <button
+            onClick={onClose}
+            className="rounded-md bg-brand-500 px-4 py-2 text-white transition hover:bg-brand-600"
+          >
+            Close
+          </button>
+        </div>
+      </div>
+    </div>
+  )
+}
+
 export function PSSBuilder() {
   const [projects, setProjects] = useState<any[]>([])
   const [isCreateModalOpen, setIsCreateModalOpen] = useState(false)
   const [createProjectError, setCreateProjectError] = useState<string | null>(null)
+  const [importReport, setImportReport] = useState<ImportReport | null>(null)
+  const [workspaceView, setWorkspaceView] = useState<WorkspaceView>('design')
   const [equipmentCatalog, setEquipmentCatalog] = useState<Record<string, any>>({})
   const [isHelpOpen, setIsHelpOpen] = useState(false)
   const projectStore = useProjectStore()
@@ -656,6 +1060,17 @@ export function PSSBuilder() {
               speed_mbps: port.speed_mbps,
               power_watts: port.power_watts,
             })),
+            interfaces:
+              Array.isArray(createdDevice.interfaces) && createdDevice.interfaces.length > 0
+                ? createdDevice.interfaces
+                : deriveInterfacesFromPorts(createdDevice.ports || equipment.ports || [], {
+                    deviceType: createdDevice.type || createdDevice.device_type || equipment.type_key,
+                    name: createdDevice.name || equipment.name,
+                    model: createdDevice.model || equipment.model,
+                    key: createdDevice.key || equipment.key,
+                    powerConsumptionWatts:
+                      createdDevice.power_consumption_watts || equipment.power_consumption_watts,
+                  }),
           },
         }
 
@@ -678,6 +1093,10 @@ export function PSSBuilder() {
       validateMutation.mutate(projectStore.projectId)
     }
   }
+
+  const handleFitToContent = useCallback(() => {
+    window.dispatchEvent(new CustomEvent('psb-fit-canvas'))
+  }, [])
 
   const handleExportProject = useCallback(() => {
     const payload: ExportedProjectPayload = {
@@ -708,14 +1127,11 @@ export function PSSBuilder() {
     async (file: File) => {
       try {
         const raw = await file.text()
-        const parsed = JSON.parse(raw) as Partial<ExportedProjectPayload>
-        if (!Array.isArray(parsed.nodes) || !Array.isArray(parsed.edges)) {
-          throw new Error('Invalid file: nodes/edges are missing.')
-        }
-
-        const importedNodes = parsed.nodes as Node[]
-        const importedEdges = parsed.edges as Edge[]
-        const importedGroups = Array.isArray(parsed.groups) ? (parsed.groups as NodeGroup[]) : []
+        const parsed = JSON.parse(raw)
+        const migrated = migrateAndValidateImportPayload(parsed)
+        const importedNodes = migrated.payload.nodes
+        const importedEdges = migrated.payload.edges
+        const importedGroups = migrated.payload.groups
 
         projectStore.setGraph(importedNodes, importedEdges, {
           markDirty: true,
@@ -724,13 +1140,25 @@ export function PSSBuilder() {
         projectStore.setGroups(importedGroups)
         projectStore.setSelectedNodeId(null)
         projectStore.setSelectedEdgeId(null)
-        emitToast('Project imported', 'success')
+        setImportReport({
+          ...migrated.report,
+          fileName: file.name,
+        })
+        emitToast(
+          migrated.report.warnings.length > 0
+            ? `Project imported with ${migrated.report.warnings.length} warning(s)`
+            : 'Project imported',
+          migrated.report.warnings.length > 0 ? 'warning' : 'success'
+        )
         window.dispatchEvent(
           new CustomEvent('psb-status-action', { detail: { action: 'Project imported' } })
         )
       } catch (error) {
         console.error('Failed to import project JSON:', error)
-        emitToast('Import failed: invalid JSON', 'error')
+        emitToast(
+          error instanceof Error ? error.message : 'Import failed: invalid project file.',
+          'error'
+        )
       }
     },
     [projectStore]
@@ -779,6 +1207,11 @@ export function PSSBuilder() {
       projectStore.setSelectedEdgeId(null)
     },
     [projectStore]
+  )
+
+  const activeProject = useMemo(
+    () => projects.find((project) => project.id === projectStore.projectId) || null,
+    [projectStore.projectId, projects]
   )
 
   if (!projectStore.projectId) {
@@ -1002,61 +1435,145 @@ export function PSSBuilder() {
           isDirty={projectStore.isDirty}
           onExportProject={handleExportProject}
           onImportProject={handleImportProject}
+          onFitToContent={handleFitToContent}
         />
 
-        <div className="grid flex-1 grid-cols-[18rem_minmax(0,1fr)_20rem] gap-4 overflow-hidden p-4">
-          <div className="pss-panel flex flex-col overflow-hidden">
-            <EquipmentLibrary projectId={projectStore.projectId} onAddDevice={handleAddDevice} />
-          </div>
+        <div className="border-b border-slate-200/80 px-4 pt-4">
+          <div className="mx-auto flex w-full max-w-[1600px] items-center justify-between gap-4">
+            <div className="flex flex-wrap gap-2">
+              {[
+                { key: 'design', label: 'Design', description: 'Canvas, properties, validation' },
+                { key: 'catalog', label: 'Catalog', description: 'Browse and place equipment' },
+                { key: 'specification', label: 'Specification', description: 'BOM and export' },
+              ].map((tab) => (
+                <button
+                  key={tab.key}
+                  type="button"
+                  onClick={() => setWorkspaceView(tab.key as WorkspaceView)}
+                  className={`rounded-2xl px-4 py-3 text-left transition ${
+                    workspaceView === tab.key
+                      ? 'bg-slate-950 text-white shadow-lg'
+                      : 'bg-white/80 text-slate-700 ring-1 ring-slate-200 hover:bg-white'
+                  }`}
+                >
+                  <div className="text-sm font-semibold">{tab.label}</div>
+                  <div
+                    className={`mt-1 text-xs ${
+                      workspaceView === tab.key ? 'text-slate-300' : 'text-slate-500'
+                    }`}
+                  >
+                    {tab.description}
+                  </div>
+                </button>
+              ))}
+            </div>
 
-          <div className="grid min-w-0 grid-rows-[auto_minmax(0,1fr)] gap-4 overflow-hidden">
-            <Dashboard nodes={projectStore.nodes} validationIssues={projectStore.validationErrors} />
-
-            <div className="pss-panel min-w-0 overflow-hidden">
-              <Canvas
-                initialNodes={projectStore.nodes}
-                initialEdges={projectStore.edges}
-                onNodesChange={(nodes) => projectStore.setNodes(nodes)}
-                onEdgesChange={(edges) => projectStore.setEdges(edges)}
-                onAddDeviceAtPosition={handleAddDevice}
-              />
+            <div className="hidden rounded-2xl bg-white/80 px-4 py-3 text-sm text-slate-600 ring-1 ring-slate-200 lg:block">
+              {activeProject?.name || 'Current project'}: {projectStore.nodes.length} devices,{' '}
+              {projectStore.edges.length} links
             </div>
           </div>
+        </div>
 
-          <div className="flex flex-col gap-4 overflow-hidden">
-            <div className="pss-panel min-h-0 flex-1 overflow-hidden">
-              <PropertiesPanel
-                selectedNodeId={projectStore.selectedNodeId}
-                selectedEdgeId={projectStore.selectedEdgeId}
-                nodes={projectStore.nodes}
-                edges={projectStore.edges}
-                onUpdateNode={(id, updates) => projectStore.updateNode(id, updates)}
-              />
-            </div>
+        <div className="flex-1 overflow-hidden p-4">
+          {workspaceView === 'design' && (
+            <div className="grid h-full grid-cols-[22rem_minmax(0,1fr)_20rem] gap-4 overflow-hidden">
+              <div className="pss-panel flex min-h-0 flex-col overflow-hidden">
+                <EquipmentLibrary
+                  projectId={projectStore.projectId}
+                  onAddDevice={handleAddDevice}
+                  mode="picker"
+                />
+              </div>
 
-            <div className="pss-panel min-h-0 flex-1 overflow-hidden">
-              <ValidationPanel
-                errors={projectStore.validationErrors}
-                onSelectError={handleSelectValidationIssue}
-                isValidating={validateMutation.isPending}
-              />
-            </div>
+              <div className="grid min-w-0 grid-rows-[auto_minmax(0,1fr)] gap-4 overflow-hidden">
+                <Dashboard nodes={projectStore.nodes} validationIssues={projectStore.validationErrors} />
 
-            <div className="pss-panel min-h-0 flex-1 overflow-hidden">
-              <GroupPanel
-                groups={projectStore.groups}
-                nodes={projectStore.nodes}
-                selectedNodeIds={selectedNodeIds}
-                selectedGroupId={projectStore.selectedZone}
-                onCreateGroup={handleCreateGroup}
-                onToggleHidden={projectStore.toggleGroupHidden}
-                onToggleCollapsed={projectStore.toggleGroupCollapsed}
-                onRenameGroup={projectStore.renameGroup}
-                onDeleteGroup={projectStore.deleteGroup}
-                onSelectGroup={handleSelectGroup}
-              />
+                <div className="pss-panel min-w-0 overflow-hidden">
+                  <Canvas
+                    initialNodes={projectStore.nodes}
+                    initialEdges={projectStore.edges}
+                    onNodesChange={(nodes) => projectStore.setNodes(nodes)}
+                    onEdgesChange={(edges) => projectStore.setEdges(edges)}
+                    onAddDeviceAtPosition={handleAddDevice}
+                  />
+                </div>
+              </div>
+
+              <div className="flex flex-col gap-4 overflow-hidden">
+                <div className="pss-panel min-h-0 flex-1 overflow-hidden">
+                  <PropertiesPanel
+                    selectedNodeId={projectStore.selectedNodeId}
+                    selectedEdgeId={projectStore.selectedEdgeId}
+                    nodes={projectStore.nodes}
+                    edges={projectStore.edges}
+                    onUpdateNode={(id, updates) => projectStore.updateNode(id, updates)}
+                  />
+                </div>
+
+                <div className="pss-panel min-h-0 flex-1 overflow-hidden">
+                  <ValidationPanel
+                    errors={projectStore.validationErrors}
+                    onSelectError={handleSelectValidationIssue}
+                    isValidating={validateMutation.isPending}
+                  />
+                </div>
+
+                <div className="pss-panel min-h-0 flex-1 overflow-hidden">
+                  <GroupPanel
+                    groups={projectStore.groups}
+                    nodes={projectStore.nodes}
+                    selectedNodeIds={selectedNodeIds}
+                    selectedGroupId={projectStore.selectedZone}
+                    onCreateGroup={handleCreateGroup}
+                    onToggleHidden={projectStore.toggleGroupHidden}
+                    onToggleCollapsed={projectStore.toggleGroupCollapsed}
+                    onRenameGroup={projectStore.renameGroup}
+                    onDeleteGroup={projectStore.deleteGroup}
+                    onSelectGroup={handleSelectGroup}
+                  />
+                </div>
+              </div>
             </div>
-          </div>
+          )}
+
+          {workspaceView === 'catalog' && (
+            <div className="grid h-full grid-cols-[25rem_minmax(0,1fr)] gap-4 overflow-hidden">
+              <div className="pss-panel flex min-h-0 flex-col overflow-hidden">
+                <EquipmentLibrary
+                  projectId={projectStore.projectId}
+                  onAddDevice={handleAddDevice}
+                  mode="catalog"
+                />
+              </div>
+
+              <div className="grid min-w-0 grid-rows-[auto_minmax(0,1fr)] gap-4 overflow-hidden">
+                <div className="pss-panel rounded-[24px] px-6 py-5">
+                  <div className="text-sm font-semibold text-slate-900">Catalog Placement Workspace</div>
+                  <p className="mt-2 max-w-2xl text-sm leading-6 text-slate-600">
+                    Browse models in a dedicated catalog view, then drag them into the canvas or add them directly. This keeps equipment selection separate from detailed validation and properties work.
+                  </p>
+                </div>
+
+                <div className="pss-panel min-w-0 overflow-hidden">
+                  <Canvas
+                    initialNodes={projectStore.nodes}
+                    initialEdges={projectStore.edges}
+                    onNodesChange={(nodes) => projectStore.setNodes(nodes)}
+                    onEdgesChange={(edges) => projectStore.setEdges(edges)}
+                    onAddDeviceAtPosition={handleAddDevice}
+                  />
+                </div>
+              </div>
+            </div>
+          )}
+
+          {workspaceView === 'specification' && (
+            <SpecificationPanel
+              nodes={projectStore.nodes}
+              projectName={activeProject?.name || 'pss-project'}
+            />
+          )}
         </div>
         <StatusBar
           selectedNodeId={projectStore.selectedNodeId}
@@ -1067,6 +1584,7 @@ export function PSSBuilder() {
         <KeyboardShortcuts />
         <HelpPanel isOpen={isHelpOpen} onClose={() => setIsHelpOpen(false)} />
         <OnboardingTutorial isOpen={onboarding.isOpen} onClose={onboarding.close} />
+        <ImportReportModal report={importReport} onClose={() => setImportReport(null)} />
 
         <CreateProjectModal
           isOpen={isCreateModalOpen}

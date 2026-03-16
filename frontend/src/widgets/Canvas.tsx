@@ -15,6 +15,7 @@ import ReactFlow, {
   OnSelectionChangeParams,
   ReactFlowProvider,
   ReactFlowInstance,
+  Viewport,
 } from 'reactflow'
 import 'reactflow/dist/style.css'
 import { DeviceNode } from '@/widgets/DeviceNode'
@@ -35,6 +36,10 @@ interface CanvasSettings {
 
 interface NodeVisualSettings {
   viewMode: 'icon' | 'hybrid' | 'text'
+}
+
+interface StoredViewport extends Viewport {
+  updatedAt: string
 }
 
 interface CanvasProps {
@@ -75,6 +80,11 @@ interface PendingConnection {
   targetPortType?: string
   sourceFamily: PortFamily
   targetFamily: PortFamily
+}
+
+interface ConnectionFeedback {
+  level: 'warning' | 'error'
+  message: string
 }
 
 const CABLE_PRESETS: CablePreset[] = [
@@ -119,6 +129,10 @@ const CABLE_PRESETS: CablePreset[] = [
     compatibleFamilies: ['power', 'unknown'],
   },
 ]
+
+function getViewportStorageKey(projectId: string): string {
+  return `psb-viewport:${projectId}`
+}
 
 function getSelectionSnapshot(nodes: Node[], edges: Edge[], selectedNodeId: string | null, selectedEdgeId: string | null): SelectionSnapshot {
   const nodeIds = nodes.filter((node) => node.selected).map((node) => node.id)
@@ -199,6 +213,18 @@ function findPortTypeByHandle(
 ): string | undefined {
   if (!nodeId || !handleId) return undefined
   const node = nodes.find((item) => item.id === nodeId)
+  const interfaces = node?.data?.interfaces
+  if (Array.isArray(interfaces)) {
+    const rawHandleId = String(handleId)
+    const extractedInterfaceId = rawHandleId.replace(/^in-/, '').replace(/^out-/, '')
+    if (extractedInterfaceId.startsWith('group-')) {
+      return extractedInterfaceId.replace(/^group-/, '')
+    }
+    const interfaceMatch = interfaces.find((item: any) => String(item?.id ?? '') === extractedInterfaceId)
+    if (interfaceMatch?.kind) {
+      return interfaceMatch.kind
+    }
+  }
   const ports = node?.data?.ports
   if (!Array.isArray(ports)) return undefined
 
@@ -216,6 +242,37 @@ function findPortTypeByHandle(
   return match?.type || match?.port_type
 }
 
+function getInterfaceByHandle(nodes: Node[], nodeId?: string, handleId?: string): any | undefined {
+  if (!nodeId || !handleId) return undefined
+  const node = nodes.find((item) => item.id === nodeId)
+  const interfaces = node?.data?.interfaces
+  if (!Array.isArray(interfaces)) return undefined
+
+  const rawHandleId = String(handleId)
+  const extractedInterfaceId = rawHandleId.replace(/^in-/, '').replace(/^out-/, '')
+  if (extractedInterfaceId.startsWith('group-')) {
+    const groupKind = extractedInterfaceId.replace(/^group-/, '')
+    const members = interfaces.filter((item: any) => String(item?.kind || '') === groupKind)
+    if (members.length === 0) return undefined
+    return {
+      ...members[0],
+      id: extractedInterfaceId,
+      capacity: {
+        ...members[0].capacity,
+        port_count: members.length,
+        poe_budget_watts: members.reduce(
+          (sum: number, item: any) => sum + Number(item?.capacity?.poe_budget_watts || 0),
+          0
+        ),
+      },
+      occupied_count: 0,
+      members: members.map((item: any) => item.id),
+    }
+  }
+
+  return interfaces.find((item: any) => String(item?.id || '') === extractedInterfaceId)
+}
+
 function getCompatiblePresets(sourceFamily: PortFamily, targetFamily: PortFamily): CablePreset[] {
   return CABLE_PRESETS.filter((preset) => {
     const sourceAllowed =
@@ -224,6 +281,74 @@ function getCompatiblePresets(sourceFamily: PortFamily, targetFamily: PortFamily
       targetFamily === 'unknown' || preset.compatibleFamilies.includes(targetFamily)
     return sourceAllowed && targetAllowed
   })
+}
+
+function exceedsInterfaceCapacity(
+  nodes: Node[],
+  edges: Edge[],
+  nodeId?: string,
+  handleId?: string
+): boolean {
+  const targetInterface = getInterfaceByHandle(nodes, nodeId, handleId)
+  if (!targetInterface) return false
+
+  const portCount = Number(targetInterface.capacity?.port_count || 0)
+  if (portCount <= 0) return false
+
+  const memberIds = Array.isArray(targetInterface.members)
+    ? targetInterface.members
+    : [String(targetInterface.id).replace(/^group-/, '')]
+
+  const occupied = edges.filter((edge) => {
+    const sourceHandle = String(edge.sourceHandle || '')
+    const targetHandle = String(edge.targetHandle || '')
+    return (
+      memberIds.some((id) => sourceHandle === `out-${id}` || targetHandle === `in-${id}`) ||
+      sourceHandle === `out-${targetInterface.id}` ||
+      targetHandle === `in-${targetInterface.id}`
+    )
+  }).length
+
+  return occupied >= portCount
+}
+
+function exceedsPoeBudget(
+  nodes: Node[],
+  edges: Edge[],
+  nodeId?: string,
+  handleId?: string,
+  pendingPeerNodeId?: string
+): boolean {
+  const targetInterface = getInterfaceByHandle(nodes, nodeId, handleId)
+  if (!targetInterface || String(targetInterface.kind || '') !== 'poe_ethernet') return false
+
+  const budget = Number(targetInterface.capacity?.poe_budget_watts || 0)
+  if (budget <= 0) return false
+
+  const memberIds = Array.isArray(targetInterface.members)
+    ? targetInterface.members
+    : [String(targetInterface.id).replace(/^group-/, '')]
+
+  const currentDraw = edges.reduce((sum, edge) => {
+    const sourceHandle = String(edge.sourceHandle || '')
+    const targetHandle = String(edge.targetHandle || '')
+    const touchesTarget =
+      memberIds.some((id) => sourceHandle === `out-${id}` || targetHandle === `in-${id}`) ||
+      sourceHandle === `out-${targetInterface.id}` ||
+      targetHandle === `in-${targetInterface.id}`
+
+    if (!touchesTarget) return sum
+
+    const peerNodeId = edge.source === nodeId ? edge.target : edge.source
+    const peerNode = nodes.find((item) => item.id === peerNodeId)
+    return sum + Number(peerNode?.data?.power_consumption_watts || 0)
+  }, 0)
+
+  const pendingDraw = pendingPeerNodeId
+    ? Number(nodes.find((item) => item.id === pendingPeerNodeId)?.data?.power_consumption_watts || 0)
+    : 0
+
+  return currentDraw + pendingDraw > budget
 }
 
 function CanvasInner({
@@ -236,6 +361,7 @@ function CanvasInner({
   const wrapperRef = useRef<HTMLDivElement>(null)
   const reactFlowRef = useRef<ReactFlowInstance | null>(null)
   const dragDepthRef = useRef(0)
+  const viewportRestoreRef = useRef(false)
   const [settings, setSettings] = useState<CanvasSettings>({
     backgroundPattern: 'grid',
     backgroundColor: 'transparent',
@@ -246,6 +372,7 @@ function CanvasInner({
   const [isDropTargetActive, setIsDropTargetActive] = useState(false)
   const [hoveredEdgeId, setHoveredEdgeId] = useState<string | null>(null)
   const [pendingConnection, setPendingConnection] = useState<PendingConnection | null>(null)
+  const [connectionFeedback, setConnectionFeedback] = useState<ConnectionFeedback | null>(null)
   const [nodeVisualSettings, setNodeVisualSettings] = useState<NodeVisualSettings>({
     viewMode: 'hybrid',
   })
@@ -321,6 +448,70 @@ function CanvasInner({
       window.removeEventListener('psb-node-visuals-changed', handleNodeVisualSettingsChange)
   }, [])
 
+  useEffect(() => {
+    viewportRestoreRef.current = false
+  }, [projectStore.projectId])
+
+  useEffect(() => {
+    const projectId = projectStore.projectId
+    const instance = reactFlowRef.current
+    if (!projectId || !instance || viewportRestoreRef.current) return
+
+    const raw = localStorage.getItem(getViewportStorageKey(projectId))
+    if (!raw) {
+      viewportRestoreRef.current = true
+      return
+    }
+
+    try {
+      const parsed = JSON.parse(raw) as StoredViewport
+      instance.setViewport(
+        {
+          x: parsed.x,
+          y: parsed.y,
+          zoom: parsed.zoom,
+        },
+        { duration: 0 }
+      )
+      projectStore.setZoom(parsed.zoom)
+      viewportRestoreRef.current = true
+    } catch (error) {
+      console.error('Failed to restore project viewport:', error)
+      viewportRestoreRef.current = true
+    }
+  }, [projectStore, projectStore.nodes.length, projectStore.projectId])
+
+  useEffect(() => {
+    const handleFitCanvas = () => {
+      if (!reactFlowRef.current) return
+      reactFlowRef.current.fitView({
+        padding: 0.18,
+        includeHiddenNodes: false,
+        duration: 240,
+      })
+      const viewport = reactFlowRef.current.getViewport()
+      if (projectStore.projectId) {
+        localStorage.setItem(
+          getViewportStorageKey(projectStore.projectId),
+          JSON.stringify({
+            ...viewport,
+            updatedAt: new Date().toISOString(),
+          } satisfies StoredViewport)
+        )
+      }
+      projectStore.setZoom(viewport.zoom)
+    }
+
+    window.addEventListener('psb-fit-canvas', handleFitCanvas)
+    return () => window.removeEventListener('psb-fit-canvas', handleFitCanvas)
+  }, [projectStore])
+
+  useEffect(() => {
+    if (!connectionFeedback) return
+    const timer = window.setTimeout(() => setConnectionFeedback(null), 2600)
+    return () => window.clearTimeout(timer)
+  }, [connectionFeedback])
+
   const validationMap = useMemo(() => {
     const next = new Map<string, 'error' | 'warning' | 'info'>()
     for (const issue of projectStore.validationErrors) {
@@ -342,16 +533,87 @@ function CanvasInner({
 
   const nodes = useMemo(
     () =>
-      projectStore.nodes.map((node) => ({
-        ...node,
-        selected: selection.nodeIds.includes(node.id),
-        hidden: hiddenNodeIdsByGroup.has(node.id),
-        data: {
-          ...node.data,
-          status: validationMap.get(node.id) ?? node.data?.status ?? 'active',
-          viewMode: nodeVisualSettings.viewMode,
-        },
-      })),
+      projectStore.nodes.map((node) => {
+        const interfaces = Array.isArray(node.data?.interfaces) ? node.data.interfaces : []
+        const groupUsageByKind = interfaces.reduce((acc: Record<string, number>, item: any) => {
+          const count = projectStore.edges.filter((edge) => {
+            const sourceHandle = String(edge.sourceHandle || '')
+            const targetHandle = String(edge.targetHandle || '')
+            return (
+              sourceHandle === `out-group-${item.kind}` ||
+              targetHandle === `in-group-${item.kind}`
+            )
+          }).length
+          acc[item.kind] = count
+          return acc
+        }, {})
+        const groupPoeDrawByKind = interfaces.reduce((acc: Record<string, number>, item: any) => {
+          if (String(item?.kind || '') !== 'poe_ethernet' || String(node.data?.type || '').toLowerCase() !== 'switch') {
+            acc[item.kind] = acc[item.kind] || 0
+            return acc
+          }
+
+          const draw = projectStore.edges.reduce((sum, edge) => {
+            const sourceHandle = String(edge.sourceHandle || '')
+            const targetHandle = String(edge.targetHandle || '')
+            const touchesGroup =
+              sourceHandle === `out-group-${item.kind}` || targetHandle === `in-group-${item.kind}`
+            if (!touchesGroup) return sum
+
+            const peerNodeId = edge.source === node.id ? edge.target : edge.source
+            const peerNode = projectStore.nodes.find((candidate) => candidate.id === peerNodeId)
+            return sum + Number(peerNode?.data?.power_consumption_watts || 0)
+          }, 0)
+
+          acc[item.kind] = draw
+          return acc
+        }, {})
+        const interfacesWithUsage = interfaces.map((item: any) => {
+          const occupiedCount = projectStore.edges.filter((edge) => {
+            const sourceHandle = String(edge.sourceHandle || '')
+            const targetHandle = String(edge.targetHandle || '')
+            return (
+              sourceHandle === `out-${item.id}` ||
+              targetHandle === `in-${item.id}`
+            )
+          }).length
+          const poeDrawWatts =
+            String(item?.kind || '') === 'poe_ethernet' && String(node.data?.type || '').toLowerCase() === 'switch'
+              ? projectStore.edges.reduce((sum, edge) => {
+                  const sourceHandle = String(edge.sourceHandle || '')
+                  const targetHandle = String(edge.targetHandle || '')
+                  const touchesInterface =
+                    sourceHandle === `out-${item.id}` ||
+                    targetHandle === `in-${item.id}`
+                  if (!touchesInterface) return sum
+
+                  const peerNodeId = edge.source === node.id ? edge.target : edge.source
+                  const peerNode = projectStore.nodes.find((candidate) => candidate.id === peerNodeId)
+                  return sum + Number(peerNode?.data?.power_consumption_watts || 0)
+                }, 0)
+              : 0
+
+          return {
+            ...item,
+            occupied_count: occupiedCount,
+            group_usage_count: groupUsageByKind[item.kind] || 0,
+            poe_draw_watts: poeDrawWatts,
+            group_poe_draw_watts: groupPoeDrawByKind[item.kind] || 0,
+          }
+        })
+
+        return {
+          ...node,
+          selected: selection.nodeIds.includes(node.id),
+          hidden: hiddenNodeIdsByGroup.has(node.id),
+          data: {
+            ...node.data,
+            status: validationMap.get(node.id) ?? node.data?.status ?? 'active',
+            viewMode: nodeVisualSettings.viewMode,
+            interfaces: interfacesWithUsage,
+          },
+        }
+      }),
     [hiddenNodeIdsByGroup, nodeVisualSettings.viewMode, projectStore.nodes, selection.nodeIds, validationMap]
   )
 
@@ -641,6 +903,38 @@ function CanvasInner({
 
   const handleConnect = useCallback(
     (connection: Connection) => {
+      if (
+        exceedsInterfaceCapacity(
+          projectStore.nodes,
+          projectStore.edges,
+          connection.target,
+          connection.targetHandle
+        )
+      ) {
+        setConnectionFeedback({
+          level: 'error',
+          message: 'Connection blocked: target interface group has no free capacity.',
+        })
+        emitToast('Target interface group is full', 'error')
+        return
+      }
+      if (
+        exceedsPoeBudget(
+          projectStore.nodes,
+          projectStore.edges,
+          connection.target,
+          connection.targetHandle,
+          connection.source
+        )
+      ) {
+        setConnectionFeedback({
+          level: 'error',
+          message: 'Connection blocked: target PoE budget would be exceeded.',
+        })
+        emitToast('Target PoE budget would be exceeded', 'error')
+        return
+      }
+
       const sourcePortType = findPortTypeByHandle(
         projectStore.nodes,
         connection.source,
@@ -655,6 +949,12 @@ function CanvasInner({
       const targetFamily = detectPortFamily(targetPortType)
 
       if (!arePortFamiliesCompatible(sourceFamily, targetFamily)) {
+        setConnectionFeedback({
+          level: 'error',
+          message: `Connection blocked: ${sourcePortType || sourceFamily} is incompatible with ${
+            targetPortType || targetFamily
+          }.`,
+        })
         emitToast(
           `Incompatible ports: ${sourcePortType || sourceFamily} -> ${
             targetPortType || targetFamily
@@ -673,6 +973,12 @@ function CanvasInner({
         targetPortType,
         sourceFamily,
         targetFamily,
+      })
+      setConnectionFeedback({
+        level: 'warning',
+        message: `Select cable for ${sourcePortType || sourceFamily} -> ${
+          targetPortType || targetFamily
+        }.`,
       })
     },
     [projectStore.nodes]
@@ -696,6 +1002,7 @@ function CanvasInner({
       )
       onEdgesChange(nextEdges)
       setPendingConnection(null)
+      setConnectionFeedback(null)
       emitToast(`Connection created (${preset.cableType})`, 'success')
       window.dispatchEvent(
         new CustomEvent('psb-status-action', { detail: { action: 'Connection created' } })
@@ -708,6 +1015,27 @@ function CanvasInner({
     (connection: Connection) => {
       if (!connection.source || !connection.target) return false
       if (connection.source === connection.target) return false
+      if (
+        exceedsInterfaceCapacity(
+          projectStore.nodes,
+          projectStore.edges,
+          connection.target,
+          connection.targetHandle
+        )
+      ) {
+        return false
+      }
+      if (
+        exceedsPoeBudget(
+          projectStore.nodes,
+          projectStore.edges,
+          connection.target,
+          connection.targetHandle,
+          connection.source
+        )
+      ) {
+        return false
+      }
 
       const sourcePortType = findPortTypeByHandle(
         projectStore.nodes,
@@ -725,7 +1053,7 @@ function CanvasInner({
         detectPortFamily(targetPortType)
       )
     },
-    [projectStore.nodes]
+    [projectStore.edges, projectStore.nodes]
   )
 
   const handleSelectionChange = useCallback(
@@ -847,6 +1175,20 @@ function CanvasInner({
         <div className="pointer-events-none absolute inset-0 z-10 border-2 border-dashed border-brand-400 bg-brand-100/30" />
       )}
 
+      {connectionFeedback && (
+        <div className="pointer-events-none absolute left-1/2 top-4 z-20 -translate-x-1/2">
+          <div
+            className={`rounded-full px-4 py-2 text-sm font-medium shadow-lg ${
+              connectionFeedback.level === 'error'
+                ? 'bg-red-50 text-red-700 ring-1 ring-red-200'
+                : 'bg-amber-50 text-amber-700 ring-1 ring-amber-200'
+            }`}
+          >
+            {connectionFeedback.message}
+          </div>
+        </div>
+      )}
+
       <ReactFlow
         nodes={nodes}
         edges={edges}
@@ -873,6 +1215,17 @@ function CanvasInner({
         onEdgeClick={(_, edge) => {
           projectStore.setSelectedNodeId(null)
           projectStore.setSelectedEdgeId(edge.id)
+        }}
+        onMoveEnd={(_, viewport) => {
+          projectStore.setZoom(viewport.zoom)
+          if (!projectStore.projectId) return
+          localStorage.setItem(
+            getViewportStorageKey(projectStore.projectId),
+            JSON.stringify({
+              ...viewport,
+              updatedAt: new Date().toISOString(),
+            } satisfies StoredViewport)
+          )
         }}
         selectionOnDrag
         multiSelectionKeyCode={['Shift', 'Control', 'Meta']}

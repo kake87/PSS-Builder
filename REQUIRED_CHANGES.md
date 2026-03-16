@@ -588,3 +588,67 @@ Progress update (March 11, 2026):
   - `POST /api/equipment-catalog/models/import-url/bulk`
   - Equipment Library URL import control (paste link -> import -> catalog refresh)
 - [ ] Persist normalized catalog in dedicated DB tables (currently JSON file snapshot)
+
+---
+
+## PHASE 0.3.0: Release Alignment and Post-Release Required Changes (March 15, 2026)
+
+### Release status snapshot
+- [x] Promote application version to `0.3.0`
+- [x] Sync version across root, backend, and frontend package metadata
+- [x] Add overview-oriented start screen for first entry into the product
+- [x] Keep production frontend build green after release packaging
+
+Definition of done:
+- `VERSION`, backend version constant, and frontend package versions match
+- Frontend production build completes without errors
+
+### A. Required UX hardening after 0.3.0
+- [ ] Replace remaining `window.alert(...)` flows with toast or inline error states
+- [ ] Normalize API/network failure messages into user-facing language
+- [ ] Remove developer-only error leakage from primary UI flows
+- [ ] Audit empty/loading/error states for project open, device add, validation, import
+
+Definition of done:
+- No blocking user action relies on browser alert dialogs
+- Failure states are understandable without opening the console
+
+### B. Text, encoding, and language consistency
+- [ ] Remove all mojibake / broken symbol artifacts in frontend text
+- [ ] Decide product UI language policy: full Russian or full English
+- [ ] Align mixed terminology (`canvas`, `project`, `validation`, `links`, `devices`) across UI
+- [ ] Review docs that still describe frontend as planned/MVP-only
+
+Definition of done:
+- Interface contains no corrupted text fragments
+- User-visible copy follows one consistent language strategy
+
+### C. Release-quality documentation alignment
+- [ ] Update `STATUS.md` to reflect that frontend is already implemented
+- [ ] Update `frontend/README.md` roadmap so `0.2.0` items already shipped are no longer marked planned
+- [ ] Update `frontend/FRONTEND_REPORT.md` from `v0.1.0 MVP` wording to current release framing
+- [ ] Add concise `v0.3.0` release notes section in a stable project doc
+
+Definition of done:
+- Internal docs describe the same product state as the codebase
+- No major shipped feature is still documented as future work
+
+### D. Stability and release confidence
+- [ ] Add smoke checklist for create/open project, add device, connect nodes, validate, export, import
+- [ ] Add at least one automated frontend verification beyond build if feasible
+- [ ] Verify version tag / GitHub release workflow for future releases
+- [ ] Add regression check for normalized catalog loading fallback
+
+Definition of done:
+- `0.3.0` can be re-verified from a short repeatable checklist
+- Future release preparation does not rely on memory alone
+
+### E. Product follow-up for 0.4.0 planning
+- [x] Persist normalized catalog in proper DB storage instead of JSON snapshot only
+- [x] Add viewport persistence and explicit `Fit to content` action
+- [x] Add import schema migration support and import validation report
+- [x] Improve port usability with hover preview and richer connection feedback
+- [ ] Decide whether AI-assisted architecture mode is still a near-term roadmap item
+
+Definition of done:
+- Next minor version has a focused scope tied to reliability and operator workflow

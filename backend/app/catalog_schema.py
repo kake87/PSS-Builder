@@ -27,6 +27,24 @@ class CatalogPortDefinition(BaseModel):
     power_watts: Optional[float] = None
 
 
+class InterfaceCapacityDefinition(BaseModel):
+    speed_mbps: Optional[int] = None
+    power_watts: Optional[float] = None
+    port_count: Optional[int] = None
+    poe_budget_watts: Optional[float] = None
+
+
+class InterfaceDefinition(BaseModel):
+    id: str
+    label: str
+    kind: str
+    role: str = "secondary"
+    direction: str = "bidirectional"
+    connection_mode: str = "data"
+    visible_by_default: bool = True
+    capacity: InterfaceCapacityDefinition = Field(default_factory=InterfaceCapacityDefinition)
+
+
 class StatusHistoryEntry(BaseModel):
     from_status: str
     to_status: str
@@ -51,6 +69,7 @@ class EquipmentModelDefinition(BaseModel):
     storage_capacity_gb: Optional[int] = None
     bandwidth_requires_mbps: Optional[int] = None
     ports: List[CatalogPortDefinition] = Field(default_factory=list)
+    interfaces: List[InterfaceDefinition] = Field(default_factory=list)
     status_history: List[StatusHistoryEntry] = Field(default_factory=list)
 
 
@@ -165,6 +184,82 @@ def _make_compatibility_rules() -> List[CompatibilityRuleDefinition]:
     ]
 
 
+def derive_interfaces_from_ports(
+    ports: List[CatalogPortDefinition],
+    *,
+    device_type: Optional[str] = None,
+    name: Optional[str] = None,
+    model: Optional[str] = None,
+    key: Optional[str] = None,
+    power_consumption_watts: Optional[float] = None,
+) -> List[InterfaceDefinition]:
+    if not ports:
+        return []
+
+    interfaces: List[InterfaceDefinition] = []
+    poe_hint = " ".join(value.lower() for value in [device_type, name, model, key] if value)
+    inferred_poe_switch = str(device_type or "").lower() == "switch" and "poe" in poe_hint
+    has_poe_like_interface = any("poe" in str(port.port_type).lower() for port in ports) or inferred_poe_switch
+    for index, port in enumerate(ports):
+        port_type = str(port.port_type).lower()
+        kind = "ethernet"
+        role = "secondary"
+        connection_mode = "data"
+        label = port.name
+        port_power_budget = port.power_watts
+
+        if "poe" in port_type or (inferred_poe_switch and "ethernet" in port_type):
+            kind = "poe_ethernet"
+            role = "primary"
+            connection_mode = "combined"
+            label = "PoE Access" if inferred_poe_switch else "PoE / LAN"
+            port_power_budget = (
+                port.power_watts
+                if port.power_watts is not None
+                else (
+                    float(power_consumption_watts) / max(len(ports), 1)
+                    if inferred_poe_switch and power_consumption_watts
+                    else None
+                )
+            )
+        elif "ethernet" in port_type:
+            kind = "ethernet"
+            role = "primary" if index == 0 else "secondary"
+            connection_mode = "data"
+            label = "LAN" if index == 0 else port.name
+        elif "power" in port_type:
+            kind = "power_input"
+            role = "secondary"
+            connection_mode = "power"
+            label = "Power In"
+        elif "serial" in port_type:
+            kind = "serial"
+            role = "advanced"
+            connection_mode = "data"
+        elif "fiber" in port_type or "optical" in port_type or "sfp" in port_type:
+            kind = "fiber"
+            role = "primary"
+            connection_mode = "data"
+            label = "Fiber"
+
+        interfaces.append(
+            InterfaceDefinition(
+                id=f"if-{index}-{port.name.lower().replace(' ', '-')}",
+                label=label,
+                kind=kind,
+                role=role,
+                connection_mode=connection_mode,
+                visible_by_default=role != "advanced" and not (has_poe_like_interface and kind == "power_input"),
+                capacity=InterfaceCapacityDefinition(
+                    speed_mbps=port.speed_mbps,
+                    power_watts=port.power_watts,
+                    poe_budget_watts=port_power_budget if kind == "poe_ethernet" else None,
+                ),
+            )
+        )
+    return interfaces
+
+
 def build_normalized_catalog(equipment_catalog: Dict[str, Device]) -> NormalizedCatalogResponse:
     generated_at = datetime.now(timezone.utc).isoformat()
     type_keys = sorted({str(device.device_type) for device in equipment_catalog.values()})
@@ -197,6 +292,22 @@ def build_normalized_catalog(equipment_catalog: Dict[str, Device]) -> Normalized
                     )
                     for port in device.ports
                 ],
+                interfaces=derive_interfaces_from_ports(
+                    [
+                        CatalogPortDefinition(
+                            name=port.name,
+                            port_type=str(port.port_type),
+                            speed_mbps=port.speed_mbps,
+                            power_watts=port.power_watts,
+                        )
+                        for port in device.ports
+                    ],
+                    device_type=str(device.device_type),
+                    name=device.name,
+                    model=device.model,
+                    key=key,
+                    power_consumption_watts=device.power_consumption_watts,
+                ),
             )
         )
 

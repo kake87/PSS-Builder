@@ -11,6 +11,7 @@ import {
   Keyboard,
   Download,
   Upload,
+  ScanSearch,
 } from 'lucide-react'
 import { SettingsModal } from '@/widgets/SettingsModal'
 import { useProjectStore } from '@/shared/store/projectStore'
@@ -21,6 +22,7 @@ interface ToolbarProps {
   isDirty: boolean
   onExportProject: () => void
   onImportProject: (file: File) => void
+  onFitToContent: () => void
 }
 
 export function Toolbar({
@@ -29,6 +31,7 @@ export function Toolbar({
   isDirty,
   onExportProject,
   onImportProject,
+  onFitToContent,
 }: ToolbarProps) {
   const [lastSaved, setLastSaved] = React.useState<Date | null>(null)
   const [isSettingsOpen, setIsSettingsOpen] = useState(false)
@@ -142,6 +145,17 @@ export function Toolbar({
         >
           <Download className="h-4 w-4 text-brand-600" />
           Export
+        </button>
+
+        <button
+          type="button"
+          onClick={onFitToContent}
+          disabled={!projectId}
+          className="pss-control inline-flex items-center gap-2 border border-white/30 bg-white/90 text-sm font-medium text-gray-700 transition-all hover:bg-white hover:shadow-sm disabled:cursor-not-allowed disabled:opacity-50"
+          title="Fit all nodes into view"
+        >
+          <ScanSearch className="h-4 w-4 text-brand-600" />
+          Fit
         </button>
 
         <button
